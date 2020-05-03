@@ -40,19 +40,18 @@ function initialize() {
 
 
     teren = [];
-    var tx = 13, ty = 23;
-    for(var i = 0;i<28;i++)
-    {
-        if(i==CardZones.Deck) teren.push(new CardZone(deck, tx, ty, MonsterCardW, MonsterCardH));
-        else if (i==CardZones.DeckP) teren.push(new CardZone(protivnickideck, tx, ty, MonsterCardW, MonsterCardH));
+    var tx = 13,
+        ty = 23;
+    for (var i = 0; i < 28; i++) {
+        if (i == CardZones.Deck) teren.push(new CardZone(deck, tx, ty, MonsterCardW, MonsterCardH));
+        else if (i == CardZones.DeckP) teren.push(new CardZone(protivnickideck, tx, ty, MonsterCardW, MonsterCardH));
         else teren.push(new CardZone([], tx, ty, MonsterCardW, MonsterCardH));
-        tx+=MonsterCardW+MonsterCardD;
-        if(tx>800)
-        {
+        tx += MonsterCardW + MonsterCardD;
+        if (tx > 800) {
             tx = 13;
-            ty+= 144;
+            ty += 144;
         }
-        if(ty==311) ty = 338;
+        if (ty == 311) ty = 338;
     }
     teren[CardZones.Deck].promesaj();
     teren[CardZones.DeckP].promesaj();
@@ -74,7 +73,9 @@ function initialize() {
     slikaaktivnefaze.src = 'slike/Interfejs/AktivnoDugme.png';
     slikaselektovane = new Image();
     slikaselektovane.src = 'slike/Karte/selektovana.png';
-    Filteri = [[]];
+    Filteri = [
+        []
+    ];
     //Niz nizova filtera, u DNFu, redovi u matrici su odvojeni znakom ili, a unutar jednog reda su filteri odvojeni znakom i. 
     //Filter ima i bool pozitivan koji ako je false, znaci da mora karta be sne da ima date osobine. 
     slikaterena = new Image();
