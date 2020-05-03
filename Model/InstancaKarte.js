@@ -22,7 +22,8 @@ class InstancaKarte {
 
     resetTurnVariables() {
         this.TurnVariables = {
-            BrojNapada: 0
+            BrojNapada: 0,
+            PozicijaPromenjena: false
         };
     }
     crtaj(ctx, x, y, w, h) {
@@ -30,18 +31,30 @@ class InstancaKarte {
             ctx.drawImage(svekarte[this.karta].slika, 0, 0, wSlikeKarte, hSlikeKarte, x, y, w, h);
         }
         if (this.GlobalVariables.Position == Pozicija.Odbrana) {
-            ctx.drawImage(svekarte[this.karta].slika, 0, 0, wSlikeKarte, hSlikeKarte, x, y, w, h);
+            ctx.save();
+            ctx.translate(x, y);
+            ctx.rotate(-Math.PI*0.5);
+            ctx.drawImage(svekarte[this.karta].slika, 0, 0, wSlikeKarte, hSlikeKarte, -h, 0, w, h);
+            ctx.restore();
         }
         if (this.GlobalVariables.Position == Pozicija.NeotkrivenNapad) {
-            ctx.drawImage(svekarte[this.karta].slika, 0, 0, wSlikeKarte, hSlikeKarte, x, y, w, h);
+            ctx.drawImage(slikapozadinekarte, 0, 0, wSlikeKarte, hSlikeKarte, x, y, w, h);
         }
         if (this.GlobalVariables.Position == Pozicija.NeotkrivenaOdbrana) {
-            ctx.drawImage(svekarte[this.karta].slika, 0, 0, wSlikeKarte, hSlikeKarte, x, y, w, h);
+            ctx.save();
+            ctx.translate(x, y);
+            ctx.rotate(-Math.PI*0.5);
+            ctx.drawImage(slikapozadinekarte, 0, 0, wSlikeKarte, hSlikeKarte, -h, 0, w, h);
+            ctx.restore();
         }
     }
     crtajV() {
         var slikaVelike = document.getElementById("velikakarta");
         slikaVelike.src = "slike/karte/" + svekarte[this.karta].naziv + ".png";
+    }
+    get canChangePosition()
+    {
+        return !this.TurnVariables.PozicijaPromenjena;
     }
     get brojNormalnihZrtava() {
         if (svekarte[this.karta].nivo > 0 && svekarte[this.karta].nivo < 5)
@@ -74,6 +87,57 @@ class InstancaKarte {
         return true;
     }
     get isNormalSummonable() {
+        if (faza != Faza.MainPhase && faza != Faza.MainPhase2) return false;
+        if (this.uruci == -1 && this.uruciP == -1) return false;
+        if (this.uruci != -1) {
+            if (TurnVariables.NormalSummoned > 0) {
+                return false;
+            }
+            var tributable = 0;
+            var onTerrain = 0;
+            for (var i = CardZones.Monster5; i <= CardZones.Monster1; i++) {
+                if (teren[i].cards.length > 0) {
+                    onTerrain++;
+                    if (teren[i].cards[0].isTributable) {
+                        tributable++;
+                    }
+                }
+            }
+            if (this.brojNormalnihZrtava > 0) {
+                if (tributable >= this.brojNormalnihZrtava) return true;
+                else return false;
+            } else {
+                if (onTerrain > 4) {
+                    return false;
+                }
+                return true;
+            }
+        }
+        if (TurnVariables.NormalSummoned > 0) {
+            return false;
+        }
+        var tributable = 0;
+        var onTerrain = 0;
+        for (var i = CardZones.Monster1P; i <= CardZones.Monster5P; i++) {
+            if (teren[i].cards.length > 0) {
+                onTerrain++;
+                if (teren[i].cards[0].isTributable) {
+                    tributable++;
+                }
+            }
+        }
+        if (this.brojNormalnihZrtava > 0) {
+            if (tributable >= this.brojNormalnihZrtava) return true;
+            else return false;
+        } else {
+            if (onTerrain > 4) {
+                return false;
+            }
+            return true;
+        }
+
+    }
+    get isSettable() {
         if (faza != Faza.MainPhase && faza != Faza.MainPhase2) return false;
         if (this.uruci == -1 && this.uruciP == -1) return false;
         if (this.uruci != -1) {
@@ -192,9 +256,40 @@ class InstancaKarte {
         }
         return canBeAttackedZones;
     }
+    opcijaPromenePozicije()
+    {
+        var self = this;
+        if(this.GlobalVariables.Position==Pozicija.Napad)
+        {
+            return new Opcija("Odbrana", function (params) {
+                self.GlobalVariables.Position = Pozicija.Odbrana;
+                self.TurnVariables.PozicijaPromenjena = true;
+                render();
+            });
+        }
+        if(this.GlobalVariables.Position==Pozicija.Odbrana)
+        {
+            return new Opcija("Napad", function (params) {
+                self.GlobalVariables.Position = Pozicija.Napad;
+                self.TurnVariables.PozicijaPromenjena = true;
+                render();
+            });
+        }
+        if(this.GlobalVariables.Position==Pozicija.NeotkrivenaOdbrana)
+        {
+            return new Opcija("Flipuj", function (params) {
+                self.GlobalVariables.Position = Pozicija.Napad;
+                self.TurnVariables.PozicijaPromenjena = true;
+                render();
+            });
+        }
+
+        
+    }
     opcije() {
         var opcije = [];
         var self = this;
+        //FUNKCIJA NORMALNO PRIZOVI UMESTO DVA VELIKA DELA KODA U ZAGRADI
         if (this.isNormalSummonable&&mojpotez) {
             opcije.push(new Opcija("Prizovi", function (params) {
                 var freeCardZoneIndex = 100; //Da ne bi bio 0 dole
@@ -208,6 +303,7 @@ class InstancaKarte {
                     }
                     teren[freeCardZoneIndex].premesti(ruka, params[0]);
                     teren[freeCardZoneIndex].cards[0].GlobalVariables.Position = Pozicija.Napad;
+                    teren[freeCardZoneIndex].cards[0].TurnVariables.PozicijaPromenjena = true;
                     TurnVariables.NormalSummoned++;
                 } else {
                     SelektovaniIndeksi = [];
@@ -233,6 +329,55 @@ class InstancaKarte {
                         teren[CardZones.Graveyard].premesti(niz, SelektovaniIndeksi);
                         teren[freeCardZoneIndex].premesti(ruka, params[0]);
                         teren[freeCardZoneIndex].cards[0].GlobalVariables.Position = Pozicija.Napad;
+                        teren[freeCardZoneIndex].cards[0].TurnVariables.PozicijaPromenjena = true;
+                        TurnVariables.NormalSummoned++;
+                    }
+                    stanjeIgre = StanjeIgre.SelekcijaTerena;
+                }
+            }, this.uruci));
+
+        }
+        
+        if (this.isSettable&&mojpotez) {
+            opcije.push(new Opcija("Setuj", function (params) {
+                var freeCardZoneIndex = 100; //Da ne bi bio 0 dole
+                if (self.brojNormalnihZrtava == 0) {
+                    //Mozda metoda freecardzoneindex()
+                    for (var i = CardZones.Monster5; i <= CardZones.Monster1; i++) {
+                        if (teren[i].cards.length == 0) {
+                            freeCardZoneIndex = i;
+                            break;
+                        }
+                    }
+                    teren[freeCardZoneIndex].premesti(ruka, params[0]);
+                    teren[freeCardZoneIndex].cards[0].GlobalVariables.Position = Pozicija.NeotkrivenaOdbrana;
+                    teren[freeCardZoneIndex].cards[0].TurnVariables.PozicijaPromenjena = true;
+                    TurnVariables.NormalSummoned++;
+                } else {
+                    SelektovaniIndeksi = [];
+                    CiljSelekcije = self.brojNormalnihZrtava;
+                    Filteri = [
+                        [new FilterZaSelekciju(true, CardTypes.Monster)]
+                    ];
+                    DozvoljeniIndeksi = [];
+                    ObaveznaSelekcija = false;
+                    //ZRTVUJE SE SAMO SA TERENA
+                    for (var i = CardZones.Monster5; i <= CardZones.Monster1; i++) {
+                        DozvoljeniIndeksi.push(i);
+                    }
+                    EfekatSelekcije = function (niz) {
+                        SelektovaniIndeksi.sort((a, b) => a - b);
+                        for (var i = CardZones.Monster5; i <= CardZones.Monster1; i++) {
+                            if (teren[i].cards.length == 0) {
+                                freeCardZoneIndex = i;
+                                break;
+                            }
+                        }
+                        if (SelektovaniIndeksi[0] < freeCardZoneIndex) freeCardZoneIndex = SelektovaniIndeksi[0];
+                        teren[CardZones.Graveyard].premesti(niz, SelektovaniIndeksi);
+                        teren[freeCardZoneIndex].premesti(ruka, params[0]);
+                        teren[freeCardZoneIndex].cards[0].GlobalVariables.Position = Pozicija.NeotkrivenaOdbrana;
+                        teren[freeCardZoneIndex].cards[0].TurnVariables.PozicijaPromenjena = true;
                         TurnVariables.NormalSummoned++;
                     }
                     stanjeIgre = StanjeIgre.SelekcijaTerena;
@@ -249,6 +394,12 @@ class InstancaKarte {
             }
         }
         if (izmedju(indexOnTerrain, CardZones.Monster1, CardZones.Monster5)) {
+            if((faza==Faza.MainPhase||faza==Faza.MainPhase2)&&this.canChangePosition)
+            {
+                prikaziRed("moze da promeni poziciju");
+                opcije.push(this.opcijaPromenePozicije());
+            }
+
             var attackableZones = this.checkForAttacks(indexOnTerrain);
             if (this.canAttack) {
                 opcije.push(new Opcija("Napadni", function (params) {
@@ -266,7 +417,6 @@ class InstancaKarte {
                     }
                     stanjeIgre = StanjeIgre.SelekcijaTerena;
                 }));
-                prikaziRed("moze da napada");
             }
             if (this.canDirectAttack) {
                 opcije.push(new Opcija("Napadni direktno", function (params) {
@@ -274,9 +424,9 @@ class InstancaKarte {
                     //VRV CE TREBATI NEKO SVOJSTVO META NAPADA ZA KARTE KAO STO JE CILINDRIN
                     render();
                 }));
-                prikaziRed("moze da napada direktno");
             }
         }
+
         return opcije;
     }
 }

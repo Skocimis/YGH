@@ -56,7 +56,7 @@ function DialogClickable(x, y) {
             if (izmedju(x, dijalozi[i].x, dijalozi[i].x + dijalozi[i].width) && izmedju(y, dijalozi[i].y, dijalozi[i].y + dijalozi[i].height)) {
                 indeksd = i;
             }
-            for (var j = 0; j < dijalozi.length; j++) {
+            for (var j = 0; j < dijalozi[i].opcije.length; j++) {
                 if (izmedju(x, dijalozi[i].elemX(j), dijalozi[i].elemX(j) + dijalozi[i].elemW(j)) && izmedju(y, dijalozi[i].elemY(j), dijalozi[i].elemY(j) + dijalozi[i].elemH(j))) {
                     dijalozi[i].opcije[j].efekat(dijalozi[i].opcije[j].params);
                 }
@@ -251,87 +251,14 @@ function cMouseUp(e) {
 
             break;
         default:
-
     }
 
 
 }
 
-/*//Klik na kartu u ruci
-    if (faza == Faza.MainPhase || faza == Faza.MainPhase2) {
-        //dugme na dijalogu
-        
-    }
-    //KLIKABILNOST DUGMETA BORBA
-    if (faza == Faza.MainPhase)
-    {
-        
-    }
-    if(faza == Faza.BattlePhase)
-    {
-        
-    }
-    
-}*/
 
 function handleEvents() {
     c.addEventListener("mousemove", cMouseMove);
     c.addEventListener("mouseup", cMouseUp);
     c.addEventListener("contextmenu", cContextMenu);
 }
-
-/*if (faza == 2 || faza == 4)
-        if (x > xruke && x < xruke + ruka.cards.length * wkarteuruci && y > yruke && y < yruke + hkarteuruci) {
-            //Ovo bi trebalo da bude prizivanje cudovista
-            var indeks = Math.floor((x - xruke) / wkarteuruci);
-
-            //ruka[index] je kliknuta karta
-            prikaziRed(ruka.cards[indeks].karta.ime);
-            if (DaLiJeCudovistePrizvano == false)
-                if (ruka.cards[indeks].karta.tip == 'M' && terenM.length < 5) {
-                    DaLiJeCudovistePrizvano = true;
-                    functionConfirm("Prizovi " + ruka.cards[indeks].ime + "a u napadu ili odbrani?", function yes() {
-                            deforatk.push('ATK');
-                            prikaziRed("Prizovi " + ruka.cards[indeks].ime + " u napadu");
-                            terenM.push(ruka.cards[indeks]);
-                            ruka.cards.splice(indeks, 1);
-                            render(); // PRIZIVA STVORENJE U NAPADU
-                        },
-                        function no() {
-                            prikaziRed("Prizovi " + ruka.cards[indeks].ime + " u odbrani");
-                            deforatk.push('DEF');
-                            terenM.push(ruka.cards[indeks]);
-                            ruka.cards.splice(indeks, 1);
-                            render(); // PRIZIVA STVORENJE U ODBRANI
-                        });
-                }
-            if (ruka.cards[indeks].tip == 'S' && terenS.length < 5) {
-                terenS.push(ruka.cards[indeks]);
-                ruka.cards.splice(indeks, 1);
-                render(); //POSTAVLJA NEOTKRIVENU KARTU
-            }
-        }*/
-
-/*
-    if (faza == Faza.BattlePhase) {
-        if (x > 150 && x < 150 + terenM.length * 50 && y > 350 && y < 450) //ako je pritisnuta tvoja karta prvo na terenu
-        {
-            indeksigraca = Math.floor((x - 150) / 50);
-            prikaziRed('AAAAAAAAAAAAAAAAAAAAA' + indeksigraca);
-        } else if (x > 150 && x < 150 + protivnickiteren.length * 50 && y > 150 && y < 250) {
-            //var protivnickiindeks = Math.floor((x - 150) / 50);
-
-            if (indeksigraca != -1)
-                prikaziRed('RADIIIII ' + indeksigraca);
-
-        }
-
-        
-
-    }*/
-
-/*if (faza == Faza.MainPhase || faza == Faza.MainPhase2) { //dodaj faza==3 ako iz battle phasea moze da se predje u end
-    
-}*/
-
-//prikaziRed("MouseUp(" + x + " " + y + ")");

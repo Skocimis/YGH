@@ -64,11 +64,13 @@ function initialize() {
     //VUCENJE KARATA
     ctx.clearRect(0, 0, 800, 600);
     dugmicizafaze = new Image();
-    dugmicizafaze.src = 'slike/Interfejs/Dugmad.png';
+    dugmicizafaze.src = 'Slike/Interfejs/Dugmad.png';
     slikaaktivnefaze = new Image();
-    slikaaktivnefaze.src = 'slike/Interfejs/AktivnoDugme.png';
+    slikaaktivnefaze.src = 'Slike/Interfejs/AktivnoDugme.png';
     slikaselektovane = new Image();
-    slikaselektovane.src = 'slike/Karte/selektovana.png';
+    slikaselektovane.src = 'Slike/Karte/selektovana.png';
+    slikapozadinekarte = new Image();
+    slikapozadinekarte.src = 'Slike/Karte/pozadina.png'
     Filteri = [
         []
     ];

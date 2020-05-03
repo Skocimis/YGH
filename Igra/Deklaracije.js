@@ -105,6 +105,7 @@ var SelektovaniIndeksi, CiljSelekcije, EfekatSelekcije, Filteri, DozvoljeniIndek
 var pozadina;
 var slikaaktivnefaze;
 var slikaselektovane;
+var slikapozadinekarte;
 var teren
 const hcanvas = 600,
     wcanvas = 800;
