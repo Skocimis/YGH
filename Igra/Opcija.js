@@ -1,4 +1,4 @@
-//OVDE SAM STA
+//OVDE SAM STAO
 
 class Opcija {
     constructor(tekst, efekat) {
