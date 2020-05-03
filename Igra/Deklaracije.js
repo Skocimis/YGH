@@ -59,6 +59,20 @@ const CardZones =
     Deck : 27
 
 }
+var igraci = 
+{
+    Player:
+    {
+        ZivotniPoeni: 4000,
+        Vlasnistvo: [14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27]
+    },
+    Enemy:
+    {
+        ZivotniPoeni: 4000,
+        Vlasnistvo: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+    }
+}
+igraci.Player.vlasnik = igraci.Enemy.vlasnik = function(polje) {return this.Vlasnistvo.includes(polje)};
 
 //ostali objekti
 

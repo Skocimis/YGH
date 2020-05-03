@@ -34,8 +34,8 @@ function render() {
     });
 
     //Zivotni poeni
-    ctx.fillText(GameVariables.ZivotniPoeni, HPX, HPY);
-    ctx.fillText(GameVariables.ZivotniPoeniP, HPXP, HPYP);
+    ctx.fillText(igraci.Player.ZivotniPoeni, HPX, HPY);
+    ctx.fillText(igraci.Enemy.ZivotniPoeni, HPXP, HPYP);
 }
 
 //

@@ -9,7 +9,7 @@ class Opcija {
             this.params.push(arguments[i]);
         }
         this.slika = new Image();
-        this.slika.src = 'Slike/Interfejs/Opcije/' + tekst + '.jpg';
+        this.slika.src = 'Slike/Interfejs/Opcije/' + tekst + '.png';
     }
     crtaj(ctx, x, y, w, h) {
         this.slika.onload = function() {

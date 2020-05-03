@@ -15,10 +15,6 @@ function initialize() {
     ctx = c.getContext("2d");
     ctx.font = "30px Arial";
     loadCards();
-    GameVariables = {
-        ZivotniPoeni: 4000,
-        ZivotniPoeniP: 4000
-    }
     img2 = new Image();
     imgdugmad = new Image();
     imgsvetlecedugme = new Image();
