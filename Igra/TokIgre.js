@@ -24,7 +24,7 @@ function resetTurnVariables() {
     for (var i = 0; i < teren.length; i++)
         for (var j = 0; j < teren[i].length; j++)
             teren[i].cards[j].resetTurnVariables();
-    
+
     for (var j = 0; j < ruka.cards.length; j++)
         ruka.cards[j].resetTurnVariables();
     for (var j = 0; j < protivnickaruka.cards.length; j++)

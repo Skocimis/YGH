@@ -9,9 +9,8 @@ class InstancaKarte {
         this.karta = karta;
         this.MaxBrNapada = 1;
     }
-    resetTurnVariables()
-    {
-        this.TurnVariables = {  
+    resetTurnVariables() {
+        this.TurnVariables = {
             BrojNapada: 0
         };
     }
@@ -32,18 +31,14 @@ class InstancaKarte {
         return -1;
     }
     //OVO CE TREBATI DA SE UPDATUJE
-    get tipKarte()
-    {
-        if(svekarte[this.karta].atribut==Atributi.Spell)
-        {
+    get tipKarte() {
+        if (svekarte[this.karta].atribut == Atributi.Spell) {
             return CardTypes.Spell;
         }
-        if(svekarte[this.karta].atribut==Atributi.Trap)
-        {
+        if (svekarte[this.karta].atribut == Atributi.Trap) {
             return CardTypes.Trap;
         }
-        else
-        {
+        else {
             return CardTypes.Monster;
         }
     }
@@ -58,9 +53,9 @@ class InstancaKarte {
         return true;
     }
     get isNormalSummonable() {
-        if(faza!=Faza.MainPhase&&faza!=Faza.MainPhase2) return false;
+        if (faza != Faza.MainPhase && faza != Faza.MainPhase2) return false;
         if (this.uruci == -1 && this.uruciP == -1) return false;
-        if (this.uruci!=-1) {
+        if (this.uruci != -1) {
             if (TurnVariables.NormalSummoned > 0) {
                 return false;
             }
@@ -114,43 +109,35 @@ class InstancaKarte {
     {
         return true;
     }
-    checkForAttacks(indexOnTerrain)
-    {
-        if(faza!=Faza.BattlePhase) 
-        {
+    checkForAttacks(indexOnTerrain) {
+        if (faza != Faza.BattlePhase) {
             this.canAttack = false;
             this.canDirectAttack = false;
             return [];
         }
-        if(this.TurnVariables.BrojNapada>=this.MaxBrNapada){
+        if (this.TurnVariables.BrojNapada >= this.MaxBrNapada) {
             this.canAttack = false;
             this.canDirectAttack = false;
             return [];
         }
         var canBeAttackedZones = [];
         var freezones = 0;
-        if(izmedju(indexOnTerrain, CardZones.Monster1, CardZones.Monster5))
-        {
-            for(var i = CardZones.Monster1P;i<=CardZones.Monster5P;i++)
-            {
-                if(teren[i].cards.length==0)
-                {
+        if (izmedju(indexOnTerrain, CardZones.Monster1, CardZones.Monster5)) {
+            for (var i = CardZones.Monster1P; i <= CardZones.Monster5P; i++) {
+                if (teren[i].cards.length == 0) {
                     freezones++;
                     continue;
                 }
-                if(teren[i].cards[0].canBeAttacked(teren[indexOnTerrain]))
-                {
+                if (teren[i].cards[0].canBeAttacked(teren[indexOnTerrain])) {
                     canBeAttackedZones.push(i);
                 }
             }
-            if(freezones==5)
-            {
+            if (freezones == 5) {
                 this.canAttack = false;
                 this.canDirectAttack = true;
                 return [];
             }
-            else if(canBeAttackedZones == [])
-            {
+            else if (canBeAttackedZones == []) {
                 this.canAttack = false;
                 this.canDirectAttack = false;
                 return [];
@@ -159,28 +146,22 @@ class InstancaKarte {
             this.canDirectAttack = false;
             return canBeAttackedZones;
         }
-        if(izmedju(indexOnTerrain, CardZones.Monster5P, CardZones.Monster1P))
-        {
-            for(var i = CardZones.Monster1;i<=CardZones.Monster5;i++)
-            {
-                if(teren[i].cards.length==0)
-                {
+        if (izmedju(indexOnTerrain, CardZones.Monster5P, CardZones.Monster1P)) {
+            for (var i = CardZones.Monster1; i <= CardZones.Monster5; i++) {
+                if (teren[i].cards.length == 0) {
                     freezones++;
                     continue;
                 }
-                if(teren[i].cards[0].canBeAttacked(teren[indexOnTerrain]))
-                {
+                if (teren[i].cards[0].canBeAttacked(teren[indexOnTerrain])) {
                     canBeAttackedZones.push(i);
                 }
             }
-            if(freezones==5)
-            {
+            if (freezones == 5) {
                 this.canAttack = false;
                 this.canDirectAttack = true;
                 return [];
             }
-            else if(canBeAttackedZones == [])
-            {
+            else if (canBeAttackedZones == []) {
                 this.canAttack = false;
                 this.canDirectAttack = false;
                 return [];
@@ -214,8 +195,7 @@ class InstancaKarte {
                     DozvoljeniIndeksi = [];
                     ObaveznaSelekcija = false;
                     //ZRTVUJE SE SAMO SA TERENA
-                    for(var i = CardZones.Monster5; i<=CardZones.Monster1;i++)
-                    {
+                    for (var i = CardZones.Monster5; i <= CardZones.Monster1; i++) {
                         DozvoljeniIndeksi.push(i);
                     }
                     EfekatSelekcije = function (niz) {
@@ -238,23 +218,18 @@ class InstancaKarte {
         }
         var indexOnTerrain;
         //Lose ali trebalo bi da uglavnom radi
-        for(var i = 0;i<teren.length;i++)
-        {
-            if(teren[i].cards.includes(this))
-            {
+        for (var i = 0; i < teren.length; i++) {
+            if (teren[i].cards.includes(this)) {
                 indexOnTerrain = i;
                 break;
             }
         }
-        if(faza==Faza.BattlePhase&&(izmedju(indexOnTerrain, CardZones.Monster1, CardZones.Monster5)||izmedju(indexOnTerrain, CardZones.Monster1P, CardZones.Monster5P)))
-        {
+        if (faza == Faza.BattlePhase && (izmedju(indexOnTerrain, CardZones.Monster1, CardZones.Monster5) || izmedju(indexOnTerrain, CardZones.Monster1P, CardZones.Monster5P))) {
             var attackableZones = this.checkForAttacks(indexOnTerrain);
-            if(this.canAttack)
-            {
+            if (this.canAttack) {
                 prikaziRed("moze da napada");
             }
-            if(this.canDirectAttack)
-            {
+            if (this.canDirectAttack) {
                 prikaziRed("moze da napada direktno");
             }
         }
