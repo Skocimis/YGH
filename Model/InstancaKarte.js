@@ -7,8 +7,14 @@ const CardTypes =
 class InstancaKarte {
     constructor(karta) {
         this.karta = karta;
+        this.MaxBrNapada = 1;
     }
-    
+    resetTurnVariables()
+    {
+        this.TurnVariables = {  
+            BrojNapada: 0
+        };
+    }
     crtaj(ctx, x, y, w, h) {
         ctx.drawImage(svekarte[this.karta].slika, 0, 0, wSlikeKarte, hSlikeKarte, x, y, w, h);
     }
@@ -43,18 +49,18 @@ class InstancaKarte {
     }
     //Mozda je lose ovako raditi, ali izgleda da nije
     get uruci() {
-        return ruka.cards.includes(this);
+        return ruka.cards.indexOf(this);
     }
     get uruciP() {
-        return protivnickaruka.cards.includes(this);
+        return protivnickaruka.cards.indexOf(this);
     }
     get isTributable() {
         return true;
     }
     get isNormalSummonable() {
-
-        if (!this.uruci && !this.uruciP) return false;
-        if (this.uruci) {
+        if(faza!=Faza.MainPhase&&faza!=Faza.MainPhase2) return false;
+        if (this.uruci == -1 && this.uruciP == -1) return false;
+        if (this.uruci!=-1) {
             if (TurnVariables.NormalSummoned > 0) {
                 return false;
             }
@@ -104,6 +110,87 @@ class InstancaKarte {
         }
 
     }
+    canBeAttacked(napadac) // Za sad prosledjujem teren zato sto on sadrzi i instancu karte
+    {
+        return true;
+    }
+    checkForAttacks(indexOnTerrain)
+    {
+        if(faza!=Faza.BattlePhase) 
+        {
+            this.canAttack = false;
+            this.canDirectAttack = false;
+            return [];
+        }
+        if(this.TurnVariables.BrojNapada>=this.MaxBrNapada){
+            this.canAttack = false;
+            this.canDirectAttack = false;
+            return [];
+        }
+        var canBeAttackedZones = [];
+        var freezones = 0;
+        if(izmedju(indexOnTerrain, CardZones.Monster1, CardZones.Monster5))
+        {
+            for(var i = CardZones.Monster1P;i<=CardZones.Monster5P;i++)
+            {
+                if(teren[i].cards.length==0)
+                {
+                    freezones++;
+                    continue;
+                }
+                if(teren[i].cards[0].canBeAttacked(teren[indexOnTerrain]))
+                {
+                    canBeAttackedZones.push(i);
+                }
+            }
+            if(freezones==5)
+            {
+                this.canAttack = false;
+                this.canDirectAttack = true;
+                return [];
+            }
+            else if(canBeAttackedZones == [])
+            {
+                this.canAttack = false;
+                this.canDirectAttack = false;
+                return [];
+            }
+            this.canAttack = true;
+            this.canDirectAttack = false;
+            return canBeAttackedZones;
+        }
+        if(izmedju(indexOnTerrain, CardZones.Monster5P, CardZones.Monster1P))
+        {
+            for(var i = CardZones.Monster1;i<=CardZones.Monster5;i++)
+            {
+                if(teren[i].cards.length==0)
+                {
+                    freezones++;
+                    continue;
+                }
+                if(teren[i].cards[0].canBeAttacked(teren[indexOnTerrain]))
+                {
+                    canBeAttackedZones.push(i);
+                }
+            }
+            if(freezones==5)
+            {
+                this.canAttack = false;
+                this.canDirectAttack = true;
+                return [];
+            }
+            else if(canBeAttackedZones == [])
+            {
+                this.canAttack = false;
+                this.canDirectAttack = false;
+                return [];
+            }
+            this.canAttack = true;
+            this.canDirectAttack = true;
+            return canBeAttackedZones;
+        }
+        return canBeAttackedZones;
+    }
     opcije() {
         var opcije = [];
         var self = this;
@@ -146,8 +233,30 @@ class InstancaKarte {
                     }
                     stanjeIgre = StanjeIgre.SelekcijaTerena;
                 }
-            }, arguments[0]));
+            }, this.uruci));
 
+        }
+        var indexOnTerrain;
+        //Lose ali trebalo bi da uglavnom radi
+        for(var i = 0;i<teren.length;i++)
+        {
+            if(teren[i].cards.includes(this))
+            {
+                indexOnTerrain = i;
+                break;
+            }
+        }
+        if(faza==Faza.BattlePhase&&(izmedju(indexOnTerrain, CardZones.Monster1, CardZones.Monster5)||izmedju(indexOnTerrain, CardZones.Monster1P, CardZones.Monster5P)))
+        {
+            var attackableZones = this.checkForAttacks(indexOnTerrain);
+            if(this.canAttack)
+            {
+                prikaziRed("moze da napada");
+            }
+            if(this.canDirectAttack)
+            {
+                prikaziRed("moze da napada direktno");
+            }
         }
         return opcije;
     }

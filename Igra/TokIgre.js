@@ -21,6 +21,15 @@ function resetTurnVariables() {
         NormalSummoned: 0,
         SpecialSummoned: 0
     }
+    for (var i = 0; i < teren.length; i++)
+        for (var j = 0; j < teren[i].length; j++)
+            teren[i].cards[j].resetTurnVariables();
+    
+    for (var j = 0; j < ruka.cards.length; j++)
+        ruka.cards[j].resetTurnVariables();
+    for (var j = 0; j < protivnickaruka.cards.length; j++)
+        protivnickaruka.cards[j].resetTurnVariables();
+
 }
 
 
@@ -38,7 +47,7 @@ function zavrsiFazu() {
 function zapocniFazu(faza, mojpotez) {
     if (mojpotez) {
         if (faza == Faza.DrawPhase) {
-            //resetDebugLog();
+            resetDebugLog();
             resetTurnVariables();
             if (teren[CardZones.Deck].cards.length == 0) {
                 prikaziRed("Poraz");
@@ -76,7 +85,7 @@ function zapocniFazu(faza, mojpotez) {
         }
     } else { //OVDE za AI
         if (faza == Faza.DrawPhase) {
-            //resetDebugLog();
+            resetDebugLog();
             resetTurnVariables();
             if (teren[CardZones.DeckP].cards.length == 0) {
                 prikaziRed("Pobeda");
@@ -126,7 +135,7 @@ function zapocniFazu(faza, mojpotez) {
                         }
                     }
                     if (freeCardZoneIndex != 100) {
-                        teren[CardZones.Graveyard].premesti(teren, sIndeksi);
+                        teren[CardZones.GraveyardP].premesti(teren, sIndeksi);
                         teren[freeCardZoneIndex].premesti(protivnickaruka, najjaciind);
                         TurnVariables.NormalSummoned++;
                     }

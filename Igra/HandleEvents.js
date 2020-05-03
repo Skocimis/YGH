@@ -41,6 +41,10 @@ function CardMouseOver(x, y)
 }
 function dodajDijalogAkoMoze(dijalog)
 {
+    if(dijalog.opcije.length==0)
+    {
+        return;
+    }
     dijalozi.forEach(element => {
         if (element.mandatory) {
             return;
@@ -49,47 +53,12 @@ function dodajDijalogAkoMoze(dijalog)
     dijalozi = [];
     dijalozi.push(dijalog);
 }
-function ObjectClickedMP(x, y)
-{
-    //a = CardZone(ruka);
-    //TEREN
 
-    //da li je kliknuta opcija u nekom dijalogu
-    if(!dijalozi.map(d => [d.x, d.y, d.width, d.height]).some(ar=>(izmedju(x, ar[0], ar[0]+ar[2])&&izmedju(y, ar[1], ar[1]+ar[3]))))
-    {
-        
-        //brisanje neobaveznih dijaloga
-        if(!dijalozi.map(d=>d.mandatory).some(a=>a==true))
-        {
-            dijalozi = [];
-        }
-        if (x > xruke && x < xruke + ruka.cards.length * wkarteuruci && y > yruke && y < yruke + hkarteuruci) {
-            var indeks = Math.floor((x - xruke) / wkarteuruci);
-            indekskarteuruci = indeks;
-            dodajDijalogAkoMoze(new HrpaOpcija(ruka.cards[indeks].opcije(indeks), false, x, y, wopcije, hopcije, 0, StackType.VerticalStack, StackDirection.Negative));
-        }
-        //end phase dugme
-        else if (x > xdugmadi + 5 * wdugmeta && x < xdugmadi + wdugmadi && y > ydugmadi && y < ydugmadi + hdugmadi) {
-            postaviFazu(Faza.EndPhase);
-        }
-        else
-        {
-            for (var i = 0; i < teren.length; i++) {
-                if(x>teren[i].x&&x<teren[i].x+teren[i].w&&y>teren[i].y&&y<teren[i].y+teren[i].w)
-                {
-                    if(teren[i].cards.length>0)
-                    {
-                        teren[i].cards.forEach(a => {
-                            prikaziRed(svekarte[a.karta].naziv);
-                        });
-                        dodajDijalogAkoMoze(new HrpaOpcija(teren[i].cards[0].opcije(), false, x, y, wopcije, hopcije, 0, StackType.VerticalStack, StackDirection.Negative));
-                    }
-                    break;
-                }
-            }
-        }
-    }
-    else 
+
+function DialogClickable(x, y)
+{
+    var indeksd = -1;
+    if(dijalozi.map(d => [d.x, d.y, d.width, d.height]).some(ar=>(izmedju(x, ar[0], ar[0]+ar[2])&&izmedju(y, ar[1], ar[1]+ar[3]))))
     {
         var indeksd = -1;
         for(var i = 0;i<dijalozi.length;i++)
@@ -110,22 +79,78 @@ function ObjectClickedMP(x, y)
         {
             dijalozi.splice(indeksd, 1);
         }
-        //var indeks = Math.floor((x - xruke) / wkarteuruci);
+        return true;
     }
-    render();
+    if(!dijalozi.map(d=>d.mandatory).some(a=>a==true))
+    {
+        dijalozi = [];
+        render();
+        return false;
+    }
+    return false;
 }
-
+function HandClickable(x, y)
+{
+    if (x > xruke && x < xruke + ruka.cards.length * wkarteuruci && y > yruke && y < yruke + hkarteuruci) {
+        var indeks = Math.floor((x - xruke) / wkarteuruci);
+        indekskarteuruci = indeks;
+        dodajDijalogAkoMoze(new HrpaOpcija(ruka.cards[indeks].opcije(indeks), false, x, y, wopcije, hopcije, 0, StackType.VerticalStack, StackDirection.Negative));
+        return true;
+    }
+    return false;
+}
+function TerrainClickable(x, y)
+{
+    for (var i = 0; i < teren.length; i++) {
+        if(x>teren[i].x&&x<teren[i].x+teren[i].w&&y>teren[i].y&&y<teren[i].y+teren[i].w)
+        {
+            if(teren[i].cards.length>0)
+            {
+                teren[i].cards.forEach(a => {
+                    prikaziRed(svekarte[a.karta].naziv);
+                });
+                dodajDijalogAkoMoze(new HrpaOpcija(teren[i].cards[0].opcije(), false, x, y, wopcije, hopcije, 0, StackType.VerticalStack, StackDirection.Negative));
+            }
+            return true;
+        }
+    }
+    return false;
+}
 function BattlePhaseClickable(x, y)
 {
     if (x > xdugmadi + 3 * wdugmeta && x < xdugmadi + 4 * wdugmeta && y > ydugmadi && y < ydugmadi + hdugmadi) {
         postaviFazu(Faza.BattlePhase);
+        return true;
     }
+    return false;
 }
 function MainPhase2Clickable(x, y)
 {
     if (x > xdugmadi + 4 * wdugmeta && x < xdugmadi + 5 * wdugmeta && y > ydugmadi && y < ydugmadi + hdugmadi) {
         postaviFazu(Faza.MainPhase2);
+        return true;
     }
+    return false;
+}
+function EndPhaseClickable(x, y)
+{
+    if (x > xdugmadi + 5 * wdugmeta && x < xdugmadi + wdugmadi && y > ydugmadi && y < ydugmadi + hdugmadi) {
+        postaviFazu(Faza.EndPhase);
+        return true;
+    }
+    return false;
+}
+function handleClicked(x, y)
+{
+    for(i = 2;i<arguments.length;i++)
+    {
+        if(arguments[i](x, y))
+        {
+            render();
+            return;
+        }
+    }
+    render();
 }
 function SelectCardsOnTerrain(x, y)
 {
@@ -216,14 +241,13 @@ function cMouseUp(e) {
                         
                             break;
                             case Faza.MainPhase:
-                                ObjectClickedMP(x, y);
-                                BattlePhaseClickable(x, y);
+                                handleClicked(x, y, DialogClickable, BattlePhaseClickable, EndPhaseClickable, HandClickable, TerrainClickable);
                             break;
                             case Faza.BattlePhase:
-                                MainPhase2Clickable(x, y);
+                                handleClicked(x, y, DialogClickable, MainPhase2Clickable, HandClickable, TerrainClickable);
                             break;
                             case Faza.MainPhase2:
-                                ObjectClickedMP(x, y);
+                                handleClicked(x, y, DialogClickable, EndPhaseClickable, HandClickable, TerrainClickable);
                             break;
                             case Faza.EndPhase:
                         

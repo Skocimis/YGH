@@ -13,14 +13,18 @@ function initialize() {
     //OSNOVNI ELEMENTI
     c = document.getElementById("platno");
     ctx = c.getContext("2d");
+    ctx.font = "30px Arial";
     loadCards();
+    GameVariables = {
+        ZivotniPoeni: 4000,
+        ZivotniPoeniP: 4000
+    }
     img2 = new Image();
     imgdugmad = new Image();
     imgsvetlecedugme = new Image();
     indexkarteuruci = -1;
     indexkarteuprotivnickojruci = 0;
     dijalozi = [];
-
 
 
     //DEFINISANJE DEKOVA
@@ -37,16 +41,18 @@ function initialize() {
 
     teren = [];
     var tx = 13, ty = 23;
-    for (var i = 0; i < 28; i++) {
-        if (i == CardZones.Deck) teren.push(new CardZone(deck, tx, ty, MonsterCardW, MonsterCardH));
-        else if (i == CardZones.DeckP) teren.push(new CardZone(protivnickideck, tx, ty, MonsterCardW, MonsterCardH));
+    for(var i = 0;i<28;i++)
+    {
+        if(i==CardZones.Deck) teren.push(new CardZone(deck, tx, ty, MonsterCardW, MonsterCardH));
+        else if (i==CardZones.DeckP) teren.push(new CardZone(protivnickideck, tx, ty, MonsterCardW, MonsterCardH));
         else teren.push(new CardZone([], tx, ty, MonsterCardW, MonsterCardH));
-        tx += MonsterCardW + MonsterCardD;
-        if (tx > 800) {
+        tx+=MonsterCardW+MonsterCardD;
+        if(tx>800)
+        {
             tx = 13;
-            ty += 144;
+            ty+= 144;
         }
-        if (ty == 311) ty = 338;
+        if(ty==311) ty = 338;
     }
     teren[CardZones.Deck].promesaj();
     teren[CardZones.DeckP].promesaj();
@@ -73,12 +79,11 @@ function initialize() {
     //Filter ima i bool pozitivan koji ako je false, znaci da mora karta be sne da ima date osobine. 
     slikaterena = new Image();
     slikaterena.src = 'slike/Interfejs/teren.png';
-    slikaterena.onload = function () {
+    slikaterena.onload = function() {
         render();
         handleEvents();
         faza = -1;
         mojpotez = true;
         zavrsiFazu();
-
     }
 }
