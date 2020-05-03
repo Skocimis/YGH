@@ -82,7 +82,10 @@ var Triggers = {
     SpellActivated: false,
     AttackDeclared: false
 }
-var GameVariables;
+var GameVariables = 
+{
+    ProsloPoteza: 0
+};
 
 var TurnVariables;
 var svekarte;

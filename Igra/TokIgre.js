@@ -85,6 +85,7 @@ function zapocniFazu(faza, mojpotez) {
 
         } else {
             //prikaziRed("end");
+            GameVariables.ProsloPoteza++;
             render();
             zavrsiFazu();
 
@@ -174,6 +175,7 @@ function zapocniFazu(faza, mojpotez) {
         } else if (faza == Faza.EndPhase) {
             render();
             //prikaziRed("Bot je zavrsio end");
+            GameVariables.ProsloPoteza++;
             zavrsiFazu()
         }
     }

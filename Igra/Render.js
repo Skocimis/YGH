@@ -20,7 +20,7 @@ function render() {
 
     //KARTE U RUCI
     for (var i = 0; i < ruka.cards.length; i++) {
-        ruka.cards[i].crtaj(ctx, xruke + i * wkarteuruci, yruke, wkarteuruci, hkarteuruci);
+        ruka.cards[i].crtaj(ctx, xruke + i * wkarteuruci, yruke, wkarteuruci, hkarteuruci, "HAHA SAD CE KARTA DA BUDE OTKRIVENA");
     }
 
     //Dugmici za faze

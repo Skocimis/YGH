@@ -101,7 +101,7 @@ function TerrainClickable(x, y) {
 }
 
 function BattlePhaseClickable(x, y) {
-    if (x > xdugmadi + 3 * wdugmeta && x < xdugmadi + 4 * wdugmeta && y > ydugmadi && y < ydugmadi + hdugmadi) {
+    if (x > xdugmadi + 3 * wdugmeta && x < xdugmadi + 4 * wdugmeta && y > ydugmadi && y < ydugmadi + hdugmadi&&GameVariables.ProsloPoteza>0) {
         postaviFazu(Faza.BattlePhase);
         return true;
     }
@@ -246,6 +246,9 @@ function cMouseUp(e) {
                 case StanjeIgre.SelekcijaTerena:
                     CancelSelectionOption(x, y);
                     break;
+                case StanjeIgre.SelekcijaPolja:
+
+                break;
                 default:
             }
 
