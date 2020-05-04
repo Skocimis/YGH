@@ -31,8 +31,7 @@ class InstancaKarte {
         };
     }
     crtaj(ctx, x, y, w, h) {
-        if(arguments.length==6)
-        {
+        if (arguments.length == 6) {
             ctx.drawImage(svekarte[this.karta].slika, 0, 0, wSlikeKarte, hSlikeKarte, x, y, w, h);
             return;
         }
@@ -202,9 +201,8 @@ class InstancaKarte {
     }
     checkForAttacks(indexOnTerrain) {
         if (faza != Faza.BattlePhase
-            ||this.TurnVariables.BrojNapada >= this.GlobalVariables.MaxBrNapada
-            ||this.GlobalVariables.Position != Pozicija.Napad) 
-        {
+            || this.TurnVariables.BrojNapada >= this.GlobalVariables.MaxBrNapada
+            || this.GlobalVariables.Position != Pozicija.Napad) {
             this.DumpVariables.CanAttack = false;
             this.DumpVariables.CanDirectAttack = false;
             return [];

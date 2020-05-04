@@ -12,7 +12,7 @@ class Opcija {
         this.slika.src = 'Slike/Interfejs/Opcije/' + tekst + '.png';
     }
     crtaj(ctx, x, y, w, h) {
-        this.slika.onload = function() {
+        this.slika.onload = function () {
             ctx.drawImage(this, 0, 0, this.width, this.height, x, y, w, h);
         }
 
@@ -56,12 +56,12 @@ class HrpaOpcija {
         return this.wOpcije;
     }
     elemH() {
-            if (this.stackType == StackType.VerticalStack && this.stackDirection == StackDirection.Negative) {
-                return -this.hOpcije;
-            }
-            return this.hOpcije;
+        if (this.stackType == StackType.VerticalStack && this.stackDirection == StackDirection.Negative) {
+            return -this.hOpcije;
         }
-        //height = (this.opcije.length == 0) ? 0 : (this.stackType==StackType.VerticalStack)?(true):(false);
+        return this.hOpcije;
+    }
+    //height = (this.opcije.length == 0) ? 0 : (this.stackType==StackType.VerticalStack)?(true):(false);
     crtaj(ctx) {
         var tx = this.x,
             ty = this.y;

@@ -22,17 +22,14 @@ function resetTurnVariables() {
         SpecialSummoned: 0
     }
     for (var i = 0; i < 28; i++)
-        for (var j = 0; j < teren[i].cards.length; j++)
-        {
+        for (var j = 0; j < teren[i].cards.length; j++) {
             teren[i].cards[j].resetTurnVariables();
         }
 
-    for (var j = 0; j < teren[CardZones.Hand].cards.length; j++)
-    {
+    for (var j = 0; j < teren[CardZones.Hand].cards.length; j++) {
         teren[CardZones.Hand].cards[j].resetTurnVariables();
     }
-    for (var j = 0; j < teren[CardZones.HandP].cards.length; j++)
-    {
+    for (var j = 0; j < teren[CardZones.HandP].cards.length; j++) {
         teren[CardZones.HandP].cards[j].resetTurnVariables();
     }
 
@@ -40,7 +37,7 @@ function resetTurnVariables() {
 
 
 function zavrsiFazu() {
-    setTimeout(function() {
+    setTimeout(function () {
         faza++;
         if (faza > Faza.EndPhase) {
             mojpotez = !mojpotez;

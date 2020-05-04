@@ -133,7 +133,7 @@ function handleClicked(x, y) {
     }
     render();
 }
-function SelctCardsFromZones(x, y){
+function SelctCardsFromZones(x, y) {
 
 }
 function SelectCardsOnTerrain(x, y) {

@@ -76,7 +76,7 @@ function initialize() {
     //Filter ima i bool pozitivan koji ako je false, znaci da mora karta be sne da ima date osobine. 
     slikaterena = new Image();
     slikaterena.src = 'slike/Interfejs/teren.png';
-    slikaterena.onload = function() {
+    slikaterena.onload = function () {
         render();
         handleEvents();
         faza = -1;
