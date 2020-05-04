@@ -22,19 +22,25 @@ function resetTurnVariables() {
         SpecialSummoned: 0
     }
     for (var i = 0; i < teren.length; i++)
-        for (var j = 0; j < teren[i].length; j++)
+        for (var j = 0; j < teren[i].cards.length; j++)
+        {
             teren[i].cards[j].resetTurnVariables();
+        }
 
     for (var j = 0; j < ruka.cards.length; j++)
+    {
         ruka.cards[j].resetTurnVariables();
+    }
     for (var j = 0; j < protivnickaruka.cards.length; j++)
+    {
         protivnickaruka.cards[j].resetTurnVariables();
+    }
 
 }
 
 
 function zavrsiFazu() {
-    setTimeout(function () {
+    setTimeout(function() {
         faza++;
         if (faza > Faza.EndPhase) {
             mojpotez = !mojpotez;
@@ -79,6 +85,7 @@ function zapocniFazu(faza, mojpotez) {
 
         } else {
             //prikaziRed("end");
+            GameVariables.ProsloPoteza++;
             render();
             zavrsiFazu();
 
@@ -110,7 +117,7 @@ function zapocniFazu(faza, mojpotez) {
                 }
             }
             if (najjaciind > -1) {
-                var freeCardZoneIndex = 100;//Da ne bi bio 0 dole
+                var freeCardZoneIndex = 100; //Da ne bi bio 0 dole
                 //alert(protivnickaruka.cards[najjaciind].brojNormalnihZrtava+" "+svekarte[protivnickaruka.cards[najjaciind].karta].naziv);
                 if (protivnickaruka.cards[najjaciind].brojNormalnihZrtava <= 0) {
                     //Mozda metoda freecardzoneindex()
@@ -120,9 +127,9 @@ function zapocniFazu(faza, mojpotez) {
                             break;
                         }
                     }
-                    if (freeCardZoneIndex != 100) teren[freeCardZoneIndex].premesti(protivnickaruka, najjaciind); TurnVariables.NormalSummoned++;
-                }
-                else {
+                    if (freeCardZoneIndex != 100) teren[freeCardZoneIndex].premesti(protivnickaruka, najjaciind);
+                    TurnVariables.NormalSummoned++;
+                } else {
                     var sIndeksi = [];
                     for (var i = CardZones.Monster1P; i <= CardZones.Monster5P; i++) {
                         if (teren[i].cards.length > 0 && sIndeksi.length < protivnickaruka.cards[najjaciind].brojNormalnihZrtava) {
@@ -161,19 +168,15 @@ function zapocniFazu(faza, mojpotez) {
             zavrsiFazu();
 
         } else if (faza == Faza.MainPhase2) { //MP2
-
             render();
             //prikaziRed("Bot je zavrsio m2");
             zavrsiFazu();
 
         } else if (faza == Faza.EndPhase) {
-
             render();
             //prikaziRed("Bot je zavrsio end");
+            GameVariables.ProsloPoteza++;
             zavrsiFazu()
-
         }
-
     }
-
 }
