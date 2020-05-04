@@ -8,7 +8,7 @@ function CancelSelectionOption(x, y) {
             []
         ];
         CiljSelekcije = 100;
-        EfekatSelekcije = function() {};
+        EfekatSelekcije = function () { };
         ObaveznaSelekcija = false;
         stanjeIgre = StanjeIgre.Normalno;
         render();
@@ -18,9 +18,9 @@ function CancelSelectionOption(x, y) {
 function CardMouseOver(x, y) {
     //Da li je mis iznad nekog dijaloga?
     if (!dijalozi.map(d => [d.x, d.y, d.width, d.height]).some(ar => (izmedju(x, ar[0], ar[0] + ar[2]) && izmedju(y, ar[1], ar[1] + ar[3])))) {
-        if (x > xruke && x < xruke + ruka.cards.length * wkarteuruci && y > yruke && y < yruke + hkarteuruci) {
+        if (x > xruke && x < xruke + teren[CardZones.Hand].cards.length * wkarteuruci && y > yruke && y < yruke + hkarteuruci) {
             var indeks = Math.floor((x - xruke) / wkarteuruci);
-            ruka.cards[indeks].crtajV();
+            teren[CardZones.Hand].cards[indeks].crtajV();
         }
         for (var i = 0; i < 28; i++) {
             if (x > teren[i].x && x < teren[i].x + teren[i].w && y > teren[i].y && y < teren[i].y + teren[i].h) {
@@ -76,17 +76,17 @@ function DialogClickable(x, y) {
 }
 
 function HandClickable(x, y) {
-    if (x > xruke && x < xruke + ruka.cards.length * wkarteuruci && y > yruke && y < yruke + hkarteuruci) {
+    if (x > xruke && x < xruke + teren[CardZones.Hand].cards.length * wkarteuruci && y > yruke && y < yruke + hkarteuruci) {
         var indeks = Math.floor((x - xruke) / wkarteuruci);
         indekskarteuruci = indeks;
-        dodajDijalogAkoMoze(new HrpaOpcija(ruka.cards[indeks].opcije(indeks), false, x, y, wopcije, hopcije, 0, StackType.VerticalStack, StackDirection.Negative));
+        dodajDijalogAkoMoze(new HrpaOpcija(teren[CardZones.Hand].cards[indeks].opcije(indeks), false, x, y, wopcije, hopcije, 0, StackType.VerticalStack, StackDirection.Negative));
         return true;
     }
     return false;
 }
 
 function TerrainClickable(x, y) {
-    for (var i = 0; i < teren.length; i++) {
+    for (var i = 0; i < 28; i++) {
         if (x > teren[i].x && x < teren[i].x + teren[i].w && y > teren[i].y && y < teren[i].y + teren[i].w) {
             if (teren[i].cards.length > 0) {
                 teren[i].cards.forEach(a => {
@@ -101,7 +101,7 @@ function TerrainClickable(x, y) {
 }
 
 function BattlePhaseClickable(x, y) {
-    if (x > xdugmadi + 3 * wdugmeta && x < xdugmadi + 4 * wdugmeta && y > ydugmadi && y < ydugmadi + hdugmadi&&GameVariables.ProsloPoteza>0) {
+    if (x > xdugmadi + 3 * wdugmeta && x < xdugmadi + 4 * wdugmeta && y > ydugmadi && y < ydugmadi + hdugmadi && GameVariables.ProsloPoteza > 0) {
         postaviFazu(Faza.BattlePhase);
         return true;
     }
@@ -133,7 +133,9 @@ function handleClicked(x, y) {
     }
     render();
 }
+function SelctCardsFromZones(x, y){
 
+}
 function SelectCardsOnTerrain(x, y) {
     //prikaziRed(indeks);
     //vrv nepotrebna provera, ova metoda nije uopste optimizovana, ali veoma dobro radi
@@ -144,7 +146,7 @@ function SelectCardsOnTerrain(x, y) {
             []
         ];
         CiljSelekcije = 100;
-        EfekatSelekcije = function() {};
+        EfekatSelekcije = function () { };
         ObaveznaSelekcija = false;
         stanjeIgre = StanjeIgre.Normalno;
     }
@@ -174,7 +176,7 @@ function SelectCardsOnTerrain(x, y) {
             []
         ];
         CiljSelekcije = 100;
-        EfekatSelekcije = function() {};
+        EfekatSelekcije = function () { };
         ObaveznaSelekcija = false;
         stanjeIgre = StanjeIgre.Normalno;
     }
@@ -231,8 +233,10 @@ function cMouseUp(e) {
                     }
                     break;
                 case StanjeIgre.SelekcijaTerena:
-                    //Radice vrv, ali treba da bude apstraktnije
                     SelectCardsOnTerrain(x, y);
+                    break;
+                case StanjeIgre.SelekcijaUZoni:
+                    SelctCardsFromZone(x, y);
                     break;
                 default:
             }
@@ -248,7 +252,7 @@ function cMouseUp(e) {
                     break;
                 case StanjeIgre.SelekcijaPolja:
 
-                break;
+                    break;
                 default:
             }
 

@@ -21,19 +21,19 @@ function resetTurnVariables() {
         NormalSummoned: 0,
         SpecialSummoned: 0
     }
-    for (var i = 0; i < teren.length; i++)
+    for (var i = 0; i < 28; i++)
         for (var j = 0; j < teren[i].cards.length; j++)
         {
             teren[i].cards[j].resetTurnVariables();
         }
 
-    for (var j = 0; j < ruka.cards.length; j++)
+    for (var j = 0; j < teren[CardZones.Hand].cards.length; j++)
     {
-        ruka.cards[j].resetTurnVariables();
+        teren[CardZones.Hand].cards[j].resetTurnVariables();
     }
-    for (var j = 0; j < protivnickaruka.cards.length; j++)
+    for (var j = 0; j < teren[CardZones.HandP].cards.length; j++)
     {
-        protivnickaruka.cards[j].resetTurnVariables();
+        teren[CardZones.HandP].cards[j].resetTurnVariables();
     }
 
 }
@@ -58,7 +58,7 @@ function zapocniFazu(faza, mojpotez) {
             if (teren[CardZones.Deck].cards.length == 0) {
                 prikaziRed("Poraz");
             } else {
-                ruka.cards.push(teren[CardZones.Deck].vuci());
+                teren[CardZones.Hand].cards.push(teren[CardZones.Deck].vuci());
                 //prikaziRed("draw");
                 render();
                 zavrsiFazu();
@@ -97,7 +97,7 @@ function zapocniFazu(faza, mojpotez) {
             if (teren[CardZones.DeckP].cards.length == 0) {
                 prikaziRed("Pobeda");
             } else {
-                protivnickaruka.cards.push(teren[CardZones.DeckP].vuci());
+                teren[CardZones.HandP].cards.push(teren[CardZones.DeckP].vuci());
                 render();
                 zavrsiFazu();
             }
@@ -110,16 +110,16 @@ function zapocniFazu(faza, mojpotez) {
             render();
             var najjaciatk = 0;
             var najjaciind = -1;
-            for (var i = 0; i < protivnickaruka.cards.length; i++) {
-                if (protivnickaruka.cards[i].isNormalSummonable && svekarte[protivnickaruka.cards[i].karta].napad > najjaciatk) {
-                    najjaciatk = svekarte[protivnickaruka.cards[i].karta].napad;
+            for (var i = 0; i < teren[CardZones.HandP].cards.length; i++) {
+                if (teren[CardZones.HandP].cards[i].isNormalSummonable && svekarte[teren[CardZones.HandP].cards[i].karta].napad > najjaciatk) {
+                    najjaciatk = svekarte[teren[CardZones.HandP].cards[i].karta].napad;
                     najjaciind = i;
                 }
             }
             if (najjaciind > -1) {
                 var freeCardZoneIndex = 100; //Da ne bi bio 0 dole
                 //alert(protivnickaruka.cards[najjaciind].brojNormalnihZrtava+" "+svekarte[protivnickaruka.cards[najjaciind].karta].naziv);
-                if (protivnickaruka.cards[najjaciind].brojNormalnihZrtava <= 0) {
+                if (teren[CardZones.HandP].cards[najjaciind].brojNormalnihZrtava <= 0) {
                     //Mozda metoda freecardzoneindex()
                     for (var i = CardZones.Monster1P; i <= CardZones.Monster5P; i++) {
                         if (teren[i].cards.length == 0) {
@@ -127,12 +127,12 @@ function zapocniFazu(faza, mojpotez) {
                             break;
                         }
                     }
-                    if (freeCardZoneIndex != 100) teren[freeCardZoneIndex].premesti(protivnickaruka, najjaciind);
+                    if (freeCardZoneIndex != 100) teren[freeCardZoneIndex].premesti(teren[CardZones.HandP], najjaciind);
                     TurnVariables.NormalSummoned++;
                 } else {
                     var sIndeksi = [];
                     for (var i = CardZones.Monster1P; i <= CardZones.Monster5P; i++) {
-                        if (teren[i].cards.length > 0 && sIndeksi.length < protivnickaruka.cards[najjaciind].brojNormalnihZrtava) {
+                        if (teren[i].cards.length > 0 && sIndeksi.length < teren[CardZones.HandP].cards[najjaciind].brojNormalnihZrtava) {
                             sIndeksi.push(i);
                             if (i < freeCardZoneIndex)
                                 freeCardZoneIndex = i;
@@ -143,7 +143,7 @@ function zapocniFazu(faza, mojpotez) {
                     }
                     if (freeCardZoneIndex != 100) {
                         teren[CardZones.GraveyardP].premesti(teren, sIndeksi);
-                        teren[freeCardZoneIndex].premesti(protivnickaruka, najjaciind);
+                        teren[freeCardZoneIndex].premesti(teren[CardZones.HandP], najjaciind);
                         TurnVariables.NormalSummoned++;
                     }
                 }

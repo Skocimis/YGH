@@ -86,10 +86,10 @@ class InstancaKarte {
     }
     //Mozda je lose ovako raditi, ali izgleda da nije
     get uruci() {
-        return ruka.cards.indexOf(this);
+        return teren[CardZones.Hand].cards.indexOf(this);
     }
     get uruciP() {
-        return protivnickaruka.cards.indexOf(this);
+        return teren[CardZones.HandP].cards.indexOf(this);
     }
     get isTributable() {
         return true;
@@ -303,7 +303,7 @@ class InstancaKarte {
                             break;
                         }
                     }
-                    teren[freeCardZoneIndex].premesti(ruka, params[0]);
+                    teren[freeCardZoneIndex].premesti(teren[CardZones.Hand], params[0]);
                     teren[freeCardZoneIndex].cards[0].GlobalVariables.Position = Pozicija.Napad;
                     teren[freeCardZoneIndex].cards[0].TurnVariables.PozicijaPromenjena = true;
                     TurnVariables.NormalSummoned++;
@@ -330,7 +330,7 @@ class InstancaKarte {
                         if (SelektovaniIndeksi[0] < freeCardZoneIndex) freeCardZoneIndex = SelektovaniIndeksi[0];
                         zrtvuj(CardZones.Graveyard, niz, SelektovaniIndeksi);
 
-                        teren[freeCardZoneIndex].premesti(ruka, params[0]);
+                        teren[freeCardZoneIndex].premesti(teren[CardZones.Hand], params[0]);
                         teren[freeCardZoneIndex].cards[0].GlobalVariables.Position = Pozicija.Napad;
                         teren[freeCardZoneIndex].cards[0].TurnVariables.PozicijaPromenjena = true;
                         TurnVariables.NormalSummoned++;
@@ -352,7 +352,7 @@ class InstancaKarte {
                             break;
                         }
                     }
-                    teren[freeCardZoneIndex].premesti(ruka, params[0]);
+                    teren[freeCardZoneIndex].premesti(teren[CardZones.Hand], params[0]);
                     teren[freeCardZoneIndex].cards[0].GlobalVariables.Position = Pozicija.NeotkrivenaOdbrana;
                     teren[freeCardZoneIndex].cards[0].TurnVariables.PozicijaPromenjena = true;
                     TurnVariables.NormalSummoned++;
@@ -378,7 +378,7 @@ class InstancaKarte {
                         }
                         if (SelektovaniIndeksi[0] < freeCardZoneIndex) freeCardZoneIndex = SelektovaniIndeksi[0];
                         zrtvuj(CardZones.Graveyard, niz, SelektovaniIndeksi);
-                        teren[freeCardZoneIndex].premesti(ruka, params[0]);
+                        teren[freeCardZoneIndex].premesti(teren[CardZones.Hand], params[0]);
                         teren[freeCardZoneIndex].cards[0].GlobalVariables.Position = Pozicija.NeotkrivenaOdbrana;
                         teren[freeCardZoneIndex].cards[0].TurnVariables.PozicijaPromenjena = true;
                         TurnVariables.NormalSummoned++;
@@ -390,14 +390,14 @@ class InstancaKarte {
         }
         var indexOnTerrain;
         //Lose ali trebalo bi da uglavnom radi
-        for (var i = 0; i < teren.length; i++) {
+        for (var i = 0; i < 28; i++) {
             if (teren[i].cards.includes(this)) {
                 indexOnTerrain = i;
                 break;
             }
         }
         if (izmedju(indexOnTerrain, CardZones.Monster1, CardZones.Monster5)) {
-            if ((faza == Faza.MainPhase || faza == Faza.MainPhase2) && this.DumpVariables.CanChangePosition) {
+            if ((faza == Faza.MainPhase || faza == Faza.MainPhase2) && this.canChangePosition) {
                 prikaziRed("moze da promeni poziciju");
                 opcije.push(this.opcijaPromenePozicije());
             }

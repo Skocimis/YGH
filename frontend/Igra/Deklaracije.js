@@ -56,7 +56,9 @@ const CardZones =
     SpellTrap3 : 24,
     SpellTrap2 : 25,
     SpellTrap1 : 26,
-    Deck : 27
+    Deck : 27,
+    Hand: 28,
+    HandP: 29
 
 }
 var igraci = 
@@ -64,12 +66,12 @@ var igraci =
     Player:
     {
         ZivotniPoeni: 4000,
-        Vlasnistvo: [14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27]
+        Vlasnistvo: [14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28]
     },
     Enemy:
     {
         ZivotniPoeni: 4000,
-        Vlasnistvo: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+        Vlasnistvo: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 29]
     }
 }
 igraci.Player.vlasnik = igraci.Enemy.vlasnik = function(polje) {return this.Vlasnistvo.includes(polje)};
@@ -96,7 +98,7 @@ var deck, protivnickideck;
 
 var img2, imgdugmad, imgsvetlecedugme, slikaterena, dugmicizafaze, slikaaktivnefaze;
 
-var dek, ruka, MonsterCardZone, MagicCardZone, Groblje, protivnickaruka, protivnickidek, MonsterCardZoneP, MagicCardZoneP;
+var dek, protivnickidek;
 var indekskarteuruci, indekskarteuprotivnickojruci;
 var faza, mojpotez;
 var dijalozi;

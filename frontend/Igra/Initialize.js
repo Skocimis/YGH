@@ -30,15 +30,13 @@ function initialize() {
     protivnickideck = new Deck();
     protivnickideck.generate_deck();
     //RUKA
-    ruka = new CardZone([]);
-    protivnickaruka = new CardZone([]);
     stanjeIgre = StanjeIgre.Normalno;
 
 
     teren = [];
     var tx = 13,
         ty = 23;
-    for (var i = 0; i < 28; i++) {
+    for (var i = 0; i < 30; i++) {
         if (i == CardZones.Deck) teren.push(new CardZone(deck, tx, ty, MonsterCardW, MonsterCardH));
         else if (i == CardZones.DeckP) teren.push(new CardZone(protivnickideck, tx, ty, MonsterCardW, MonsterCardH));
         else teren.push(new CardZone([], tx, ty, MonsterCardW, MonsterCardH));
@@ -53,10 +51,10 @@ function initialize() {
     teren[CardZones.DeckP].promesaj();
     for (var i = 0; i < 5; i++) {
 
-        ruka.cards.push(teren[CardZones.Deck].vuci());
+        teren[CardZones.Hand].cards.push(teren[CardZones.Deck].vuci());
     }
     for (var i = 0; i < 5; i++) {
-        protivnickaruka.cards.push(teren[CardZones.DeckP].vuci());
+        teren[CardZones.HandP].cards.push(teren[CardZones.DeckP].vuci());
     }
     SelektovaniIndeksi = [];
 

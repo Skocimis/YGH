@@ -10,7 +10,7 @@ function render() {
             teren[i].crtajU(ctx);
         }
     }
-    for (var i = 14; i < teren.length; i++) {
+    for (var i = 14; i < 28; i++) {
 
         teren[i].crtaj(ctx);
         if (SelektovaniIndeksi.includes(i)) {
@@ -19,8 +19,8 @@ function render() {
     }
 
     //KARTE U RUCI
-    for (var i = 0; i < ruka.cards.length; i++) {
-        ruka.cards[i].crtaj(ctx, xruke + i * wkarteuruci, yruke, wkarteuruci, hkarteuruci, "HAHA SAD CE KARTA DA BUDE OTKRIVENA");
+    for (var i = 0; i < teren[CardZones.Hand].cards.length; i++) {
+        teren[CardZones.Hand].cards[i].crtaj(ctx, xruke + i * wkarteuruci, yruke, wkarteuruci, hkarteuruci, "HAHA SAD CE KARTA DA BUDE OTKRIVENA");
     }
 
     //Dugmici za faze
