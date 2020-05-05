@@ -8,7 +8,7 @@ function CancelSelectionOption(x, y) {
             []
         ];
         CiljSelekcije = 100;
-        EfekatSelekcije = function () { };
+        EfekatSelekcije = function() {};
         ObaveznaSelekcija = false;
         stanjeIgre = StanjeIgre.Normalno;
         render();
@@ -133,9 +133,52 @@ function handleClicked(x, y) {
     }
     render();
 }
-function SelctCardsFromZones(x, y) {
 
+function SelctCardsFromZones(x, y) {
+    if (SelektovaniIndeksi.length == CiljSelekcije) {
+        EfekatSelekcije(teren);
+        SelektovaniIndeksi = [];
+        Filteri = [
+            []
+        ];
+        CiljSelekcije = 100;
+        EfekatSelekcije = function() {};
+        ObaveznaSelekcija = false;
+        stanjeIgre = StanjeIgre.Normalno;
+    }
+    var indeks = -1;
+    //MENI SA OPCIJAMA
+    for (var i = 0; i < 28; i++) {
+        if (x > teren[i].x && x < teren[i].x + teren[i].w && y > teren[i].y && y < teren[i].y + teren[i].h) {
+            indeks = i;
+        }
+    }
+    if (indeks == -1) return;
+    //Ovo dole (samo prvi if) samo ako je bio neki bag da ne bi bio bag
+    if (SelektovaniIndeksi.includes(indeks)) {
+        SelektovaniIndeksi.splice(SelektovaniIndeksi.indexOf(indeks), 1);
+    } else if (!DozvoljeniIndeksi.includes(indeks)) {
+        return;
+    } else if (teren[indeks].cards.length == 0) {
+        return;
+    } else if (SelektovaniIndeksi.length < CiljSelekcije) {
+        if (profiltrirajSve(Filteri, teren[indeks].getCardInstance()))
+            SelektovaniIndeksi.push(indeks);
+    }
+    if (SelektovaniIndeksi.length == CiljSelekcije) {
+        EfekatSelekcije(teren);
+        SelektovaniIndeksi = [];
+        Filteri = [
+            []
+        ];
+        CiljSelekcije = 100;
+        EfekatSelekcije = function() {};
+        ObaveznaSelekcija = false;
+        stanjeIgre = StanjeIgre.Normalno;
+    }
+    render();
 }
+
 function SelectCardsOnTerrain(x, y) {
     //prikaziRed(indeks);
     //vrv nepotrebna provera, ova metoda nije uopste optimizovana, ali veoma dobro radi
@@ -146,7 +189,7 @@ function SelectCardsOnTerrain(x, y) {
             []
         ];
         CiljSelekcije = 100;
-        EfekatSelekcije = function () { };
+        EfekatSelekcije = function() {};
         ObaveznaSelekcija = false;
         stanjeIgre = StanjeIgre.Normalno;
     }
@@ -176,7 +219,7 @@ function SelectCardsOnTerrain(x, y) {
             []
         ];
         CiljSelekcije = 100;
-        EfekatSelekcije = function () { };
+        EfekatSelekcije = function() {};
         ObaveznaSelekcija = false;
         stanjeIgre = StanjeIgre.Normalno;
     }

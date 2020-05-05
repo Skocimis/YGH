@@ -25,10 +25,10 @@ const Pozicija = {
 }
 const StanjeIgre = {
     Normalno: 0,
-    SelekcijaTerena: 1
+    SelekcijaTerena: 1,
+    SelekcijaUMeniju: 2
 }
-const CardZones =
-{
+const CardZones = {
     DeckP: 0,
     SpellTrap1P: 1,
     SpellTrap2P: 2,
@@ -61,20 +61,17 @@ const CardZones =
     HandP: 29
 
 }
-var igraci =
-{
-    Player:
-    {
+var igraci = {
+    Player: {
         ZivotniPoeni: 4000,
         Vlasnistvo: [14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28]
     },
-    Enemy:
-    {
+    Enemy: {
         ZivotniPoeni: 4000,
         Vlasnistvo: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 29]
     }
 }
-igraci.Player.vlasnik = igraci.Enemy.vlasnik = function (polje) { return this.Vlasnistvo.includes(polje) };
+igraci.Player.vlasnik = igraci.Enemy.vlasnik = function(polje) { return this.Vlasnistvo.includes(polje) };
 
 //ostali objekti
 
@@ -84,8 +81,7 @@ var Triggers = {
     SpellActivated: false,
     AttackDeclared: false
 }
-var GameVariables =
-{
+var GameVariables = {
     ProsloPoteza: 0
 };
 
@@ -134,7 +130,8 @@ const
 const
     MonsterCardZoneX = (wcanvas - MonsterCardZoneW) / 2,
     MonsterCardZoneY = 340;
-const MonsterCardH = MonsterCardZoneH, MonsterCardW = 77;
+const MonsterCardH = MonsterCardZoneH,
+    MonsterCardW = 77;
 const MonsterCardD = (MonsterCardZoneW - 5 * MonsterCardW) / 4;
 const MagicCardZoneY = MonsterCardZoneY + MonsterCardH + 20;
 const
@@ -155,7 +152,10 @@ const xdugmadi = (wcanvas - wdugmadi) / 2,
     hdugmeta = 21,
     wdugmeta = 89;
 
-const HPX = 380, HPY = 475, HPXP = 380, HPYP = 155;
+const HPX = 380,
+    HPY = 475,
+    HPXP = 380,
+    HPYP = 155;
 
 //Potrebne funkcije
 function izmedju(x, a, b) {
