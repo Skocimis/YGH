@@ -147,7 +147,8 @@ function SelctCardsFromZones(x, y) {
         stanjeIgre = StanjeIgre.Normalno;
     }
     var indeks = -1;
-    //MENI SA OPCIJAMA
+    //MENI SA OPCIJAMA, scu da napravim
+
     for (var i = 0; i < 28; i++) {
         if (x > teren[i].x && x < teren[i].x + teren[i].w && y > teren[i].y && y < teren[i].y + teren[i].h) {
             indeks = i;
