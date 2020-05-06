@@ -15,6 +15,13 @@ $conn->close();
     <head>
         <meta charset = "utf-8" />
         <title>YUGIOH</title>
+        <style>
+          body {
+            background-image: url("media/slike/crnadevojka.jpg");
+            background-size: 100% 100%;
+        }
+
+        </style>
     </head>
 
     <body>

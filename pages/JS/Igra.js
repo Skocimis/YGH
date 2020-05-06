@@ -5,6 +5,7 @@ function proveriPobedu() {
     if (igraci.Enemy.ZivotniPoeni <= 0) {
         prikaziRed("POBEDAAAAAAA");
     }
+    render();
 }
 
 initialize();

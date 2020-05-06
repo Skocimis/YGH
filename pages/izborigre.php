@@ -20,7 +20,7 @@ $conn->close();
     <style>
         body {
             background-image: url("media/slike/crnadevojka.jpg");
-            background-size: 100%;
+            background-size: 100% 100%;
         }
     </style>
 </head>

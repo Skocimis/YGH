@@ -19,7 +19,7 @@ $conn->close();
         <style>
             body {
                 background-image: url("media/slike/pocetnapozadina.jpg");
-                background-size: 100%;
+                background-size: 100% 100%;
             }
         </style>
     </head>

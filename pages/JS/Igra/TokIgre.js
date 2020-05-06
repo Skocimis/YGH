@@ -155,8 +155,7 @@ function zapocniFazu(faza, mojpotez) {
             var najjacecudoviste = -1;
             var najslabijaigracevakarta = -1;
 
-
-            provera = 20000;
+            var provera = 20000;
             for (var i = CardZones.Monster5; i <= CardZones.Monster1; i++) {
                 if (teren[i].cards.length != 0) {
                     if (teren[i].cards[0].GlobalVariables.Attack < provera) {
@@ -166,35 +165,64 @@ function zapocniFazu(faza, mojpotez) {
                 }
             }
             //ako korisnik nema cudovista napadni direktno
+
             if (najslabijaigracevakarta == -1) {
                 for (var i = CardZones.Monster1P; i <= CardZones.Monster5P; i++) {
-                    if (teren[i].cards.length != 0)
+                    if (teren[i].cards.length != 0) {
                         attackDirectly(i, igraci.Player);
+                    }
                 }
             } else {
-                var provera = 0;
+                provera = 0;
                 for (var i = CardZones.Monster1P; i <= CardZones.Monster5P; i++) {
                     if (teren[i].cards.length != 0) {
                         if (teren[i].cards[0].GlobalVariables.Attack > provera) {
                             provera = teren[i].cards[0].GlobalVariables.Attack;
                             najjacecudoviste = i;
                         }
+
                     }
-                }
+                    provera = 20000;
+                    for (var i = CardZones.Monster5; i <= CardZones.Monster1; i++) {
+                        if (teren[i].cards.length != 0) {
+                            if (teren[i].cards[0].Position == Pozicija.Napad)
+                                if (teren[i].cards[0].Position == Pozicija.Napad)
+                                    if (teren[i].cards[0].GlobalVariables.Attack <= provera) {
+                                        provera = teren[i].cards[0].GlobalVariables.Attack;
+                                        najslabijaigracevakarta = i;
+                                    } else
+                            if (teren[i].cards[0].Position == Pozicija.Odbrana) {
+                                if (teren[i].cards[0].GlobalVariables.Defense <= provera) {
+                                    provera = teren[i].cards[0].GlobalVariables.Attack;
+                                    najslabijaigracevakarta = i;
+                                }
+                            } else {
+                                provera = teren[i].cards[0].GlobalVariables.Attack;
+                                najslabijaigracevakarta = i;
+                            }
 
-                if (najjacecudoviste != -1) {
-                    if (teren[najslabijaigracevakarta].cards[0].GlobalVariables.Attack < teren[najjacecudoviste].cards[0].GlobalVariables.Attack)
-                        resolveBattle(najjacecudoviste, najslabijaigracevakarta);
+                            if (najjacecudoviste != -1) {
+                                if (teren[najslabijaigracevakarta].cards[0].GlobalVariables.Attack < teren[najjacecudoviste].cards[0].GlobalVariables.Attack)
+                                    resolveBattle(najjacecudoviste, najslabijaigracevakarta);
+                            } else
+                            if (najslabijaigracevakarta == -1) {
+                                for (var i = CardZones.Monster1P; i <= CardZones.Monster5P; i++) {
+                                    if (teren[i].cards.length != 0)
+                                        attackDirectly(i, igraci.Player);
+                                }
+                            }
+                        }
+
+                    }
+
+
                 }
+                //prikaziRed("Bot je zavrsio b");             teren[CardZones.DeckP].cards.length
+
+
             }
-
-
-
             render();
-            //prikaziRed("Bot je zavrsio b");             teren[CardZones.DeckP].cards.length
-
             zavrsiFazu();
-
         } else if (faza == Faza.MainPhase2) { //MP2
             render();
             //prikaziRed("Bot je zavrsio m2");

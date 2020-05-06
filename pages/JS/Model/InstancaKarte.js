@@ -14,6 +14,7 @@ class InstancaKarte {
             Position: Pozicija.NeotkrivenNapad,
             MaxBrNapada: 1
         }
+
         this.DumpVariables = {
             CanAttack: false,
             CanDirectAttack: false
@@ -445,23 +446,38 @@ function resolveBattle(napadac, branilac) {
         GrobljeN = CardZones.GraveyardP;
         GrobljeB = CardZones.Graveyard;
     }
+    if (teren[branilac].cards[0].GlobalVariables.Position == Pozicija.NeotkrivenaOdbrana) {
+        teren[branilac].cards[0].GlobalVariables.Position = Pozicija.Odbrana;
+        //aktivacija flip efekta
+    }
     var atknapadaca = teren[napadac].cards[0].GlobalVariables.Attack;
     var statbranioca = 0;
     if (teren[branilac].cards[0].GlobalVariables.Position == Pozicija.Napad || teren[branilac].cards[0].GlobalVariables.Position == Pozicija.NeotkrivenNapad) {
         statbranioca = teren[branilac].cards[0].GlobalVariables.Attack;
         if (atknapadaca > statbranioca) {
             zrtvuj(GrobljeB, teren, [branilac]);
-            igraci.Enemy.ZivotniPoeni -= atknapadaca - statbranioca;
+            if (igraci.Player.vlasnik(branilac)) igraci.Player.ZivotniPoeni -= atknapadaca - statbranioca;
+            else igraci.Enemy.ZivotniPoeni -= atknapadaca - statbranioca;
 
         } else if (atknapadaca < statbranioca) {
             zrtvuj(GrobljeN, teren, [napadac]);
-            igraci.Player.ZivotniPoeni -= statbranioca - atknapadaca;
+            if (igraci.Player.vlasnik(napadac)) igraci.Player.ZivotniPoeni -= statbranioca - atknapadaca;
+            else igraci.Enemy.ZivotniPoeni -= atknapadaca - statbranioca;
         } else {
             zrtvuj(GrobljeN, teren, [napadac]);
             zrtvuj(GrobljeB, teren, [branilac]);
         }
-        proveriPobedu();
+    } else if (teren[branilac].cards[0].GlobalVariables.Position == Pozicija.Odbrana) {
+        statbranioca = teren[branilac].cards[0].GlobalVariables.Defense;
+        if (atknapadaca > statbranioca) {
+            zrtvuj(GrobljeB, teren, [branilac]);
+
+        } else if (atknapadaca < statbranioca) {
+            if (igraci.Player.vlasnik(napadac)) igraci.Player.ZivotniPoeni -= statbranioca - atknapadaca;
+            else igraci.Enemy.ZivotniPoeni -= statbranioca - atknapadaca;
+        }
     }
+    proveriPobedu();
 }
 
 function attackDirectly(napadac, meta) {
@@ -477,5 +493,4 @@ function zrtvuj(groblje, niz, SelektovaniIndeksi) {
         });
     });
     teren[groblje].premesti(niz, SelektovaniIndeksi);
-    //ciganski
 }
