@@ -105,20 +105,20 @@ if (isset($_COOKIE['korisnicko_ime']) && isset($_COOKIE['lozinka'])) {
 
     <div id="id02" class="modal">
 
-        <form class="modal-content animate" action="/login.php" method="post">
+        <form class="modal-content animate" action="/YGH/backend/register.php" method="post">
             <div class="imgcontainer">
                 <span onclick="document.getElementById('id02').style.display='none'" class="close" title="Close Modal">&times;</span>
             </div>
 
             <div class="container">
                 <label for="uname"><b>Korisnočko ime</b></label>
-                <input type="text" placeholder="Enter Username" name="uname" required>
+                <input type="text" placeholder="Enter Username" name="username" required>
 
                 <label for="gmail"><b>Gmail</b></label>
-                <input type="text" placeholder="Enter Username" name="gmail" required>
+                <input type="text" placeholder="Enter Username" name="email" required>
 
                 <label for="psw"><b>Šifra</b></label>
-                <input type="password" placeholder="Enter Password" name="psw" required>
+                <input type="password" placeholder="Enter Password" name="password" required>
 
                 <label for="rippsw"><b>Ponovi šifru</b></label>
                 <input type="password" placeholder="Enter Password" name="rippsw" required>
