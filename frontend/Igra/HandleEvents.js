@@ -227,10 +227,6 @@ function SelectCardsOnTerrain(x, y) {
     render();
 
 }
-/*function HandleMonsterCardsTribute(x, y)
-{
-    
-}*/
 
 //#endregion
 

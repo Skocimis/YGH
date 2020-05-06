@@ -37,7 +37,7 @@ function resetTurnVariables() {
 
 
 function zavrsiFazu() {
-    setTimeout(function () {
+    setTimeout(function() {
         faza++;
         if (faza > Faza.EndPhase) {
             mojpotez = !mojpotez;
@@ -148,14 +148,6 @@ function zapocniFazu(faza, mojpotez) {
             render();
 
             zavrsiFazu();
-            /*for (var i = 0; i < protivnickaruka.length; i++) {
-                if (protivnickaruka[i].tip == 'M') {
-                    prikaziRed("PROTIVNIK PRIZIVA");
-                    protivnickiteren.push(protivnickaruka[i]);
-                    protivnickaruka.splice(i, 1);
-                    render();
-                }
-            }*/
             //prikaziRed("Bot je zavrsio m1");
 
         } else if (faza == Faza.BattlePhase) {
