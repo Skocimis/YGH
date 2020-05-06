@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>YUGIOH</title>
+
+    <style>
+        #confirm {
+            display: none;
+            background-color: #00aaff;
+            border: 1px solid #aaa;
+            position: fixed;
+            width: 250px;
+            left: 50%;
+            margin-left: -100px;
+            padding: 6px 8px 8px;
+            box-sizing: border-box;
+            text-align: center;
+        }
+        
+        #confirm button {
+            background-color: #48E5DA;
+            display: inline-block;
+            border-radius: 5px;
+            border: 1px solid #aaa;
+            padding: 5px;
+            text-align: center;
+            width: 80px;
+            cursor: pointer;
+        }
+        
+        #confirm .message {
+            text-align: left;
+        }
+        
+        .center {
+            text-align: center
+        }
+    </style>
+</head>
+
+<body>
+    <div id="confirm">
+        <div class="message"></div>
+        <button class="napad">Napad</button>
+        <button class="odbrana">Odbrana</button>
+    </div>
+    <table>
+        <tr>
+            <td>
+                <canvas id="platno" width="800" height="600"></canvas>
+            </td>
+            <td>
+                <img src="Slike/Karte/pozadina.png" id="velikakarta" alt="Greska">
+            </td>
+        </tr>
+    </table>
+    <pre id="Debugger">Debug komande:</pre>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="Igra/Deklaracije.js"></script>
+    <script src="Igra/Opcija.js"></script>
+    <script src="Igra/PopUp.js"></script>
+    <script src="Model/Karta.js"></script>
+    <script src="Model/Dek.js"></script>
+    <script src="Model/InstancaKarte.js"></script>
+    <script src="Model/SkupKarata.js"></script>
+    <script src="Igra/Initialize.js"></script>
+    <script src="Igra/Update.js"></script>
+    <script src="Igra/Render.js"></script>
+    <script src="Igra/HandleEvents.js"></script>
+    <script src="Igra/TokIgre.js"></script>
+    <script src="Igra/FilterZaSelekciju.js"></script>
+    <script src="Igra.js"></script>
+</body>
+
+</html>

@@ -45,6 +45,6 @@ if (isset($_COOKIE['korisnicko_ime']) && isset($_COOKIE['lozinka'])) {
 }
 else
 {
-    header("LOCATION: http://localhost/YGH/backend/loginpage.php");
+    header("LOCATION: http://localhost/YGH/src/pages/loginpage.php");
 }
 ?>

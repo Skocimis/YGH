@@ -52,7 +52,7 @@ if (isset($_COOKIE['korisnicko_ime']) && isset($_COOKIE['lozinka'])) {
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="loginstyle.css">
+    <link rel="stylesheet" href="CSS/loginstyle.css">
 </head>
 
 <body>
