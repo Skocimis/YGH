@@ -16,10 +16,10 @@
         }
 
         $conn->close();
-        setcookie ( "korisnicko_ime", $korisnicko_ime, time()+3600*24*10, "/", "localhost");
-        setcookie ( "lozinka", $lozinka, time()+3600*24*10, "/", "localhost");
-        header("LOCATION: http://localhost/YGH/pages/pocetna.php");
+        setcookie ( "korisnicko_ime", $korisnicko_ime, time()+3600*24*10, "/");
+        setcookie ( "lozinka", $lozinka, time()+3600*24*10, "/");
+        header("LOCATION: http://178.222.115.22:25565/YGH/pages/pocetna.php");
     }
     else {
-        header("LOCATION: http://localhost/YGH/pages/loginpage.php");
+        header("LOCATION: http://178.222.115.22:25565/YGH/pages/loginpage.php");
     }

@@ -90,7 +90,7 @@ class Karta {
         this.odbrana = odbrana;
         this.opis = opis;
         this.slika = new Image();
-        this.slika.src = 'slike/karte/' + naziv + '.png';
+        this.slika.src = 'JS/slike/karte/' + naziv + '.png';
     }
 }
 //Ovo bi trebala da bude funkcija koja ucitava sve moguce karte iz baze

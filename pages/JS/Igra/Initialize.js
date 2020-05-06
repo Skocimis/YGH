@@ -62,21 +62,21 @@ function initialize() {
     //VUCENJE KARATA
     ctx.clearRect(0, 0, 800, 600);
     dugmicizafaze = new Image();
-    dugmicizafaze.src = 'Slike/Interfejs/Dugmad.png';
+    dugmicizafaze.src = 'JS/Slike/Interfejs/Dugmad.png';
     slikaaktivnefaze = new Image();
-    slikaaktivnefaze.src = 'Slike/Interfejs/AktivnoDugme.png';
+    slikaaktivnefaze.src = 'JS/Slike/Interfejs/AktivnoDugme.png';
     slikaselektovane = new Image();
-    slikaselektovane.src = 'Slike/Karte/selektovana.png';
+    slikaselektovane.src = 'JS/Slike/Karte/selektovana.png';
     slikapozadinekarte = new Image();
-    slikapozadinekarte.src = 'Slike/Karte/pozadina.png'
+    slikapozadinekarte.src = 'JS/Slike/Karte/pozadina.png'
     Filteri = [
         []
     ];
     //Niz nizova filtera, u DNFu, redovi u matrici su odvojeni znakom ili, a unutar jednog reda su filteri odvojeni znakom i. 
     //Filter ima i bool pozitivan koji ako je false, znaci da mora karta be sne da ima date osobine. 
     slikaterena = new Image();
-    slikaterena.src = 'slike/Interfejs/teren.png';
-    slikaterena.onload = function () {
+    slikaterena.src = 'JS/slike/Interfejs/teren.png';
+    slikaterena.onload = function() {
         render();
         handleEvents();
         faza = -1;

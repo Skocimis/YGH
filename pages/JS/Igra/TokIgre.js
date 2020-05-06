@@ -151,9 +151,48 @@ function zapocniFazu(faza, mojpotez) {
             //prikaziRed("Bot je zavrsio m1");
 
         } else if (faza == Faza.BattlePhase) {
+            //pronalazi najjacu kartu u robotovoj ruci
+            var najjacecudoviste = -1;
+            var najslabijaigracevakarta = -1;
+
+
+            provera = 20000;
+            for (var i = CardZones.Monster5; i <= CardZones.Monster1; i++) {
+                if (teren[i].cards.length != 0) {
+                    if (teren[i].cards[0].GlobalVariables.Attack < provera) {
+                        provera = teren[i].cards[0].GlobalVariables.Attack;
+                        najslabijaigracevakarta = i;
+                    }
+                }
+            }
+            //ako korisnik nema cudovista napadni direktno
+            if (najslabijaigracevakarta == -1) {
+                for (var i = CardZones.Monster1P; i <= CardZones.Monster5P; i++) {
+                    if (teren[i].cards.length != 0)
+                        attackDirectly(i, igraci.Player);
+                }
+            } else {
+                var provera = 0;
+                for (var i = CardZones.Monster1P; i <= CardZones.Monster5P; i++) {
+                    if (teren[i].cards.length != 0) {
+                        if (teren[i].cards[0].GlobalVariables.Attack > provera) {
+                            provera = teren[i].cards[0].GlobalVariables.Attack;
+                            najjacecudoviste = i;
+                        }
+                    }
+                }
+
+                if (najjacecudoviste != -1) {
+                    if (teren[najslabijaigracevakarta].cards[0].GlobalVariables.Attack < teren[najjacecudoviste].cards[0].GlobalVariables.Attack)
+                        resolveBattle(najjacecudoviste, najslabijaigracevakarta);
+                }
+            }
+
+
 
             render();
-            //prikaziRed("Bot je zavrsio b");
+            //prikaziRed("Bot je zavrsio b");             teren[CardZones.DeckP].cards.length
+
             zavrsiFazu();
 
         } else if (faza == Faza.MainPhase2) { //MP2

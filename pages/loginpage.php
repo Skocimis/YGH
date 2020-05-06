@@ -1,11 +1,15 @@
 <?php
 require_once "../utils/db.php";
 require_once "../utils/cookie.php";
+require_once "../utils/iputils.php";
 
+$conn = PoveziSeSaBazom();
 if(nadjeni($conn)) {
-    header("LOCATION: http://localhost/YGH/pages/pocetna.php");
+    $conn->close();
+    postaviHeader("pages/pocetna.php");
     
 }
+$conn->close();
 ?>
 <!DOCTYPE html>
 <html>

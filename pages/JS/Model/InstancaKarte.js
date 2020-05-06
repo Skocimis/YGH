@@ -58,7 +58,7 @@ class InstancaKarte {
     }
     crtajV() {
         var slikaVelike = document.getElementById("velikakarta");
-        slikaVelike.src = "slike/karte/" + svekarte[this.karta].naziv + ".png";
+        slikaVelike.src = "JS/slike/karte/" + svekarte[this.karta].naziv + ".png";
     }
     get canChangePosition() {
         return (!this.TurnVariables.PozicijaPromenjena) && (this.TurnVariables.BrojNapada == 0);

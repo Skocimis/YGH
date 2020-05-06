@@ -1,12 +1,16 @@
 <?php //ovo ce kasnije gore
     require_once "../utils/db.php";
     require_once "../utils/cookie.php";
-
+    require_once "../utils/iputils.php";
+    $conn = PoveziSeSaBazom();
     if (!nadjeni($conn)) {
         echo "ne radi";
-        header("LOCATION: http://localhost/YGH/pages/loginpage.php");
+        $conn->close();
+        postaviHeader("pages/loginpage.php");
     } 
+    $conn->close();
     ?>
+    
 
 <!DOCTYPE html>
 <html lang="en">
