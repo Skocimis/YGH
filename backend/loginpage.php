@@ -1,3 +1,51 @@
+<?php
+if (isset($_COOKIE['korisnicko_ime']) && isset($_COOKIE['lozinka'])) {
+    $korisnicko_ime = $_COOKIE['korisnicko_ime'];
+    $lozinka = $_COOKIE['lozinka'];
+
+    $username = "root";
+    $password = "";
+    $db = "yugioh";
+    $adr = "localhost";
+
+    $tableName = "korisnici";
+
+    $conn = new mysqli($adr, $username, $password, $db);
+
+    if ($conn->connect_error) {
+        die("Nije moguce povezati se na bazu");
+    }
+
+    $query = "SELECT korisnicko_ime, lozinka FROM " . $tableName;
+    $result = $conn->query($query);
+    echo "zdravo svete";
+    if ($result->num_rows > 0) {                          // row["year"] = 4, row["class_index"] = 2, row["id] = 2, row["teacher_id"]
+        while ($row = $result->fetch_assoc()) {
+            if($korisnicko_ime==$row["korisnicko_ime"])
+            {
+                if($lozinka==$row["lozinka"])
+                {
+                    echo "Dobra lozinka";
+                    //Usmeravanje na pocetnu ili nastavak rada stranice
+                    $conn->close();
+                    exit();
+                }
+                else
+                {
+                    echo "Pogresna lozinka. ";
+                    //Nastavak na stranicu
+                }
+            }
+            echo $row["korisnicko_ime"];
+            echo "<br>";
+        }
+    } else {
+        echo "Nema redova u tabeli.";
+    }
+
+    $conn->close();
+}
+?>
 <!DOCTYPE html>
 <html>
 
@@ -10,9 +58,9 @@
 <body>
 
     <video autoplay muted loop id="myVideo">
-            <source src="PozadinaLogin2.mp4" type="video/mp4">
-            Ne moze da ucita sliku.
-        </video>
+        <source src="PozadinaLogin2.mp4" type="video/mp4">
+        Ne moze da ucita sliku.
+    </video>
     <div class="popravi">
         <img src="yugilogo.png" alt="greska" class="centrirajsliku">
 
@@ -23,9 +71,9 @@
                 <p>-Pravljenje naloga je besplatno i lako, dugmetom nazad možete prekinuti taj proces bilo kada.</p>
                 <p>-Da bi ste napravili nalog potrebno je da imate gmail atresu.</p>
                 <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Ulogij
-                        se</button>
+                    se</button>
                 <button onclick="document.getElementById('id02').style.display='block'" style="width:auto;">Registruj
-                        se</button>
+                    se</button>
         </div>
     </div>
     </fieldset>
@@ -45,8 +93,8 @@
 
                 <button type="submit">Uloguj se</button>
                 <label>
-                        <input type="checkbox" checked="checked" name="remember"> Upamti me
-                    </label>
+                    <input type="checkbox" checked="checked" name="remember"> Upamti me
+                </label>
             </div>
             <div class="container" style="background-color:#f1f1f1">
                 <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Odustani</button>
@@ -92,6 +140,7 @@
             }
         }
     </script>
+
 </body>
 
 </html>
