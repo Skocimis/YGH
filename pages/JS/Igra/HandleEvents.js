@@ -8,7 +8,7 @@ function CancelSelectionOption(x, y) {
             []
         ];
         CiljSelekcije = 100;
-        EfekatSelekcije = function() {};
+        EfekatSelekcije = function () { };
         ObaveznaSelekcija = false;
         stanjeIgre = StanjeIgre.Normalno;
         render();
@@ -142,7 +142,7 @@ function SelctCardsFromZones(x, y) {
             []
         ];
         CiljSelekcije = 100;
-        EfekatSelekcije = function() {};
+        EfekatSelekcije = function () { };
         ObaveznaSelekcija = false;
         stanjeIgre = StanjeIgre.Normalno;
     }
@@ -173,7 +173,7 @@ function SelctCardsFromZones(x, y) {
             []
         ];
         CiljSelekcije = 100;
-        EfekatSelekcije = function() {};
+        EfekatSelekcije = function () { };
         ObaveznaSelekcija = false;
         stanjeIgre = StanjeIgre.Normalno;
     }
@@ -190,7 +190,7 @@ function SelectCardsOnTerrain(x, y) {
             []
         ];
         CiljSelekcije = 100;
-        EfekatSelekcije = function() {};
+        EfekatSelekcije = function () { };
         ObaveznaSelekcija = false;
         stanjeIgre = StanjeIgre.Normalno;
     }
@@ -220,7 +220,7 @@ function SelectCardsOnTerrain(x, y) {
             []
         ];
         CiljSelekcije = 100;
-        EfekatSelekcije = function() {};
+        EfekatSelekcije = function () { };
         ObaveznaSelekcija = false;
         stanjeIgre = StanjeIgre.Normalno;
     }
