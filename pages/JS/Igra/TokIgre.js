@@ -124,8 +124,12 @@ function zapocniFazu(faza, mojpotez) {
                             break;
                         }
                     }
-                    if (freeCardZoneIndex != 100) teren[freeCardZoneIndex].premesti(teren[CardZones.HandP], najjaciind);
-                    TurnVariables.NormalSummoned++;
+                    if (freeCardZoneIndex != 100) {
+                        teren[freeCardZoneIndex].premesti(teren[CardZones.HandP], najjaciind);
+                        TurnVariables.NormalSummoned++;
+                        teren[freeCardZoneIndex].cards[0].GlobalVariables.Position = Pozicija.Napad;
+                        //alert(teren[freeCardZoneIndex].Napad + " " + teren[freeCardZoneIndex].GlobalVariables.Position);
+                    }
                 } else {
                     var sIndeksi = [];
                     for (var i = CardZones.Monster1P; i <= CardZones.Monster5P; i++) {
@@ -141,6 +145,7 @@ function zapocniFazu(faza, mojpotez) {
                     if (freeCardZoneIndex != 100) {
                         teren[CardZones.GraveyardP].premesti(teren, sIndeksi);
                         teren[freeCardZoneIndex].premesti(teren[CardZones.HandP], najjaciind);
+                        teren[freeCardZoneIndex].cards[0].GlobalVariables.Position = Pozicija.Napad;
                         TurnVariables.NormalSummoned++;
                     }
                 }
