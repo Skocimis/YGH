@@ -1,4 +1,4 @@
-var cdek, csvekarte, deksvihkarata, red, kolona, indekspomeranja, indekspomeranja1, korisnickiDek, prekoracenje, csvsdek, kolona1, red1, svekarte;
+var cdek, csvekarte, deksvihkarata, red, kolona, indekspomeranja, indekspomeranja1, korisnickiDek, prekoracenje, csvsdek, kolona1, red1, svekarte, vid_korisnika, v_dekovi;
 //deklasiranje
 cdek = document.getElementById("KarteDeka");
 csvsdek = cdek.getContext("2d");
@@ -19,39 +19,65 @@ function resetDebugLog() {
     konzola.innerHTML = "Debug komande:";
 }
 
-function insertData() {
-    var id_deka, naziv, karte_u_deku, id_korisnika;
+function loadUserDecks() {
+    $.post('../control/getdecks.php', { id_korisnika: vid_korisnika },
+        function(returnedData) {
+            var selekt = document.getElementById("izbor_deka");
+            selekt.onchange = function(e) {
+                var x = document.getElementById("izbor_deka").value;
+                if (x > -1) {
+                    korisnickiDek = v_dekovi[x].karte_u_deku.split(" ").map(a => parseInt(a));
+                    korisnickiDek.pop();
+                }
+                render1();
 
+            };
+            v_dekovi = JSON.parse(returnedData);
+            var val = 0;
+            v_dekovi.forEach(element => {
+                var chld = new Option(element.naziv, val);
+                selekt.appendChild(chld);
+                val++;
+                //prikaziRed(element.naziv);
+            });
+        });
+}
+
+function loadUserData() {
+    var vkorisnicko_ime = getCookie("korisnicko_ime");
+    var vlozinka = getCookie("lozinka");
+    $.post('../control/getuserinfo.php', { korisnicko_ime: vkorisnicko_ime, lozinka: vlozinka },
+        function(returnedData) {
+            vid_korisnika = returnedData;
+            loadUserDecks(vid_korisnika);
+        });
+}
+
+
+function insertData() {
     vnaziv = document.getElementById("nazivtb").value;
     if (vnaziv == "") vnaziv = "Dek";
     var vkarte = "";
     korisnickiDek.forEach(element => {
         vkarte += element + " ";
     });
-    var vkorisnicko_ime = getCookie("korisnicko_ime");
-    var vlozinka = getCookie("lozinka");
     var trenidDeka = null;
-    $.post('../control/getuserinfo.php', { korisnicko_ime: vkorisnicko_ime, lozinka: vlozinka },
-        function(returnedData) {
-            prikaziRed(returnedData);
-            vid_korisnika = returnedData;
-            var dekk = {
-                id_deka: trenidDeka,
-                id_korisnika: vid_korisnika,
-                naziv: vnaziv,
-                karte_u_deku: vkarte
-            };
-            $.ajax({
-                type: 'post',
-                url: '../control/postdeck.php',
-                data: JSON.stringify(dekk),
-                contentType: "application/json; charset=utf-8",
-                traditional: true,
-                success: function(data) {
-                    prikaziRed(data);
-                }
-            });
-        });
+    var dekk = {
+        id_deka: trenidDeka,
+        id_korisnika: vid_korisnika,
+        naziv: vnaziv,
+        karte_u_deku: vkarte
+    };
+    $.ajax({
+        type: 'post',
+        url: '../control/postdeck.php',
+        data: JSON.stringify(dekk),
+        contentType: "application/json; charset=utf-8",
+        traditional: true,
+        success: function(data) {
+            prikaziRed(data);
+        }
+    });
     /*var params = JSON.stringify();
     http.open('POST', url, true);
 
@@ -89,6 +115,7 @@ kolona1 = 0;
 red1 = 0;
 kolona = 0;
 red = 0;
+loadUserData();
 loadCards();
 
 setTimeout(render, 500);

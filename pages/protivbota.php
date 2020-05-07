@@ -30,6 +30,16 @@ $conn->close();
                 top: 0;
                 text-align: center;
             }
+
+            .dizajnzapobedaiporaz {
+  width: 100%;
+  padding: 50px 0;
+  text-align: center;
+  background-color: lightblue;
+  margin-top: 20px;
+  display:none;
+  position:fixed;
+}
         </style>
     </head>
 
@@ -51,6 +61,10 @@ $conn->close();
                 </table>
             </div>
         </div>
+        <div class="dizajnzapobedaiporaz">
+
+        </div>
+
         <pre id="Debugger">Debug komande:</pre>
         <script type="application/javascript" src="JS/Igra/Deklaracije.js"></script>
         <script type="application/javascript" src="JS/Igra/Opcija.js"></script>

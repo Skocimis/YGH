@@ -4,52 +4,27 @@ require_once "../utils/db.php";
 
 class Deck
 {
-    private $id_deka;
-    private $naziv;
-    private $karte;
-
-    function set_id($id_deka)
-    {
-        $this->id_deka = $id_deka;
-    }
-    function get_id()
-    {
-        return $this->id_deka;
-    }
-    function set_naziv($naziv)
-    {
-        $this->naziv = $naziv;
-    }
-    function get_naziv()
-    {
-        return $this->naziv;
-    }
-    function set_karte($karte)
-    {
-        $this->karte = $karte;
-    }
-    function get_karte()
-    {
-        return $this->karte;
-    }
+    public $id_deka;
+    public $naziv;
+    public $karte_u_deku;
 }
 
 function get_decks($id_korisnika)
 {
 
     $conn = PoveziSeSaBazom();
-    $dekovi = new Deck();
+    $dekovi = array();
 
-    $query = "SELECT id_deka, naziv, karte FROM dekovi WHERE id_korisnika = " . $id_korisnika;
+    $query = "SELECT id_deka, naziv, karte_u_deku FROM dekovi WHERE id_korisnika = " . $id_korisnika;
     $result = $conn->query($query);
     if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
             $dek = new Deck();
-            $dek->set_id($row["id_deka"]);
-            $dek->set_naziv($row["naziv"]);
-            $dek->set_karte($row["karte"]);
+            $dek->id_deka = $row["id_deka"];
+            $dek->naziv = $row["naziv"];
+            $dek->karte_u_deku = $row["karte_u_deku"];
 
-            $dekovi . array_push($dek);
+            array_push($dekovi, $dek);
         }
     }
     $conn->close();
@@ -74,7 +49,7 @@ function post_deck($deck_json)
     if ($result) {
         return "uspesno";
     } else {
-        $query = "UPDATE dekovi SET  karte_u_deku='$karte_u_deku' WHERE id_deka=$id_deka";
+        $query = "UPDATE dekovi SET karte_u_deku='$karte_u_deku' WHERE id_deka=$id_deka";
         $result = $conn->query($query);
         if ($result) {
             return "uspesno";

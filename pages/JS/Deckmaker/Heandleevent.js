@@ -51,7 +51,6 @@ function cMouseMove2(e) {
         var indeksmisa2 = Math.floor(y / 145) * 5 + Math.floor(x / 100);
 
         if (indeksmisa2 + indekspomeranja1 < korisnickiDek.length) {
-
             var slikaVelike = document.getElementById("velikakarta");
             slikaVelike.src = "JS/Slike/Karte/" + svekarte[korisnickiDek[indeksmisa2 + indekspomeranja1]].naziv + ".png";
         }
