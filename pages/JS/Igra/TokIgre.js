@@ -204,13 +204,12 @@ function zapocniFazu(faza, mojpotez) {
                                 }
 
                                 if (najjacecudoviste != -1) {
-                                    prikaziRed(najslabijaigracevakarta);
-                                    prikaziRed(teren[najslabijaigracevakarta].cards.length);
-                                    prikaziRed(teren[najslabijaigracevakarta].cards[0].GlobalVariables.Attack);
-                                    teren[najslabijaigracevakarta].cards[0].calculateStats();
-                                    if (teren[najslabijaigracevakarta].cards.length != 0)
+                                    if (teren[najslabijaigracevakarta].cards.length != 0) {
+                                        teren[najslabijaigracevakarta].cards[0].calculateStats();
+
                                         if (teren[najslabijaigracevakarta].cards[0].GlobalVariables.Attack < teren[najjacecudoviste].cards[0].GlobalVariables.Attack)
                                             resolveBattle(najjacecudoviste, najslabijaigracevakarta);
+                                    }
                                 } else
                                 if (najslabijaigracevakarta == -1) {
                                     for (var i = CardZones.Monster1P; i <= CardZones.Monster5P; i++) {

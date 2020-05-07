@@ -34,7 +34,7 @@ class Deck
     }
 }
 
-function get_deck($id_korisnika)
+function get_decks($id_korisnika)
 {
 
     $conn = PoveziSeSaBazom();
@@ -55,4 +55,16 @@ function get_deck($id_korisnika)
     }
     $conn->close();
     return $dekovi;
+}
+
+function post_deck($deck_json) {
+    $conn = PoveziSeSaBazom();
+    $dek = json_decode($deck_json);
+    $id_deka = $conn->real_escape_string($dek["id_deka"]);
+    $naziv = $conn->real_escape_string($dek["naziv"]);
+    $karte_u_deku = $conn->real_escape_string($dek["karte_u_deku"]);
+    $id_korisnika = $conn->real_escape_string($dek["id_korisnika"]);
+    
+    $query = "INSERT INTO dekovi VALUES ($id_deka, '$naziv', '$karte_u_deku', $id_korisnika)";
+    $result = $conn->query($query);
 }

@@ -14,3 +14,15 @@
         postaviHeader("pages/loginpage.php");
     }
 ?>
+
+<?php
+if(isset($_GET["option"])) {
+    $opcija = $_GET["option"];
+    if ($opcija == "login") {
+        echo "";
+    }
+    else if ($opcija == "register") {
+        echo "";
+    }
+}
+?>

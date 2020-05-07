@@ -4,10 +4,9 @@ require_once "../utils/cookie.php";
 require_once "../utils/iputils.php";
 
 $conn = PoveziSeSaBazom();
-if(nadjeni($conn)) {
+if (nadjeni($conn)) {
     $conn->close();
     postaviHeader("pages/pocetna.php");
-    
 }
 $conn->close();
 ?>
@@ -34,67 +33,79 @@ $conn->close();
                     <p>-U slučaju da još nemate svoj nalog idite na registar gde ćete napraviti nalog.</p>
                     <p>-Pravljenje naloga je besplatno i lako, dugmetom nazad možete prekinuti taj proces bilo kada.</p>
                     <p>-Da bi ste napravili nalog potrebno je da imate gmail atresu.</p>
-                    <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Ulogij
-                        se</button>
-                    <button onclick="document.getElementById('id02').style.display='block'" style="width:auto;">Registruj
-                        se</button>
+                    <a href="?option=login">
+                    <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Ulogij se</button></a>
+                    <a href="?option=register">
+                    <button onclick="document.getElementById('id02').style.display='block'" style="width:auto;">Registruj se</button> </a>   
+                </fieldset>
             </div>
         </div>
-        </fieldset>
-        <div id="id01" class="modal">
-
-            <form class="modal-content animate" action="/YGH/control/login.php" method="post">
-                <div class="imgcontainer">
-                    <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
-                </div>
-
-                <div class="container">
-                    <label for="uname"><b>Porisničko ime</b></label>
-                    <input type="text" placeholder="Enter Username" name="korisnicko_ime" required>
-
-                    <label for="psw"><b>Šifra</b></label>
-                    <input type="password" placeholder="Enter Password" name="lozinka" required>
-
-                    <button type="submit">Uloguj se</button>
-                    <label>
-                        <input type="checkbox" checked="checked" name="mejl"> Upamti me
-                    </label>
-                </div>
-                <div class="container" style="background-color:#f1f1f1">
-                    <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Odustani</button>
-                    <span class="psw">Resetuj <a href="#">šifru</a></span>
-                </div>
-            </form>
-        </div>
-
-        <div id="id02" class="modal">
-
-            <form class="modal-content animate" action="/YGH/control/register.php" method="post">
-                <div class="imgcontainer">
-                    <span onclick="document.getElementById('id02').style.display='none'" class="close" title="Close Modal">&times;</span>
-                </div>
-
-                <div class="container">
-                    <label for="uname"><b>Korisnočko ime</b></label>
-                    <input type="text" placeholder="Enter Username" name="korisnicko_ime" required>
-
-                    <label for="gmail"><b>Gmail</b></label>
-                    <input type="text" placeholder="Enter Username" name="mejl" required>
-
-                    <label for="psw"><b>Šifra</b></label>
-                    <input type="password" placeholder="Enter Password" name="lozinka" required>
-
-                    <label for="rippsw"><b>Ponovi šifru</b></label>
-                    <input type="password" placeholder="Enter Password" name="rippsw" required>
-
-                    <button type="submit">Registruj se</button>
-                </div>
-                <div class="container" style="background-color:#f1f1f1">
-                    <button type="button" onclick="document.getElementById('id02').style.display='none'" class="cancelbtn">Odustani</button>
-                </div>
-            </form>
-        </div>
-
+        <?php
+        if (isset($_GET["option"])) {
+            $opcija = $_GET["option"];
+            if ($opcija == "login") {
+                echo
+                "<div id=\"id01\" class=\"modal\">
+                    <form class=\"modal-content animate\" action=\"/YGH/control/login.php\" method=\"post\">
+                        <div class=\"imgcontainer\">
+                        <a href = \"?\">
+                            <span onclick=\"document.getElementById('id01').style.display='none'\" class=\"close\" title=\"Close Modal\">&times;</span></a>
+                        </div>
+        
+                        <div class=\"container\">
+                            <label for=\"uname\"><b>Porisničko ime</b></label>
+                            <input type=\"text\" placeholder=\"Enter Username\" name=\"korisnicko_ime\" required>
+            
+                            <label for=\"psw\"><b>Šifra</b></label>
+                            <input type=\"password\" placeholder=\"Enter Password\" name=\"lozinka\" required>
+            
+                            <button type=\"submit\">Uloguj se</button>
+                            <label>
+                                <input type=\"checkbox\" checked=\"checked\" name=\"mejl\"> Upamti me
+                            </label>
+                        </div>
+                        <div class=\"container\" style=\"background-color:#f1f1f1\">
+                            <a href = \"?\">
+                            <button type=\"button\" onclick=\"document.getElementById('id01').style.display='none'\" class=\"cancelbtn\">Odustani</button></a>
+                            <span class=\"psw\">Resetuj <a href=\"#\">šifru</a></span>
+                        </div>
+                    </form>
+                </div>";
+            }
+            else if ($opcija == "register") {
+                echo
+                "<div id=\"id02\" class=\"modal\">
+                    <form class=\"modal-content animate\" action=\"/YGH/control/register.php\" method=\"post\">
+                        <div class=\"imgcontainer\">
+                        <a href = \"?\">
+                            <span onclick=\"document.getElementById('id02').style.display='none'\" class=\"close\" title=\"Close Modal\">&times;</span></a>
+                        </div><>
+            
+                        <div class=\"container\">
+                            <label for=\"uname\"><b>Korisnočko ime</b></label>
+                            <input type=\"text\" placeholder=\"Enter Username\" name=\"korisnicko_ime\" required>
+            
+                            <label for=\"gmail\"><b>Gmail</b></label>
+                            <input type=\"text\" placeholder=\"Enter Username\" name=\"mejl\" required>
+            
+                            <label for=\"psw\"><b>Šifra</b></label>
+                            <input type=\"password\" placeholder=\"Enter Password\" name=\"lozinka\" required>
+            
+                            <label for=\"rippsw\"><b>Ponovi šifru</b></label>
+                            <input type=\"password\" placeholder=\"Enter Password\" name=\"rippsw\" required>
+            
+                            <button type=\"submit\">Registruj se</button>
+                        </div>
+                        <div class=\"container\" style=\"background-color:#f1f1f1\">
+                        <a href = \"?\">
+                            <button type=\"button\" onclick=\"document.getElementById('id02').style.display='none'\" class=\"cancelbtn\">Odustani</button></a>
+                        </div>
+                    </form>
+                </div>";
+            }
+        }
+        ?>
+        
         <script>
             var modal = document.getElementById('id01');
 

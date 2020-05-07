@@ -24,12 +24,12 @@ $conn->close();
             }
 
             .centriraj {
-                margin-left: 40%;
+                margin-left: 25%;
             
             }
 
          .centrirajdole {
-            margin-top: 10%;
+            margin-top: 7%;
          }
         </style>
     </head>
