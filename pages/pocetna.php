@@ -41,7 +41,7 @@ $conn->close();
                     </td>
                 </tr>
                 <tr>
-                    <td><a href="nesto" class="button1" style="font-size:2em">Napravi dek</a></td>
+                    <td><a href="napravidek.php" class="button1" style="font-size:2em">Napravi dek</a></td>
                 </tr>
                 <tr>
                     <td><a href="nesto" class="button1" style="font-size:2em">Opcije</a></td>

@@ -17,14 +17,27 @@ $conn->close();
         <title>YUGIOH</title>
         <style>
           body {
-            background-image: url("media/slike/crnadevojka.jpg");
+            background-image: url("media/slike/ljubicastapozadina.jpg");
             background-size: 100% 100%;
         }
-
+           .centriraj{
+               margin-left: 20%;
+               margin-top: 2%;
+           }
+           .centrirajlogo
+           {top:0;
+            text-align: center;
+           }
+     
         </style>
     </head>
 
     <body>
+        <div class="centrirajlogo">
+        
+        <img src="media/slike/yugilogo.png" alt="slika yugioh" width="424" height="171">
+   
+    <div class="centriraj">
         <table>
             <tr>
                 <td>
@@ -35,6 +48,8 @@ $conn->close();
                 </td>
             </tr>
         </table>
+        </div>
+        </div>
         <pre id = "Debugger">Debug komande:</pre>
         <script type="application/javascript" src="JS/Igra/Deklaracije.js"></script>
         <script type="application/javascript" src="JS/Igra/Opcija.js"></script>
