@@ -19,6 +19,58 @@ function resetDebugLog() {
     konzola.innerHTML = "Debug komande:";
 }
 
+function insertData() {
+    var id_deka, naziv, karte_u_deku, id_korisnika;
+    var http = new XMLHttpRequest();
+    var url = 'get_data.php';
+    id_korisnika = getUserId();
+    prikaziRed(id_korisnika);
+    /*var params = JSON.stringify();
+    http.open('POST', url, true);
+
+    //Send the proper header information along with the request
+    http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+    http.onreadystatechange = function() { //Call a function when the state changes.
+        if (http.readyState == 4 && http.status == 200) {
+            alert(http.responseText);
+        }
+    }
+    http.send(params);
+*/
+
+    prikaziRed("aa");
+}
+
+function getCookie(cname) {
+    var name = cname + "=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var ca = decodedCookie.split(';');
+    for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+}
+
+function getUserId() {
+    var id_korisnika;
+    var vkorisnicko_ime = getCookie("korisnicko_ime");
+    var vlozinka = getCookie("lozinka");
+    var http = new XMLHttpRequest();
+    var url = '../control/getuserinfo.php';
+    $.post('../control/getuserinfo.php', { korisnicko_ime: vkorisnicko_ime, lozinka: vlozinka },
+        function(returnedData) {
+            console.log(returnedData);
+        });
+
+
+}
 
 kolona1 = 0;
 red1 = 0;

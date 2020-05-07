@@ -28,26 +28,7 @@ function maxbrojkarata(broj) {
     if (brojacponavljanja >= 3) { prekoracenje = false; }
 }
 
-function insertData() {
-    var id_deka, naziv, karte_u_deku, id_korisnika;
-    var http = new XMLHttpRequest();
-    var url = 'get_data.php';
-    var params = JSON.stringify();
-    http.open('POST', url, true);
 
-    //Send the proper header information along with the request
-    http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-
-    http.onreadystatechange = function() { //Call a function when the state changes.
-        if (http.readyState == 4 && http.status == 200) {
-            alert(http.responseText);
-        }
-    }
-    http.send(params);
-
-
-    prikaziRed("aa");
-}
 
 function cMouseUp(e) {
     var x = e.offsetX;

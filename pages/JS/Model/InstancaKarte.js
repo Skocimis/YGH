@@ -469,7 +469,7 @@ function resolveBattle(napadac, branilac) {
         }
     } else if (teren[branilac].cards[0].GlobalVariables.Position == Pozicija.Odbrana) {
         statbranioca = teren[branilac].cards[0].GlobalVariables.Defense;
-        prikaziRed(atknapadaca + " " + statbranioca);
+        //prikaziRed(atknapadaca + " " + statbranioca);
         if (atknapadaca > statbranioca) {
             zrtvuj(GrobljeB, teren, [branilac]);
 

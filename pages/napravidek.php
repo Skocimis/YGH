@@ -50,6 +50,7 @@ $conn->close();
             </table>
         </div>
     </div>
+    <script src="JS/Biblioteke/jquery-3.5.1.min.js"></script>
     <script src="JS/Model/Karta.js"></script>
     <script src="JS/Model/Dek.js"></script>
     <script src="JS/Deckmaker/Heandleevent.js"></script>

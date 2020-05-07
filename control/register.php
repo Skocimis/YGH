@@ -8,22 +8,21 @@
         $mejl = $conn->real_escape_string($_POST["mejl"]);
 
         $sql = "INSERT INTO korisnici (korisnicko_ime, mejl, lozinka)
-            VALUES ('$korisnicko_ime', '$mejl', '$lozinka')";
+                VALUES ('$korisnicko_ime', '$mejl', '$lozinka')";
 
         if ($conn->query($sql) === TRUE) {
             echo "New record created successfully";
-        }
-        else {
+        } else {
             echo "Error: " . $sql . "<br>" . $conn->error;
         }
 
         $conn->close();
-        setcookie ( "korisnicko_ime", $korisnicko_ime, time()+3600*24*10, "/");
-        setcookie ( "lozinka", $lozinka, time()+3600*24*10, "/");
+        setcookie("korisnicko_ime", $korisnicko_ime, time() + 3600 * 24 * 10, "/");
+        setcookie("lozinka", $lozinka, time() + 3600 * 24 * 10, "/");
         $conn->close();
         postaviHeader("pages/pocetna.php");
-    }
-    else {
+    } else {
         $conn->close();
         postaviHeader("pages/loginpage.php");
     }
+?>

@@ -50,7 +50,7 @@ function zavrsiFazu() {
 function zapocniFazu(faza, mojpotez) {
     if (mojpotez) {
         if (faza == Faza.DrawPhase) {
-            resetDebugLog();
+            //resetDebugLog();
             resetTurnVariables();
             if (teren[CardZones.Deck].cards.length == 0) {
                 prikaziRed("Poraz");
@@ -89,7 +89,7 @@ function zapocniFazu(faza, mojpotez) {
         }
     } else { //OVDE za AI
         if (faza == Faza.DrawPhase) {
-            resetDebugLog();
+            //resetDebugLog();
             resetTurnVariables();
             if (teren[CardZones.DeckP].cards.length == 0) {
                 prikaziRed("Pobeda");
@@ -181,44 +181,67 @@ function zapocniFazu(faza, mojpotez) {
             } else { //dovde super radi posle 
 
                 for (var i = CardZones.Monster1P; i <= CardZones.Monster5P; i++) {
+
+                    //prikaziRed(CardZones.Monster1P + " " + CardZones.Monster5P);
                     if (teren[i].cards.length != 0) {
-                        najjacecudoviste = i;
+                        najjacecudoviste = i; //uzima cuvoviste koje napada
+                        //prikaziRed(i);
                         teren[najjacecudoviste].cards[0].calculateStats();
                         provera = 20000;
-                        for (var i = CardZones.Monster5; i <= CardZones.Monster1; i++) {
-                            if (teren[i].cards.length != 0) {
-                                if (teren[i].cards[0].Position == Pozicija.Napad)
-                                    if (teren[i].cards[0].Position == Pozicija.Napad)
-                                        if (teren[i].cards[0].GlobalVariables.Attack <= provera) {
-                                            provera = teren[i].cards[0].GlobalVariables.Attack;
-                                            najslabijaigracevakarta = i;
-                                        } else
-                                if (teren[i].cards[0].Position == Pozicija.Odbrana) {
-                                    if (teren[i].cards[0].GlobalVariables.Defense <= provera) {
-                                        provera = teren[i].cards[0].GlobalVariables.Attack;
-                                        najslabijaigracevakarta = i;
-                                    }
-                                } else {
-                                    provera = teren[i].cards[0].GlobalVariables.Attack;
-                                    najslabijaigracevakarta = i;
-                                }
 
-                                if (najjacecudoviste != -1) {
-                                    if (teren[najslabijaigracevakarta].cards.length != 0) {
-                                        teren[najslabijaigracevakarta].cards[0].calculateStats();
-
-                                        if (teren[najslabijaigracevakarta].cards[0].GlobalVariables.Attack < teren[najjacecudoviste].cards[0].GlobalVariables.Attack)
-                                            resolveBattle(najjacecudoviste, najslabijaigracevakarta);
-                                    }
-                                } else
-                                if (najslabijaigracevakarta == -1) {
-                                    for (var i = CardZones.Monster1P; i <= CardZones.Monster5P; i++) {
-                                        if (teren[i].cards.length != 0)
-                                            attackDirectly(i, igraci.Player);
-                                    }
+                        var attackable = teren[najjacecudoviste].cards[0].checkForAttacks(najjacecudoviste);
+                        attackable.forEach(j => {
+                            if (teren[j].cards[0].Position == Pozicija.Napad) {
+                                if (teren[j].cards[0].GlobalVariables.Attack <= provera) {
+                                    provera = teren[j].cards[0].GlobalVariables.Attack;
+                                    najslabijaigracevakarta = j;
                                 }
+                            } else if (teren[j].cards[0].Position == Pozicija.Odbrana) {
+                                if (teren[j].cards[0].GlobalVariables.Defense <= provera) {
+                                    provera = teren[j].cards[0].GlobalVariables.Defense;
+                                    najslabijaigracevakarta = j;
+                                }
+                            } else {
+                                provera = teren[j].cards[0].GlobalVariables.Defense;
+                                najslabijaigracevakarta = j;
                             }
-                        }
+
+                            if (najjacecudoviste != -1 || teren[najslabijaigracevakarta].cards.length != 0) {
+                                //prikaziRed(najslabijaigracevakarta);
+                                teren[najslabijaigracevakarta].cards[0].calculateStats();
+
+                                if (teren[najslabijaigracevakarta].cards[0].GlobalVariables.Attack <= teren[najjacecudoviste].cards[0].GlobalVariables.Attack)
+                                    resolveBattle(najjacecudoviste, najslabijaigracevakarta);
+                                prikaziRed("napao");
+                            }
+                        });
+
+                        /*   for (var j = CardZones.Monster5; j <= CardZones.Monster1; j++) {
+                              
+
+
+
+                        
+ else {
+                                   najslabijaigracevakarta = -1;
+
+                                   for (var k = CardZones.Monster5; k <= CardZones.Monster1; k++) {
+                                       if (teren[j].cards.length != 0) {
+                                           if (teren[k].cards[0].GlobalVariables.Attack < provera) {
+                                               provera = teren[k].cards[0].GlobalVariables.Attack;
+                                               najslabijaigracevakarta = j;
+                                           }
+                                       }
+                                   }
+                                   if (najslabijaigracevakarta == -1) {
+                                       for (var l = CardZones.Monster1P; l <= CardZones.Monster5P; l++) {
+                                           if (teren[l].cards.length != 0) {
+                                               attackDirectly(k, igraci.Player);
+                                           }
+                                       }
+                                   }
+                               }
+                           }*/
                     }
                 }
             }
