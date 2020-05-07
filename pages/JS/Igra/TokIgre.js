@@ -156,6 +156,7 @@ function zapocniFazu(faza, mojpotez) {
             //prikaziRed("Bot je zavrsio m1");
 
         } else if (faza == Faza.BattlePhase) {
+            var napadni = true;
             //pronalazi najjacu kartu u robotovoj ruci
             var najjacecudoviste = -1;
             var najslabijaigracevakarta = -1;
@@ -200,9 +201,8 @@ function zapocniFazu(faza, mojpotez) {
                                     provera = teren[i].cards[0].GlobalVariables.Attack;
                                     najslabijaigracevakarta = i;
                                 }
-
                                 if (najjacecudoviste != -1) {
-                                    prikaziRed(najslabijaigracevakarta);
+                                    prikaziRed(teren[najslabijaigracevakarta].cards[0].GlobalVariables.Attack);
                                     if (teren[najslabijaigracevakarta].cards[0].GlobalVariables.Attack < teren[najjacecudoviste].cards[0].GlobalVariables.Attack)
                                         resolveBattle(najjacecudoviste, najslabijaigracevakarta);
                                 } else
