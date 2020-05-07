@@ -1,4 +1,9 @@
 <?php
+require_once "../utils/db.php";
+require_once "../utils/cookie.php";
+require_once "../utils/iputils.php";
+require_once "../models/deck.php";
+
 
 /*Kada korisnik ovde posalje GET zahtev sa parametrom
 id_deka Treba da mu se posalje taj dek kao JSON objekat
@@ -11,14 +16,8 @@ Ali bice string tako da ne moras da brines o obradi
 
 Ee, ustv msm da je bolje da parametar bude id_igraca i
  da mu iz baze uzima sve dekove koji su njegovi*/
-
-    class deck {
-        private $id_deka;
-        private $naziv;
-        private $karte;
-    }
-
-    function get_deck() {
-        
-    }
+if(isset($_GET['id_korisnika']))
+{
+    echo json_encode(get_decks($_GET['id_korisnika']));
+}
 ?>
