@@ -24,6 +24,8 @@ function insertData() {
     var http = new XMLHttpRequest();
     var url = 'get_data.php';
     id_korisnika = getUserId();
+    if (id_korisnika == -1)
+        return;
     prikaziRed(id_korisnika);
     /*var params = JSON.stringify();
     http.open('POST', url, true);
@@ -38,8 +40,6 @@ function insertData() {
     }
     http.send(params);
 */
-
-    prikaziRed("aa");
 }
 
 function getCookie(cname) {
@@ -59,15 +59,16 @@ function getCookie(cname) {
 }
 
 function getUserId() {
-    var id_korisnika;
     var vkorisnicko_ime = getCookie("korisnicko_ime");
     var vlozinka = getCookie("lozinka");
-    var http = new XMLHttpRequest();
-    var url = '../control/getuserinfo.php';
     $.post('../control/getuserinfo.php', { korisnicko_ime: vkorisnicko_ime, lozinka: vlozinka },
         function(returnedData) {
-            console.log(returnedData);
+            prikaziRed(returnedData);
+            if (Number.isInteger(returnedData))
+                return returnedData;
+            else return -1;
         });
+
 
 
 }

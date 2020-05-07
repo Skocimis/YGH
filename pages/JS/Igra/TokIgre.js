@@ -188,9 +188,10 @@ function zapocniFazu(faza, mojpotez) {
                         //prikaziRed(i);
                         teren[najjacecudoviste].cards[0].calculateStats();
                         provera = 20000;
-
                         var attackable = teren[najjacecudoviste].cards[0].checkForAttacks(najjacecudoviste);
-                        attackable.forEach(j => {
+                        for (var bb = 0; bb < attackable.length; bb++) {
+                            var j = attackable[bb];
+
                             if (teren[j].cards[0].Position == Pozicija.Napad) {
                                 if (teren[j].cards[0].GlobalVariables.Attack <= provera) {
                                     provera = teren[j].cards[0].GlobalVariables.Attack;
@@ -205,16 +206,30 @@ function zapocniFazu(faza, mojpotez) {
                                 provera = teren[j].cards[0].GlobalVariables.Defense;
                                 najslabijaigracevakarta = j;
                             }
-
+                            prikaziRed(teren[najslabijaigracevakarta].cards.length);
                             if (najjacecudoviste != -1 || teren[najslabijaigracevakarta].cards.length != 0) {
-                                //prikaziRed(najslabijaigracevakarta);
+
                                 teren[najslabijaigracevakarta].cards[0].calculateStats();
 
-                                if (teren[najslabijaigracevakarta].cards[0].GlobalVariables.Attack <= teren[najjacecudoviste].cards[0].GlobalVariables.Attack)
+                                if (teren[najslabijaigracevakarta].cards[0].GlobalVariables.Attack <= teren[najjacecudoviste].cards[0].GlobalVariables.Attack) {
+
+                                    teren[najjacecudoviste].cards[0].TurnVariables.BrojNapada++;
                                     resolveBattle(najjacecudoviste, najslabijaigracevakarta);
-                                prikaziRed("napao");
+                                    bb = 0;
+                                    prikaziRed(najjacecudoviste);
+                                    if (teren[najjacecudoviste].cards.length == 0) {
+                                        attackable = [];
+                                        break;
+                                    } else {
+
+                                        attackable = teren[najjacecudoviste].cards[0].checkForAttacks(najjacecudoviste);
+                                    }
+
+                                    //prikaziRed("Napao cudoviste");
+                                }
                             }
-                        });
+                        }
+
 
                         /*   for (var j = CardZones.Monster5; j <= CardZones.Monster1; j++) {
                               
@@ -222,28 +237,21 @@ function zapocniFazu(faza, mojpotez) {
 
 
                         
- else {
-                                   najslabijaigracevakarta = -1;
 
-                                   for (var k = CardZones.Monster5; k <= CardZones.Monster1; k++) {
-                                       if (teren[j].cards.length != 0) {
-                                           if (teren[k].cards[0].GlobalVariables.Attack < provera) {
-                                               provera = teren[k].cards[0].GlobalVariables.Attack;
-                                               najslabijaigracevakarta = j;
-                                           }
-                                       }
-                                   }
-                                   if (najslabijaigracevakarta == -1) {
-                                       for (var l = CardZones.Monster1P; l <= CardZones.Monster5P; l++) {
-                                           if (teren[l].cards.length != 0) {
-                                               attackDirectly(k, igraci.Player);
-                                           }
-                                       }
-                                   }
-                               }
                            }*/
                     }
                 }
+                /*Direktan napad*/
+
+                for (var i = CardZones.Monster1P; i <= CardZones.Monster5P; i++) {
+                    if (teren[i].cards.length != 0) {
+                        if (teren[i].cards[0].checkForAttacks(i).length == 0 && teren[i].cards[0].DumpVariables.CanDirectAttack) {
+                            prikaziRed("dirnap:" + i);
+                            attackDirectly(i, igraci.Player);
+                        }
+                    }
+                }
+
             }
             //prikaziRed("Bot je zavrsio b");             teren[CardZones.DeckP].cards.length
 
