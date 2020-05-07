@@ -37,7 +37,7 @@ function resetTurnVariables() {
 
 
 function zavrsiFazu() {
-    setTimeout(function () {
+    setTimeout(function() {
         faza++;
         if (faza > Faza.EndPhase) {
             mojpotez = !mojpotez;

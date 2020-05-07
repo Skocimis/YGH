@@ -28,9 +28,9 @@ $conn->close();
             
             }
 
-         .centrirajdole {
-            margin-top: 7%;
-         }
+            .centrirajdole {
+                margin-top: 7%;
+            }
         </style>
     </head>
     <body>

@@ -44,7 +44,7 @@ $conn->close();
                     <td><a href="napravidek.php" class="button1" style="font-size:2em">Napravi dek</a></td>
                 </tr>
                 <tr>
-                    <td><a href="opcije.php" class="button1" style="font-size:2em">Opcije</a></td>
+                    <td><a href="zasluge.php" class="button1" style="font-size:2em">Zasluge</a></td>
                 </tr>
                 <tr>
                     <td><a href="../control/logout.php" class="button1" style="font-size:2em">Izloguj se</a></td>

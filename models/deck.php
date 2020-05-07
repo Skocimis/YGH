@@ -38,7 +38,7 @@ function get_decks($id_korisnika)
 {
 
     $conn = PoveziSeSaBazom();
-    $dekovi = new Deck[];
+    $dekovi = new Deck();
 
     $query = "SELECT id_deka, naziv, karte FROM dekovi WHERE id_korisnika = " . $id_korisnika;
     $result = $conn->query($query);
@@ -59,23 +59,27 @@ function get_decks($id_korisnika)
 function post_deck($deck_json)
 {
     $conn = PoveziSeSaBazom();
-    $dek = json_decode($deck_json);
+    //echo $deck_json;
+    $dek = json_decode($deck_json, true);
+    //echo $deck_json;
     $id_deka = $conn->real_escape_string($dek["id_deka"]);
     $naziv = $conn->real_escape_string($dek["naziv"]);
     $karte_u_deku = $conn->real_escape_string($dek["karte_u_deku"]);
     $id_korisnika = $conn->real_escape_string($dek["id_korisnika"]);
-
-    $query = "INSERT INTO dekovi VALUES ($id_deka, '$naziv', '$karte_u_deku', $id_korisnika)";
+    if ($id_deka == null)
+        $query = "INSERT INTO dekovi VALUES (NULL, '$naziv', '$karte_u_deku', $id_korisnika)";
+    else
+        $query = "INSERT INTO dekovi VALUES ($id_deka, '$naziv', '$karte_u_deku', $id_korisnika)";
     $result = $conn->query($query);
     if ($result) {
         return "uspesno";
     } else {
-        $query = "UPDATE dekovi SET  karte_u_deku='$karte_u_deku' WHERE $id_deka=id_deka";
+        $query = "UPDATE dekovi SET  karte_u_deku='$karte_u_deku' WHERE id_deka=$id_deka";
         $result = $conn->query($query);
         if ($result) {
             return "uspesno";
         } else {
-            return "neuspesno";
+            return $conn->error;
         }
     }
 }

@@ -21,12 +21,37 @@ function resetDebugLog() {
 
 function insertData() {
     var id_deka, naziv, karte_u_deku, id_korisnika;
-    var http = new XMLHttpRequest();
-    var url = 'get_data.php';
-    id_korisnika = getUserId();
-    if (id_korisnika == -1)
-        return;
-    prikaziRed(id_korisnika);
+
+    vnaziv = document.getElementById("nazivtb").value;
+    if (vnaziv == "") vnaziv = "Dek";
+    var vkarte = "";
+    korisnickiDek.forEach(element => {
+        vkarte += element + " ";
+    });
+    var vkorisnicko_ime = getCookie("korisnicko_ime");
+    var vlozinka = getCookie("lozinka");
+    var trenidDeka = null;
+    $.post('../control/getuserinfo.php', { korisnicko_ime: vkorisnicko_ime, lozinka: vlozinka },
+        function(returnedData) {
+            prikaziRed(returnedData);
+            vid_korisnika = returnedData;
+            var dekk = {
+                id_deka: trenidDeka,
+                id_korisnika: vid_korisnika,
+                naziv: vnaziv,
+                karte_u_deku: vkarte
+            };
+            $.ajax({
+                type: 'post',
+                url: '../control/postdeck.php',
+                data: JSON.stringify(dekk),
+                contentType: "application/json; charset=utf-8",
+                traditional: true,
+                success: function(data) {
+                    prikaziRed(data);
+                }
+            });
+        });
     /*var params = JSON.stringify();
     http.open('POST', url, true);
 
@@ -58,20 +83,7 @@ function getCookie(cname) {
     return "";
 }
 
-function getUserId() {
-    var vkorisnicko_ime = getCookie("korisnicko_ime");
-    var vlozinka = getCookie("lozinka");
-    $.post('../control/getuserinfo.php', { korisnicko_ime: vkorisnicko_ime, lozinka: vlozinka },
-        function (returnedData) {
-            prikaziRed(returnedData);
-            if (Number.isInteger(returnedData))
-                return returnedData;
-            else return -1;
-        });
 
-
-
-}
 
 kolona1 = 0;
 red1 = 0;

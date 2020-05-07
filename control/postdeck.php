@@ -1,5 +1,7 @@
 <?php
-    if (isset($_POST['id_korisnika']) && isset($_POST['id_korisnika']) && isset($_POST['id_korisnika']) && isset($_POST['id_korisnika'])) {
-        echo json_encode(get_decks($_POST['id_korisnika']));
-    }
-?>
+require_once "../models/deck.php";
+
+$entityBody = file_get_contents('php://input');
+
+echo post_deck($entityBody);
+

@@ -74,11 +74,11 @@ $conn->close();
                 <a href="#" class="button1" onclick="gore()">/\</a></td>
         </table>
         <form>
-            <input type="text" name="naziv">
+            <input type="text" id = "nazivtb" name="naziv">
             <a href="#" class="button1" onclick="insertData()">Sacuvaj Dek</a>
         </form>
         <a href="pocetna.php" class="button1" style="font-size:1.5em">&nbsp &nbsp &nbsp Nazad &nbsp &nbsp &nbsp </a>
-        <p id="Debugger"></p>
+        <pre id="Debugger"></pre>
     </div>
 </body>
 
