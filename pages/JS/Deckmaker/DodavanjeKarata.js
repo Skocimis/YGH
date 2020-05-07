@@ -62,7 +62,7 @@ function getUserId() {
     var vkorisnicko_ime = getCookie("korisnicko_ime");
     var vlozinka = getCookie("lozinka");
     $.post('../control/getuserinfo.php', { korisnicko_ime: vkorisnicko_ime, lozinka: vlozinka },
-        function(returnedData) {
+        function (returnedData) {
             prikaziRed(returnedData);
             if (Number.isInteger(returnedData))
                 return returnedData;
