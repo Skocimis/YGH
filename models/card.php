@@ -1,5 +1,4 @@
 <?php
-    require_once "../utils/db.php";
     class Card {
         public $id_karte;
         public $naziv;
@@ -11,6 +10,8 @@
         public $opis;
     }
     function get_all_cards() {
+        require_once "../utils/db.php";
+
         $conn = PoveziSeSaBazom();
         $karte = array();
         $query = "SELECT * FROM karte";

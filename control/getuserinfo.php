@@ -1,6 +1,6 @@
 <?php
     require_once "../utils/db.php";
-    require_once "../utils/iputils.php";
+    //require_once "../utils/iputils.php";
 
 
     $conn = PoveziSeSaBazom();

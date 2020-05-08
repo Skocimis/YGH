@@ -1,6 +1,7 @@
 <?php
     require_once "../utils/db.php";
     require_once "../utils/iputils.php";
+    
     $conn = PoveziSeSaBazom();
     if (isset($_POST["korisnicko_ime"]) && isset($_POST["lozinka"]) && isset($_POST["mejl"])) {
         $korisnicko_ime = $conn->real_escape_string($_POST["korisnicko_ime"]);
