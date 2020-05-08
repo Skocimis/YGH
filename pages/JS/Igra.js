@@ -1,11 +1,17 @@
 function proveriPobedu() {
     if (igraci.Player.ZivotniPoeni <= 0) {
-        prikaziRed("HAHA IZGUBIO SI");
+        var poraz = document.getElementById("dizajnzaporaz");
+        poraz.style.display = "block";
+
     }
     if (igraci.Enemy.ZivotniPoeni <= 0) {
-        prikaziRed("POBEDAAAAAAA");
+        var pobeda = document.getElementById("dizajnzapobedu");
+        pobeda.style.display = "block";
+
+
     }
     render();
 }
 
-initialize();
+loadCards();
+loadUserData();

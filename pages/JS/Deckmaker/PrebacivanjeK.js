@@ -1,7 +1,7 @@
 function dole() {
 
     csvsvekarte.clearRect(0, 0, 500, 500);
-    if (indekspomeranja < 1000005 - 15) //PRVI BROJ JE ID POSLEDNJE KARTE
+    if (indekspomeranja < 1000030 - 15) //PRVI BROJ JE ID POSLEDNJE KARTE
         indekspomeranja = indekspomeranja + 5;
     kolona = 0;
     red = 0;

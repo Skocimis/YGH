@@ -22,35 +22,110 @@ $conn->close();
             background-image: url("media/slike/crnadevojka.jpg");
             background-size: 100% 100%;
         }
+        .pomocna
+        {
+           margin-left:35%;
+        }
     </style>
 </head>
 
 <body>
+    <script>
 
+    </script>
     <div class="header">
         <div class="pomeridesno">
-            <p><?php echo "Korisnik: ".$_COOKIE['korisnicko_ime'] ?></p>
+            <p><?php echo "Korisnik: " . $_COOKIE['korisnicko_ime'] ?></p>
         </div>
     </div>
 
     <div class="centriraj2">
-        <img src="media/slike/yugilogo.png" alt="slika yugioh" width="954" height="386">
-        <div class="pomeriudesno">
-            <table>
-                <tr>
-                    <td>
-                        <div class="Pomeridugmice"><a href="protivbota.php" class="button1" style="font-size:3.5em">&nbsp &nbsp &nbsp &nbsp PvPC &nbsp &nbsp &nbsp &nbsp</a></div>
-                    </td>
-                </tr>
-                <tr>
-                    <td><a href="nesto" class="button1" style="font-size:3.5em">&nbsp &nbsp &nbsp &nbsp PvP &nbsp &nbsp &nbsp &nbsp </a></td>
-                </tr>
-                <tr>
-                    <td><a href="pocetna.php" class="button1" style="font-size:3em">&nbsp &nbsp &nbsp Nazad &nbsp &nbsp &nbsp </a></td>
-                </tr>
-            </table>
+        <div class="pomocna">
+            <img src="media/slike/yugilogo.png" alt="slika yugioh" width="636" height="257">
         </div>
+            <div class="pomeriudesno">
+                    <br>
+                    <select name="trenutni_dek" id="izbor_deka">
+
+                    </select>
+                    <br>
+                    <div class="Pomeridugmice"><a id="linkzaprotivbota" href="protivbota.php" class="button1" style="font-size:3em">&nbsp &nbsp &nbsp &nbsp PvPC &nbsp &nbsp &nbsp &nbsp</a></div>
+                    <br>
+                    <td><a href="nesto" class="button1" style="font-size:3em">&nbsp &nbsp &nbsp &nbsp PvP &nbsp &nbsp &nbsp &nbsp </a></td>
+                    <br>
+                    <td><a href="pocetna.php" class="button1" style="font-size:2.5em">&nbsp &nbsp &nbsp Nazad &nbsp &nbsp &nbsp </a></td>
+            
+    
+            </div>
     </div>
+    <script src="JS/Biblioteke/jquery-3.5.1.min.js"></script>
+    <script>
+        var vid_korisnika;
+        var v_dekovi, postParams;
+        function getCookie(cname) {
+            var name = cname + "=";
+            var decodedCookie = decodeURIComponent(document.cookie);
+            var ca = decodedCookie.split(';');
+            for (var i = 0; i < ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0) == ' ') {
+                    c = c.substring(1);
+                }
+                if (c.indexOf(name) == 0) {
+                    return c.substring(name.length, c.length);
+                }
+            }
+            return "";
+        }
+
+        function loadUserDecks() {
+            $.post('../control/getdecks.php', {
+                    id_korisnika: vid_korisnika
+                },
+                function(returnedData) {
+                    //alert(returnedData);
+                    var selekt = document.getElementById("izbor_deka");
+                    selekt.onchange = function(e) {
+                        var x = document.getElementById("izbor_deka").value;
+                        if (x > -1) {
+                            postParams = v_dekovi[x].id_deka;
+                            var aa = document.getElementById("linkzaprotivbota");
+                            aa.href = "protivbota.php?dek="+postParams;
+                            //console.log(postParams);
+                        }
+
+                    };
+                    v_dekovi = JSON.parse(returnedData);
+                    var val = 0;
+                    if(v_dekovi.length>0)
+                    {
+                            postParams = v_dekovi[0].id_deka;
+                            var aa = document.getElementById("linkzaprotivbota");
+                            aa.href = "protivbota.php?dek="+postParams;
+                    }
+                    v_dekovi.forEach(element => {
+                        var chld = new Option(element.naziv, val);
+                        selekt.appendChild(chld);
+                        val++;
+                        //prikaziRed(element.naziv);
+                    });
+                });
+        }
+
+        function loadUserData() {
+            var vkorisnicko_ime = getCookie("korisnicko_ime");
+            var vlozinka = getCookie("lozinka");
+            $.post('../control/getuserinfo.php', {
+                    korisnicko_ime: vkorisnicko_ime,
+                    lozinka: vlozinka
+                },
+                function(returnedData) {
+                    vid_korisnika = returnedData;
+                    loadUserDecks(vid_korisnika);
+                });
+        }
+        loadUserData();
+    </script>
 </body>
 
 </html>

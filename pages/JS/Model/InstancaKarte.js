@@ -65,26 +65,26 @@ class InstancaKarte {
         return (!this.TurnVariables.PozicijaPromenjena) && (this.TurnVariables.BrojNapada == 0);
     }
     get brojNormalnihZrtava() {
-        if (svekarte[this.karta].nivo > 0 && svekarte[this.karta].nivo < 5)
-            return 0;
-        if (svekarte[this.karta].nivo > 4 && svekarte[this.karta].nivo < 7)
-            return 1;
-        if (svekarte[this.karta].nivo > 6 && svekarte[this.karta].nivo < 13)
-            return 2;
-        return -1;
-    }
-    //OVO CE TREBATI DA SE UPDATUJE
+            if (svekarte[this.karta].nivo > 0 && svekarte[this.karta].nivo < 5)
+                return 0;
+            if (svekarte[this.karta].nivo > 4 && svekarte[this.karta].nivo < 7)
+                return 1;
+            if (svekarte[this.karta].nivo > 6 && svekarte[this.karta].nivo < 13)
+                return 2;
+            return -1;
+        }
+        //OVO CE TREBATI DA SE UPDATUJE
     get tipKarte() {
-        if (svekarte[this.karta].atribut == Atributi.Spell) {
-            return CardTypes.Spell;
+            if (svekarte[this.karta].atribut == Atributi.Spell) {
+                return CardTypes.Spell;
+            }
+            if (svekarte[this.karta].atribut == Atributi.Trap) {
+                return CardTypes.Trap;
+            } else {
+                return CardTypes.Monster;
+            }
         }
-        if (svekarte[this.karta].atribut == Atributi.Trap) {
-            return CardTypes.Trap;
-        } else {
-            return CardTypes.Monster;
-        }
-    }
-    //Mozda je lose ovako raditi, ali izgleda da nije
+        //Mozda je lose ovako raditi, ali izgleda da nije
     get uruci() {
         return teren[CardZones.Hand].cards.indexOf(this);
     }
@@ -197,9 +197,9 @@ class InstancaKarte {
 
     }
     canBeAttacked(napadac) // Za sad prosledjujem teren zato sto on sadrzi i instancu karte
-    {
-        return true;
-    }
+        {
+            return true;
+        }
     checkForAttacks(indexOnTerrain) {
         if (faza != Faza.BattlePhase ||
             this.TurnVariables.BrojNapada >= this.GlobalVariables.MaxBrNapada ||
@@ -264,21 +264,21 @@ class InstancaKarte {
     opcijaPromenePozicije() {
         var self = this;
         if (this.GlobalVariables.Position == Pozicija.Napad) {
-            return new Opcija("Odbrana", function (params) {
+            return new Opcija("Odbrana", function(params) {
                 self.GlobalVariables.Position = Pozicija.Odbrana;
                 self.TurnVariables.PozicijaPromenjena = true;
                 render();
             });
         }
         if (this.GlobalVariables.Position == Pozicija.Odbrana) {
-            return new Opcija("Napad", function (params) {
+            return new Opcija("Napad", function(params) {
                 self.GlobalVariables.Position = Pozicija.Napad;
                 self.TurnVariables.PozicijaPromenjena = true;
                 render();
             });
         }
         if (this.GlobalVariables.Position == Pozicija.NeotkrivenaOdbrana) {
-            return new Opcija("Flipuj", function (params) {
+            return new Opcija("Flipuj", function(params) {
                 self.GlobalVariables.Position = Pozicija.Napad;
                 self.TurnVariables.PozicijaPromenjena = true;
                 render();
@@ -292,7 +292,7 @@ class InstancaKarte {
         var self = this;
         //FUNKCIJA NORMALNO PRIZOVI UMESTO DVA VELIKA DELA KODA U ZAGRADI
         if (this.isNormalSummonable && mojpotez) {
-            opcije.push(new Opcija("Prizovi", function (params) {
+            opcije.push(new Opcija("Prizovi", function(params) {
                 var freeCardZoneIndex = 100; //Da ne bi bio 0 dole
                 if (self.brojNormalnihZrtava == 0) {
                     //Mozda metoda freecardzoneindex()
@@ -318,7 +318,7 @@ class InstancaKarte {
                     for (var i = CardZones.Monster5; i <= CardZones.Monster1; i++) {
                         DozvoljeniIndeksi.push(i);
                     }
-                    EfekatSelekcije = function (niz) {
+                    EfekatSelekcije = function(niz) {
                         SelektovaniIndeksi.sort((a, b) => a - b);
                         for (var i = CardZones.Monster5; i <= CardZones.Monster1; i++) {
                             if (teren[i].cards.length == 0) {
@@ -341,7 +341,7 @@ class InstancaKarte {
         }
 
         if (this.isSettable && mojpotez) {
-            opcije.push(new Opcija("Setuj", function (params) {
+            opcije.push(new Opcija("Setuj", function(params) {
                 var freeCardZoneIndex = 100; //Da ne bi bio 0 dole
                 if (self.brojNormalnihZrtava == 0) {
                     //Mozda metoda freecardzoneindex()
@@ -367,7 +367,7 @@ class InstancaKarte {
                     for (var i = CardZones.Monster5; i <= CardZones.Monster1; i++) {
                         DozvoljeniIndeksi.push(i);
                     }
-                    EfekatSelekcije = function (niz) {
+                    EfekatSelekcije = function(niz) {
                         SelektovaniIndeksi.sort((a, b) => a - b);
                         for (var i = CardZones.Monster5; i <= CardZones.Monster1; i++) {
                             if (teren[i].cards.length == 0) {
@@ -403,7 +403,7 @@ class InstancaKarte {
 
             var attackableZones = this.checkForAttacks(indexOnTerrain);
             if (this.DumpVariables.CanAttack) {
-                opcije.push(new Opcija("Napadni", function (params) {
+                opcije.push(new Opcija("Napadni", function(params) {
                     SelektovaniIndeksi = [];
                     CiljSelekcije = 1;
                     Filteri = [
@@ -412,7 +412,7 @@ class InstancaKarte {
                     DozvoljeniIndeksi = attackableZones;
                     ObaveznaSelekcija = false;
                     //ZRTVUJE SE SAMO SA TERENA
-                    EfekatSelekcije = function () {
+                    EfekatSelekcije = function() {
                         resolveBattle(indexOnTerrain, SelektovaniIndeksi[0]);
                         stanjeIgre
                     }
@@ -420,7 +420,7 @@ class InstancaKarte {
                 }));
             }
             if (this.DumpVariables.CanDirectAttack) {
-                opcije.push(new Opcija("Napadni direktno", function (params) {
+                opcije.push(new Opcija("Napadni direktno", function(params) {
                     attackDirectly(indexOnTerrain, igraci.Player.vlasnik(indexOnTerrain) ? igraci.Enemy : igraci.Player);
                     teren[indexOnTerrain].cards[0].TurnVariables.BrojNapada++;
                     //VRV CE TREBATI NEKO SVOJSTVO META NAPADA ZA KARTE KAO STO JE CILINDRIN
@@ -455,6 +455,7 @@ function resolveBattle(napadac, branilac) {
     if (teren[branilac].cards[0].GlobalVariables.Position == Pozicija.Napad || teren[branilac].cards[0].GlobalVariables.Position == Pozicija.NeotkrivenNapad) {
         statbranioca = teren[branilac].cards[0].GlobalVariables.Attack;
         if (atknapadaca > statbranioca) {
+            prikaziRed(atknapadaca > statbranioca);
             zrtvuj(GrobljeB, teren, [branilac]);
             if (igraci.Player.vlasnik(branilac)) igraci.Player.ZivotniPoeni -= atknapadaca - statbranioca;
             else igraci.Enemy.ZivotniPoeni -= atknapadaca - statbranioca;

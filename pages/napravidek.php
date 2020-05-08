@@ -34,8 +34,6 @@ $conn->close();
 </head>
 
 <body>
-    <div class="centrirajlogo">
-        <img src="media/slike/yugilogo.png" alt="slika yugioh" width="424" height="171">
         <div class="centriraj">
             <table>
                 <td>
@@ -76,7 +74,7 @@ $conn->close();
         <form>
             <input type="text" id="nazivtb" name="naziv">
             <select name="trenutni_dek" id = "izbor_deka">
-                <option value="-1">Napravi novi dek</option>
+                
             </select>
             <a href="#" class="button1" onclick="insertData()">Sacuvaj Dek</a>
         </form>

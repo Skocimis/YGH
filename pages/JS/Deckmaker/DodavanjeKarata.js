@@ -22,14 +22,20 @@ function resetDebugLog() {
 function loadUserDecks() {
     $.post('../control/getdecks.php', { id_korisnika: vid_korisnika },
         function(returnedData) {
+            //alert(returnedData);
             var selekt = document.getElementById("izbor_deka");
+            selekt.innerHTML = "<option value=\"-1\">Napravi novi dek</option>";
             selekt.onchange = function(e) {
                 var x = document.getElementById("izbor_deka").value;
                 if (x > -1) {
                     korisnickiDek = v_dekovi[x].karte_u_deku.split(" ").map(a => parseInt(a));
                     korisnickiDek.pop();
                 }
+                //indekspomeranja = 1000001;
+                indekspomeranja1 = 0;
+
                 render1();
+
 
             };
             v_dekovi = JSON.parse(returnedData);
@@ -55,6 +61,10 @@ function loadUserData() {
 
 
 function insertData() {
+    var selekt = parseInt(document.getElementById("izbor_deka").value);
+    //dobro su nazvane promenljive
+    v_iddeka = selekt == -1 ? (null) : (v_dekovi[selekt].id_deka);
+    var selekt = parseInt(document.getElementById("izbor_deka").value);
     vnaziv = document.getElementById("nazivtb").value;
     if (vnaziv == "") vnaziv = "Dek";
     var vkarte = "";
@@ -63,7 +73,7 @@ function insertData() {
     });
     var trenidDeka = null;
     var dekk = {
-        id_deka: trenidDeka,
+        id_deka: v_iddeka,
         id_korisnika: vid_korisnika,
         naziv: vnaziv,
         karte_u_deku: vkarte
@@ -76,22 +86,12 @@ function insertData() {
         traditional: true,
         success: function(data) {
             prikaziRed(data);
+
+            loadUserData();
         }
     });
-    /*var params = JSON.stringify();
-    http.open('POST', url, true);
-
-    //Send the proper header information along with the request
-    http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-
-    http.onreadystatechange = function() { //Call a function when the state changes.
-        if (http.readyState == 4 && http.status == 200) {
-            alert(http.responseText);
-        }
-    }
-    http.send(params);
-*/
 }
+
 
 function getCookie(cname) {
     var name = cname + "=";

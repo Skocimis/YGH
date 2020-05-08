@@ -72,7 +72,7 @@ var igraci = {
         Vlasnistvo: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 29]
     }
 }
-igraci.Player.vlasnik = igraci.Enemy.vlasnik = function (polje) { return this.Vlasnistvo.includes(polje) };
+igraci.Player.vlasnik = igraci.Enemy.vlasnik = function(polje) { return this.Vlasnistvo.includes(polje) };
 
 //ostali objekti
 
@@ -85,6 +85,7 @@ var Triggers = {
 var GameVariables = {
     ProsloPoteza: 0
 };
+var v_dekovi, vid_korisnika, vid_deka = -1;
 
 var TurnVariables;
 var svekarte;

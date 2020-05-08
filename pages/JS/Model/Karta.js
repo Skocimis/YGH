@@ -97,11 +97,18 @@ class Karta {
 function loadCards() {
     if (arguments.length == 0) {
         svekarte = Array(999999);
-        svekarte[1000001] = new Karta(1000001, 'Alpha The Magnet Warrior', Nivoi.Cetvrti, Atributi.Earth, ['Rock'], 1400, 1700, 'Alpha, Beta, and Gamma meld as one to form a powerful monster.');
+        $.post('../control/getallcards.php', {},
+            function(returnedData) {
+                ldc = JSON.parse(returnedData);
+                ldc.forEach(a => {
+                    svekarte[a.id_karte] = new Karta(a.id_karte, a.naziv, parseInt(a.nivo), parseInt(a.atribut), a.tip, parseInt(a.napad), parseInt(a.odbrana), a.opis);
+                });
+            });
+        /*svekarte[1000001] = new Karta(1000001, 'Alpha The Magnet Warrior', Nivoi.Cetvrti, Atributi.Earth, ['Rock'], 1400, 1700, 'Alpha, Beta, and Gamma meld as one to form a powerful monster.');
         svekarte[1000002] = new Karta(1000002, 'Beta The Magnet Warrior', Nivoi.Cetvrti, Atributi.Earth, ['Rock'], 1700, 1600, 'Alpha, Beta, and Gamma meld as one to form a powerful monster.');
         svekarte[1000003] = new Karta(1000003, 'Gamma The Magnet Warrior', Nivoi.Cetvrti, Atributi.Earth, ['Rock'], 1500, 1800, 'Alpha, Beta, and Gamma meld as one to form a powerful monster.');
         svekarte[1000004] = new Karta(1000004, 'Saggi the Dark Clown', Nivoi.Treci, Atributi.Dark, ['Spellcaster'], 600, 1500, 'This clown appears from nowhere and executes very strange moves to avoid enemy attacks.');
         svekarte[1000005] = new Karta(1000005, 'Blue-Eyes White Dragon', Nivoi.Osmi, Atributi.Light, ['Dragon'], 3000, 2500, 'This legendary dragon is a powerful engine of destruction. Virtually invincible, very few have faced this awesome creature and lived to tell the tale.');
-        svekarte[1000006] = new Karta(1000006, 'Gazelle the King of Mythical Beasts', Nivoi.Cetvrti, Atributi.Earth, ['Rock'], 1500, 1200, 'This monster moves so fast that it looks like an illusion to mortal eyes. (This card is always treated as a "Phantom Beast" card.)');
+        svekarte[1000006] = new Karta(1000006, 'Gazelle the King of Mythical Beasts', Nivoi.Cetvrti, Atributi.Earth, ['Rock'], 1500, 1200, 'This monster moves so fast that it looks like an illusion to mortal eyes. (This card is always treated as a "Phantom Beast" card.)');*/
     }
 }

@@ -1,3 +1,43 @@
+function getCookie(cname) {
+    var name = cname + "=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var ca = decodedCookie.split(';');
+    for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+}
+
+function loadUserDecks() { //Kasnije treba napraviti loadUserDeck
+    $.post('../control/getdecks.php', { id_korisnika: vid_korisnika },
+        function(returnedData) {
+            v_dekovi = JSON.parse(returnedData);
+            for (var i = 0; i < v_dekovi.length; i++) {
+                if (v_dekovi[i].id_deka == postParams) {
+                    vid_deka = i;
+                }
+            }
+            initialize();
+        });
+}
+
+function loadUserData() {
+
+    var vkorisnicko_ime = getCookie("korisnicko_ime");
+    var vlozinka = getCookie("lozinka");
+    $.post('../control/getuserinfo.php', { korisnicko_ime: vkorisnicko_ime, lozinka: vlozinka },
+        function(returnedData) {
+            vid_korisnika = returnedData;
+            loadUserDecks(vid_korisnika);
+        });
+}
+
 function prikaziRed(a) {
     var konzola = document.getElementById("Debugger");
     konzola.innerHTML += "\n" + a;
@@ -14,7 +54,6 @@ function initialize() {
     c = document.getElementById("platno");
     ctx = c.getContext("2d");
     ctx.font = "30px Arial";
-    loadCards();
     img2 = new Image();
     imgdugmad = new Image();
     imgsvetlecedugme = new Image();
@@ -24,11 +63,9 @@ function initialize() {
 
 
     //DEFINISANJE DEKOVA
-    deck = new Deck();
+    deck = new Deck(vid_deka);
     //prikaziRed(dek.cards.length);
-    deck.generate_deck();
-    protivnickideck = new Deck();
-    protivnickideck.generate_deck();
+    protivnickideck = new Deck(-1);
     //RUKA
     stanjeIgre = StanjeIgre.Normalno;
 
@@ -76,7 +113,7 @@ function initialize() {
     //Filter ima i bool pozitivan koji ako je false, znaci da mora karta be sne da ima date osobine. 
     slikaterena = new Image();
     slikaterena.src = 'JS/slike/Interfejs/teren.png';
-    slikaterena.onload = function () {
+    slikaterena.onload = function() {
         render();
         handleEvents();
         faza = -1;

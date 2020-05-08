@@ -3,18 +3,16 @@ class CardZone {
     constructor(cards, x, y, w, h) {
         if (cards.constructor == Deck) {
             this.cards = [];
-            for (var i = 0; i < deck.cards.length; i++) {
-                this.cards.push(new InstancaKarte(deck.cards[i]));
+            for (var i = 0; i < cards.cards.length; i++) {
+                this.cards.push(new InstancaKarte(cards.cards[i]));
             }
-        }
-        else this.cards = cards;
+        } else this.cards = cards;
         this.x = x;
         this.y = y;
         if (arguments.length == 3) {
             this.w = MonsterCardW;
             this.h = MonsterCardH;
-        }
-        else {
+        } else {
             this.w = w;
             this.h = h;
         }
@@ -22,16 +20,14 @@ class CardZone {
     crtaj(ctx) {
         if (this.cards.length == 0) {
             //prikaziRed(this.x+" "+this.y);
-        }
-        else {
+        } else {
             this.cards[0].crtaj(ctx, this.x, this.y, this.w, this.h);
         }
     }
     crtajO(ctx) {
         if (this.cards.length == 0) {
             //prikaziRed(this.x+" "+this.y);
-        }
-        else {
+        } else {
             ctx.save();
             ctx.translate(this.x, this.y);
             ctx.rotate(Math.PI);
@@ -79,12 +75,10 @@ class CardZone {
                 indeks.forEach(el => {
                     this.cards.unshift(skup.cards.splice(el, 1)[0]);
                 });
-            }
-            else {
+            } else {
                 this.cards.unshift(skup.cards.splice(indeks, 1)[0]);
             }
-        }
-        else if (skup.constructor === Array) {
+        } else if (skup.constructor === Array) {
             if (skup.length > 0 && skup[0].constructor === CardZone) {
                 if (indeks.constructor === Array) {
                     indeks.forEach(el => {
@@ -93,8 +87,7 @@ class CardZone {
                         });
                         skup[el].cards = [];
                     });
-                }
-                else {
+                } else {
                     this.cards.unshift(skup.cards.splice(indeks, 1)[0]);
                 }
             }
