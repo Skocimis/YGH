@@ -16,7 +16,7 @@ function getCookie(cname) {
 
 function loadUserDecks() { //Kasnije treba napraviti loadUserDeck
     $.post('../control/getdecks.php', { id_korisnika: vid_korisnika },
-        function(returnedData) {
+        function (returnedData) {
             v_dekovi = JSON.parse(returnedData);
             for (var i = 0; i < v_dekovi.length; i++) {
                 if (v_dekovi[i].id_deka == postParams) {
@@ -32,7 +32,7 @@ function loadUserData() {
     var vkorisnicko_ime = getCookie("korisnicko_ime");
     var vlozinka = getCookie("lozinka");
     $.post('../control/getuserinfo.php', { korisnicko_ime: vkorisnicko_ime, lozinka: vlozinka },
-        function(returnedData) {
+        function (returnedData) {
             vid_korisnika = returnedData;
             loadUserDecks(vid_korisnika);
         });
@@ -113,7 +113,7 @@ function initialize() {
     //Filter ima i bool pozitivan koji ako je false, znaci da mora karta be sne da ima date osobine. 
     slikaterena = new Image();
     slikaterena.src = 'JS/slike/Interfejs/teren.png';
-    slikaterena.onload = function() {
+    slikaterena.onload = function () {
         render();
         handleEvents();
         faza = -1;
