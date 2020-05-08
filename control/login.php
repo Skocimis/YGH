@@ -1,5 +1,4 @@
 <?php
-    //require_once "../utils/db.php";
     require_once "../utils/iputils.php";
 
     if (isset($_POST["korisnicko_ime"]) && isset($_POST["lozinka"])) {
