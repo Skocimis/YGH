@@ -6,7 +6,7 @@ require_once "../utils/iputils.php";
 $conn = PoveziSeSaBazom();
 if (!nadjeni($conn)) {
     $conn->close();
-    postaviHeader("pages/loginpage.php");
+    postaviHeader("pages/loginpage.php?option=login&poruka=Netačni podaci!");
 }
 $conn->close();
 ?>

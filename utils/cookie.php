@@ -12,13 +12,13 @@
                     {
                         if($lozinka==$row["lozinka"])
                         {
-                            echo "Dobra lozinka";
+                            //echo "Dobra lozinka";
                             return true;
                             //Usmeravanje na pocetnu ili nastavak rada stranice
                         }
                         else
                         {
-                            echo "Pogresna lozinka";
+                            //echo "Pogresna lozinka";
                             return false;
                             //USMERAVANJE NA LOGIN
                         }

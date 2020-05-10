@@ -7,7 +7,7 @@ $conn = PoveziSeSaBazom();
 if (!nadjeni($conn)) {
     echo "ne radi";
     $conn->close();
-    postaviHeader("pages/loginpage.php");
+    postaviHeader("pages/loginpage.php?option=login&poruka=Netačni podaci!");
 }
 $conn->close();
 ?>

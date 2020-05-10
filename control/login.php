@@ -10,6 +10,6 @@
         postaviHeader("pages/pocetna.php");
     }
     else {
-        postaviHeader("pages/loginpage.php");
+        postaviHeader("pages/loginpage.php?option=login&poruka=Unesite korisničko ime i lozinku!");
     }
 ?>
