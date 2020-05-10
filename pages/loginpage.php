@@ -24,17 +24,17 @@ $conn->close();
     <script src="JS/Biblioteke/SHA256.js"></script>
     <div id="id01" class="modal">
 
-        <form class="modal-content animate"  id = "logforma" action="../control/login.php" method="post">
+        <form class="modal-content animate" id="logforma" action="../control/login.php" method="post">
             <div class="imgcontainer">
-                <span onclick="document.getElementById('id01').style.display='none'; window.location.href = '?';" class="close" title="Close Modal">&times;</span>
+                <span onclick="window.location.href = '?';" class="close" title="Close Modal">&times;</span>
             </div>
 
             <div class="container">
                 <label for="uname"><b>Porisničko ime</b></label>
-                <input type="text" placeholder="Enter Username" name="korisnicko_ime" required>
+                <input type="text" placeholder="Unesite ime" name="korisnicko_ime" required>
 
                 <label for="psw"><b>Šifra</b></label>
-                <input type="password" placeholder="Enter Password" name="lozinka" required>
+                <input type="password" placeholder="Unesite lozinku" name="lozinka" required>
 
                 <button type="submit">Uloguj se</button>
                 <label>
@@ -43,7 +43,7 @@ $conn->close();
                 </label>
             </div>
             <div class="container" style="background-color:#f1f1f1">
-                <button type="button" onclick="document.getElementById('id01').style.display='none'; window.location.href = '?';" class="cancelbtn">Odustani</button>
+                <button type="button" onclick="window.location.href = '?';" class="cancelbtn">Odustani</button>
                 <span class="psw">Resetuj <a href="#">šifru</a></span>
             </div>
         </form>
@@ -51,29 +51,29 @@ $conn->close();
 
     <div id="id02" class="modal">
 
-        <form class="modal-content animate" id = "regforma" action="../control/register.php" method="post" onsubmit="return false;">
+        <form class="modal-content animate" id="regforma" action="../control/register.php" method="post" onsubmit="return false;">
             <div class="imgcontainer">
-                <span onclick="document.getElementById('id02').style.display='none'; window.location.href = '?';" class="close" title="Close Modal">&times;</span>
+                <span onclick=" window.location.href = '?';" class="close" title="Close Modal">&times;</span>
             </div>
 
             <div class="container">
                 <label for="uname"><b>Korisnočko ime</b></label>
-                <input type="text" placeholder="Enter Username" name="korisnicko_ime" required>
+                <input type="text" placeholder="Unesite ime" name="korisnicko_ime" required>
 
                 <label for="gmail"><b>Gmail</b></label>
-                <input type="text" placeholder="Enter Username" name="mejl" required>
+                <input type="text" placeholder="Unesite mail" name="mejl" required>
 
                 <label for="psw"><b>Šifra</b></label>
-                <input type="password" placeholder="Enter Password" name="lozinka" required>
+                <input type="password" placeholder="Unesite lozinku" name="lozinka" required>
 
                 <label for="rippsw"><b>Ponovi šifru</b></label>
-                <input type="password" placeholder="Enter Password" name="lozinka2" required>
+                <input type="password" placeholder="Ponovo unesite lozinku" name="lozinka2" required>
                 <p id="poruka02"></p>
 
                 <button type="submit">Registruj se</button>
             </div>
             <div class="container" style="background-color:#f1f1f1">
-                <button type="button" onclick="document.getElementById('id02').style.display='none'; window.location.href = '?'; " class="cancelbtn">Odustani</button>
+                <button type="button" onclick="window.location.href = '?'; " class="cancelbtn">Odustani</button>
             </div>
         </form>
     </div>
@@ -112,9 +112,9 @@ $conn->close();
                 <p>-Pravljenje naloga je besplatno i lako, dugmetom nazad možete prekinuti taj proces bilo kada.</p>
                 <p>-Da bi ste napravili nalog potrebno je da imate gmail atresu.</p>
                 <a href="?option=login">
-                    <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Ulogij se</button></a>
+                    <button onclick="//document.getElementById('id01').style.display='block'" style="width:auto;">Ulogij se</button></a>
                 <a href="?option=register">
-                    <button onclick="document.getElementById('id02').style.display='block'" style="width:auto;">Registruj se</button> </a>
+                    <button onclick="//document.getElementById('id02').style.display='block'" style="width:auto;">Registruj se</button> </a>
             </fieldset>
         </div>
     </div>
@@ -125,7 +125,14 @@ $conn->close();
 
         window.onclick = function(event) {
             if (event.target == modal) {
-                modal.style.display = "none";
+                window.location.href = '?';
+            }
+        }
+        var modal2 = document.getElementById('id02');
+
+        window.onclick = function(event) {
+            if (event.target == modal2) {
+                window.location.href = '?';
             }
         }
     </script>
