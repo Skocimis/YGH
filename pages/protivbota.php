@@ -1,3 +1,6 @@
+<script src="JS/Biblioteke/SHA256.js">
+</script>
+
 <?php
 require_once "../utils/db.php";
 require_once "../utils/cookie.php";
@@ -97,16 +100,13 @@ $conn->close();
     <pre id="Debugger">Debug komande:</pre>
     <script src="JS/Biblioteke/jquery-3.5.1.min.js"></script>
     <script>
-    <?php 
-        if(isset($_GET["dek"]))
-        {
-            echo "var postParams=".$_GET["dek"].";";
-        }
-        else
-        {
+        <?php
+        if (isset($_GET["dek"])) {
+            echo "var postParams=" . $_GET["dek"] . ";";
+        } else {
             echo "var postParams = -1;";
         }
-    ?>
+        ?>
     </script>
     <script type="application/javascript" src="JS/Igra/Deklaracije.js"></script>
     <script type="application/javascript" src="JS/Igra/Opcija.js"></script>

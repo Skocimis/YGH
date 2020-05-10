@@ -30,9 +30,6 @@ $conn->close();
 </head>
 
 <body>
-    <script>
-
-    </script>
     <div class="header">
         <div class="pomeridesno">
             <p><?php echo "Korisnik: " . $_COOKIE['korisnicko_ime'] ?></p>

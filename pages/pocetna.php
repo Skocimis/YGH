@@ -25,6 +25,7 @@ $conn->close();
     </head>
 
     <body>
+    <script src="JS/Biblioteke/SHA256.js"></script>
         <div class="header">
             <div class="pomeridesno">
             <p><?php echo "Korisnik: ".$_COOKIE['korisnicko_ime'] ?></p>

@@ -34,19 +34,21 @@ $conn->close();
 </head>
 
 <body>
-        <div class="centriraj">
-            <table>
-                <td>
-                    <canvas id="KarteDeka" width="500" height="500" style="border:1px solid #000000;">
-                    </canvas></td>
-                <td><canvas id="SveKarte" width="500" height="500" style="border:1px solid #000000;">
 
-                    </canvas></td>
-                <td>
-                    <img src="JS/Slike/Karte/1000001.png" id="velikakarta" alt="Greska">
-                </td>
-            </table>
-        </div>
+    <script src="JS/Biblioteke/SHA256.js"></script>
+    <div class="centriraj">
+        <table>
+            <td>
+                <canvas id="KarteDeka" width="500" height="500" style="border:1px solid #000000;">
+                </canvas></td>
+            <td><canvas id="SveKarte" width="500" height="500" style="border:1px solid #000000;">
+
+                </canvas></td>
+            <td>
+                <img src="JS/Slike/Karte/1000001.png" id="velikakarta" alt="Greska">
+            </td>
+        </table>
+    </div>
     </div>
     <script src="JS/Biblioteke/jquery-3.5.1.min.js"></script>
     <script src="JS/Model/Karta.js"></script>
@@ -73,8 +75,8 @@ $conn->close();
         </table>
         <form>
             <input type="text" id="nazivtb" name="naziv">
-            <select name="trenutni_dek" id = "izbor_deka">
-                
+            <select name="trenutni_dek" id="izbor_deka">
+
             </select>
             <a href="#" class="button1" onclick="insertData()">Sacuvaj Dek</a>
         </form>
@@ -84,4 +86,3 @@ $conn->close();
 </body>
 
 </html>
-

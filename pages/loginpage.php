@@ -20,11 +20,13 @@ $conn->close();
 </head>
 
 <body>
+    <script src="JS/Biblioteke/jquery-3.5.1.min.js"></script>
+    <script src="JS/Biblioteke/SHA256.js"></script>
     <div id="id01" class="modal">
 
-        <form class="modal-content animate" action="../control/login.php" method="post">
+        <form class="modal-content animate"  id = "logforma" action="../control/login.php" method="post">
             <div class="imgcontainer">
-                <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+                <span onclick="document.getElementById('id01').style.display='none'; window.location.href = '?';" class="close" title="Close Modal">&times;</span>
             </div>
 
             <div class="container">
@@ -41,7 +43,7 @@ $conn->close();
                 </label>
             </div>
             <div class="container" style="background-color:#f1f1f1">
-                <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Odustani</button>
+                <button type="button" onclick="document.getElementById('id01').style.display='none'; window.location.href = '?';" class="cancelbtn">Odustani</button>
                 <span class="psw">Resetuj <a href="#">šifru</a></span>
             </div>
         </form>
@@ -49,9 +51,9 @@ $conn->close();
 
     <div id="id02" class="modal">
 
-        <form class="modal-content animate" action="../control/register.php" method="post">
+        <form class="modal-content animate" id = "regforma" action="../control/register.php" method="post" onsubmit="return false;">
             <div class="imgcontainer">
-                <span onclick="document.getElementById('id02').style.display='none'" class="close" title="Close Modal">&times;</span>
+                <span onclick="document.getElementById('id02').style.display='none'; window.location.href = '?';" class="close" title="Close Modal">&times;</span>
             </div>
 
             <div class="container">
@@ -71,10 +73,11 @@ $conn->close();
                 <button type="submit">Registruj se</button>
             </div>
             <div class="container" style="background-color:#f1f1f1">
-                <button type="button" onclick="document.getElementById('id02').style.display='none'" class="cancelbtn">Odustani</button>
+                <button type="button" onclick="document.getElementById('id02').style.display='none'; window.location.href = '?'; " class="cancelbtn">Odustani</button>
             </div>
         </form>
     </div>
+    <script src="JS/Utils/loginreg.js"></script>
     <script>
         function findGetParameter(parameterName) {
             var result = null,

@@ -3,13 +3,14 @@
     require_once "../utils/iputils.php";
     
     $conn = PoveziSeSaBazom();
-    if (isset($_POST["korisnicko_ime"]) && isset($_POST["lozinka"]) && isset($_POST["mejl"])) {
+    if (isset($_POST["korisnicko_ime"]) && isset($_POST["lozinka"]) && isset($_POST["mejl"]) && isset($_POST["salt"])) {
         $korisnicko_ime = $conn->real_escape_string($_POST["korisnicko_ime"]);
         $lozinka = $conn->real_escape_string($_POST["lozinka"]);
+        $salt = $conn->real_escape_string($_POST["salt"]);
         $mejl = $conn->real_escape_string($_POST["mejl"]);
 
-        $sql = "INSERT INTO korisnici (korisnicko_ime, mejl, lozinka)
-                VALUES ('$korisnicko_ime', '$mejl', '$lozinka')";
+        $sql = "INSERT INTO korisnici (korisnicko_ime, mejl, lozinka, salt)
+                VALUES ('$korisnicko_ime', '$mejl', '$lozinka', '$salt')";
 
         if ($conn->query($sql) === TRUE) {
             echo "New record created successfully";
@@ -26,4 +27,3 @@
         $conn->close();
         postaviHeader("pages/loginpage.php");
     }
-?>
