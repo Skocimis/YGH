@@ -10,7 +10,7 @@ function cMouseMove(e) {
         if (indeksmisa + indekspomeranja < svekarte.length) {
             //prikaziRed(indeksmisa + " " + indekspomeranja);
             var slikaVelike = document.getElementById("velikakarta");
-            slikaVelike.src = "JS/Slike/Karte/" + svekarte[indeksmisa + indekspomeranja].naziv + ".png";
+            slikaVelike.src = "JS/Slike/Karte/" + svekarte[indeksmisa + indekspomeranja].id_karte + ".png";
 
         }
     }
@@ -52,7 +52,7 @@ function cMouseMove2(e) {
 
         if (indeksmisa2 + indekspomeranja1 < korisnickiDek.length) {
             var slikaVelike = document.getElementById("velikakarta");
-            slikaVelike.src = "JS/Slike/Karte/" + svekarte[korisnickiDek[indeksmisa2 + indekspomeranja1]].naziv + ".png";
+            slikaVelike.src = "JS/Slike/Karte/" + svekarte[korisnickiDek[indeksmisa2 + indekspomeranja1]].id_karte + ".png";
         }
 
     }

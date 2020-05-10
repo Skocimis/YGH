@@ -43,7 +43,7 @@ $conn->close();
 
                     </canvas></td>
                 <td>
-                    <img src="JS/Slike/Karte/Alpha The Magnet Warrior.png" id="velikakarta" alt="Greska">
+                    <img src="JS/Slike/Karte/1000001.png" id="velikakarta" alt="Greska">
                 </td>
             </table>
         </div>
