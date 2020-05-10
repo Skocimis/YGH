@@ -18,7 +18,7 @@ SHA256.K = [
     0x90befffa, 0xa4506ceb, 0xbef9a3f7, 0xc67178f2
 ];
 
-SHA256.Uint8Array = function(length) {
+SHA256.Uint8Array = function (length) {
     if (typeof Uint8Array !== 'undefined') {
         return new Uint8Array(length);
     } else {
@@ -26,7 +26,7 @@ SHA256.Uint8Array = function(length) {
     }
 };
 
-SHA256.Int32Array = function(length) {
+SHA256.Int32Array = function (length) {
     if (typeof Int32Array !== 'undefined') {
         return new Int32Array(length);
     } else {
@@ -34,7 +34,7 @@ SHA256.Int32Array = function(length) {
     }
 };
 
-SHA256.setArray = function(target, source) {
+SHA256.setArray = function (target, source) {
     if (typeof Uint8Array !== 'undefined') {
         target.set(source);
     } else {
@@ -50,7 +50,7 @@ SHA256.setArray = function(target, source) {
 // The digest function returns the hash value (digest)
 // as a 32 byte (typed) array.
 // message: the string or byte array to hash
-SHA256.digest = function(message) {
+SHA256.digest = function (message) {
     var h0 = 0x6a09e667;
     var h1 = 0xbb67ae85;
     var h2 = 0x3c6ef372;
@@ -157,7 +157,7 @@ SHA256.digest = function(message) {
 
 // The hash function returns the hash value as a hex string.
 // message: the string or byte array to hash
-SHA256.hash = function(message) {
+SHA256.hash = function (message) {
     var digest = SHA256.digest(message);
     var hex = '';
     for (i = 0; i < digest.length; i++) {

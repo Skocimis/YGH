@@ -37,51 +37,13 @@ function generisisalt(duzina) {
     return salt;
 }
 
-
-
-
-
-
-$('#regforma').submit(function(e) {
+$('#regforma').submit(function (e) {
     e.preventDefault();
     var podaci = $('#regforma').serialize();
     var korisnicko_ime = findParameter("korisnicko_ime", podaci);
     var mejl = findParameter("mejl", podaci);
     var lozinka = findParameter("lozinka", podaci);
-    var lozinka2 = findParameter("lozinka2", podaci);
-    /*
-        var jakalozinka = false;
-        var jakalozinka2 = false;
-        var dalijemail = false;
-
-        //Provera lozinke
-        if (lozinka != lozinka2) {
-            document.getElementById('poruka02').innerHTML = "Lozinke se ne poklapaju";
-            return false;
-        }
-
-        if (lozinka.length < 8) {
-            document.getElementById('poruka02').innerHTML = "Lozinka je prekratka";
-            return false;
-        }
-
-        for (var i = 0; i < lozinka.length; i++) {
-            if (lozinka[i] == lozinka[i].toUpperCase())
-                jakalozinka = true;
-            else if (lozinka[i] == lozinka[i].toLowerCase())
-                jakalozinka2 = true;
-        }
-        if (jakalozinka == false || jakalozinka2 == false) {
-            document.getElementById('poruka02').innerHTML = "Lozinka mora da sadrzi veliko slovo ili broj";
-            return false;
-        }
-
-        //Provera maila
-        for (var i = 0; i < mejl.length; i++) {
-            if (mejl[i] == '@') {
-                dalijemail = true;
-            }
-        }*/
+    
     const mailregex = new RegExp("\\b[\\w.!$%&*'+\\/=?^`{|}~-]+@[\\w-]+(?:\\.[w-]+)*\\b");
     const lozinkaregex = new RegExp("(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
     if (!mailregex.test(mejl)) {
@@ -93,23 +55,6 @@ $('#regforma').submit(function(e) {
         return false;
     }
 
-    /*if (dalijemail == false) {
-        document.getElementById('poruka02').innerHTML = "Niste uneli mail";
-        return false;
-    }*/
-    /*
-    Evo vam ovo za komentare ovde
-    Da ne pises stalno
-    |Skocimis: 
-    |AlexArcticFox: To bi ti spremo mogao da testiras
-    |BogBogdan: 
-     */
-
-    //Ovde vrsis proveru
-    /*
-        Izbacivanje greske moze ovako da izgleda
-        document.getElementById('poruka02').innerHTML = "Mejl adresa mora da sadrzi @";
-    */
     var dobriPodaci = true; //Ovaj bool je rezultat provere
 
     if (dobriPodaci) {
@@ -121,15 +66,15 @@ $('#regforma').submit(function(e) {
     }
     return false;
 });
-$('#logforma').submit(function(e) {
+$('#logforma').submit(function (e) {
     e.preventDefault();
     var podaci = $('#logforma').serialize();
     var korisnicko_ime = findParameter("korisnicko_ime", podaci);
     var lozinka = findParameter("lozinka", podaci);
     $.post('../control/getuserinfo.php', {
-            korisnicko_ime: korisnicko_ime
-        },
-        function(returnedData) {
+        korisnicko_ime: korisnicko_ime
+    },
+        function (returnedData) {
 
             var salt = returnedData; //uzimanje iz baze
             var hesovana = SHA256.hash(lozinka + salt);
