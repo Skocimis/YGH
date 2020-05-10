@@ -123,14 +123,14 @@ $conn->close();
     <script>
         var modal = document.getElementById('id01');
 
-        window.onclick = function(event) {
+        window.onmousedown = function(event) {
             if (event.target == modal) {
                 window.location.href = '?';
             }
         }
         var modal2 = document.getElementById('id02');
 
-        window.onclick = function(event) {
+        window.onmousedown = function(event) {
             if (event.target == modal2) {
                 window.location.href = '?';
             }

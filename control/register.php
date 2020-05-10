@@ -13,17 +13,15 @@
                 VALUES ('$korisnicko_ime', '$mejl', '$lozinka', '$salt')";
 
         if ($conn->query($sql) === TRUE) {
-            echo "New record created successfully";
+            $conn->close();
+            setcookie("korisnicko_ime", $korisnicko_ime, time() + 3600 * 24 * 10, "/");
+            setcookie("lozinka", $lozinka, time() + 3600 * 24 * 10, "/");
+            $conn->close();
+            postaviHeader("pages/pocetna.php");
         } else {
-            echo "Error: " . $sql . "<br>" . $conn->error;
+            postaviHeader("pages/loginpage.php?option=register&poruka=Već je registrovan nalog sa datim mejlom ili korisničkim imenom");
         }
 
-        $conn->close();
-        setcookie("korisnicko_ime", $korisnicko_ime, time() + 3600 * 24 * 10, "/");
-        setcookie("lozinka", $lozinka, time() + 3600 * 24 * 10, "/");
-        $conn->close();
-        postaviHeader("pages/pocetna.php");
     } else {
-        $conn->close();
-        postaviHeader("pages/loginpage.php");
+        postaviHeader("pages/loginpage.php?option=register");
     }
