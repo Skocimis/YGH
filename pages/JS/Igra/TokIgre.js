@@ -19,11 +19,11 @@ function resetTurnVariables() {
         NormalSummoned: 0,
         SpecialSummoned: 0
     }
-    for (var i = 0; i < 28; i++)
+    for (var i = 0; i < 28; i++) {
         for (var j = 0; j < teren[i].cards.length; j++) {
             teren[i].cards[j].resetTurnVariables();
         }
-
+    }
     for (var j = 0; j < teren[CardZones.Hand].cards.length; j++) {
         teren[CardZones.Hand].cards[j].resetTurnVariables();
     }
@@ -218,7 +218,6 @@ function zapocniFazu(faza, mojpotez) {
                                 }
                             }
                         }
-
                         /*   for (var j = CardZones.Monster5; j <= CardZones.Monster1; j++) {
 
                            }*/

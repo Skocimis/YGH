@@ -333,7 +333,6 @@ class InstancaKarte {
                     stanjeIgre = StanjeIgre.SelekcijaTerena;
                 }
             }, this.uruci));
-
         }
 
         if (this.isSettable && mojpotez) {

@@ -55,7 +55,6 @@ class Deck {
     //Dodaj neka nova svojstva ako ti trebaju za deck editor.
     generate_deck(x) {
         console.log(x != -1);
-
         //Citanje deka iz baze
     }
 }

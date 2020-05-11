@@ -224,7 +224,6 @@ function SelectCardsOnTerrain(x, y) {
         stanjeIgre = StanjeIgre.Normalno;
     }
     render();
-
 }
 
 //#endregion

@@ -7,8 +7,6 @@ function proveriPobedu() {
     if (igraci.Enemy.ZivotniPoeni <= 0) {
         var pobeda = document.getElementById("dizajnzapobedu");
         pobeda.style.display = "block";
-
-
     }
     render();
 }

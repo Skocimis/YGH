@@ -4,7 +4,6 @@ function render() {
 
     //TEREN
     for (var i = 0; i < 14; i++) {
-
         teren[i].crtajO(ctx);
         if (SelektovaniIndeksi.includes(i)) {
             teren[i].crtajU(ctx);

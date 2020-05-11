@@ -45,7 +45,6 @@ $('#regforma').submit(function (e) {
     var lozinka = findParameter("lozinka", podaci);
     var lozinka2 = findParameter("lozinka2", podaci);
 
-
     const mailregex = new RegExp("\\b[\\w.!$%&*'+\\/=?^`{|}~-]+@[\\w-]+(?:\\.[w-]+)*\\b");
     const lozinkaregex = new RegExp("(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
     if (!mailregex.test(mejl)) {
@@ -61,7 +60,6 @@ $('#regforma').submit(function (e) {
         return false;
     }
 
-
     var salt = generisisalt(100);
     var hesovana = SHA256.hash(lozinka + salt);
     post("../control/register.php", { korisnicko_ime: korisnicko_ime, mejl: mejl, lozinka: hesovana, salt: salt }, "post");
@@ -76,7 +74,6 @@ $('#logforma').submit(function (e) {
         korisnicko_ime: korisnicko_ime
     },
         function (returnedData) {
-
             var salt = returnedData; //uzimanje iz baze
             var hesovana = SHA256.hash(lozinka + salt);
             post("../control/login.php", { korisnicko_ime: korisnicko_ime, lozinka: hesovana }, "post");
