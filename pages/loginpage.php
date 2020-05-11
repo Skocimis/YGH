@@ -21,7 +21,8 @@ $conn->close();
 
 <body>
     <script src="JS/Biblioteke/jquery-3.5.1.min.js"></script>
-    <script src="JS/Biblioteke/SHA256.js"></script>
+    <script src="JS/Biblioteke/HASH.js"></script>
+    <script src="JS/Biblioteke/HTTP.js"></script>
     <div id="id01" class="modal">
 
         <form class="modal-content animate" id="logforma" action="../control/login.php" method="post">
@@ -79,16 +80,7 @@ $conn->close();
     </div>
     <script src="JS/Utils/loginreg.js"></script>
     <script>
-        function findGetParameter(parameterName) {
-            var result = null,
-                tmp = [];
-            var items = location.search.substr(1).split("&");
-            for (var index = 0; index < items.length; index++) {
-                tmp = items[index].split("=");
-                if (tmp[0] === parameterName) result = decodeURIComponent(tmp[1]);
-            }
-            return result;
-        }
+        
         if (findGetParameter("option") == "login") {
             document.getElementById('id01').style.display = 'block';
             document.getElementById('poruka01').innerHTML = findGetParameter("poruka");

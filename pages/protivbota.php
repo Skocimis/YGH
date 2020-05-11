@@ -1,5 +1,3 @@
-<script src="JS/Biblioteke/SHA256.js">
-</script>
 
 <?php
 require_once "../utils/db.php";
@@ -66,15 +64,7 @@ $conn->close();
 
 <body>
     <script src="JS/Biblioteke/Cookies.js"></script>
-    <div class="header">
-        <div class="pomeridesno">
-            <p id="korisnickoime">Niste prijavljeni</p>
-            <script>
-                var korisnickoimep = document.getElementById("korisnickoime");
-                korisnickoimep.innerHTML = "Korisnik: " + getCookie("korisnicko_ime");
-            </script>
-        </div>
-    </div>
+    <script src="JS/Biblioteke/HTTP.js"></script>
     <div class="centrirajlogo">
         <img src="media/slike/yugilogo.png" alt="slika yugioh" width="424" height="171">
 
@@ -110,13 +100,12 @@ $conn->close();
     <pre id="Debugger">Debug komande:</pre>
     <script src="JS/Biblioteke/jquery-3.5.1.min.js"></script>
     <script>
-        <?php
-        if (isset($_GET["dek"])) {
-            echo "var postParams=" . $_GET["dek"] . ";";
-        } else {
-            echo "var postParams = -1;";
+        var postParams = findGetParameter("dek");
+        if(postParams==null||postParams=="")
+        {
+            postParams = -1;
         }
-        ?>
+        postParams = parseInt(postParams);
     </script>
     <script type="application/javascript" src="JS/Igra/Deklaracije.js"></script>
     <script type="application/javascript" src="JS/Igra/Opcija.js"></script>

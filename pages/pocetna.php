@@ -26,7 +26,6 @@ $conn->close();
 </head>
 
 <body>
-    <script src="JS/Biblioteke/SHA256.js"></script>
     <script src="JS/Biblioteke/Cookies.js"></script>
     <div class="header">
         <div class="pomeridesno">

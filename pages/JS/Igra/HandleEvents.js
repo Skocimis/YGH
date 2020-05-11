@@ -16,7 +16,7 @@ function CancelSelectionOption(x, y) {
 }
 
 function CardMouseOver(x, y) {
-    //Da li je mis iznad nekog dijaloga?
+    //Vrv ne treba if else ali za sada radi
     if (!dijalozi.map(d => [d.x, d.y, d.width, d.height]).some(ar => (izmedju(x, ar[0], ar[0] + ar[2]) && izmedju(y, ar[1], ar[1] + ar[3])))) {
         if (x > xruke && x < xruke + teren[CardZones.Hand].cards.length * wkarteuruci && y > yruke && y < yruke + hkarteuruci) {
             var indeks = Math.floor((x - xruke) / wkarteuruci);
@@ -46,6 +46,7 @@ function dodajDijalogAkoMoze(dijalog) {
     dijalozi = [];
     dijalozi.push(dijalog);
 }
+
 
 function DialogClickable(x, y) {
     var indeksd = -1;
@@ -224,10 +225,10 @@ function SelectCardsOnTerrain(x, y) {
         stanjeIgre = StanjeIgre.Normalno;
     }
     render();
+
 }
 
 //#endregion
-
 function cContextMenu(e) {
     e.preventDefault();
 }
