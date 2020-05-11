@@ -45,7 +45,7 @@ $conn->close();
             </div>
             <div class="container" style="background-color:#f1f1f1">
                 <button type="button" onclick="window.location.href = '?';" class="cancelbtn">Odustani</button>
-                <span class="psw">Resetuj <a href="#">šifru</a></span>
+                <span class="psw">Resetuj <a href="#" >šifru</a></span>
             </div>
         </form>
     </div>
