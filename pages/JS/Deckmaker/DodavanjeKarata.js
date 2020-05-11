@@ -35,8 +35,6 @@ function loadUserDecks() {
                 indekspomeranja1 = 0;
 
                 render1();
-
-
             };
             v_dekovi = JSON.parse(returnedData);
             var val = 0;

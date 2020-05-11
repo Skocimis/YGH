@@ -10,8 +10,6 @@ function render() {
                 red = red + 145;
             }
         }
-
-
     }
 }
 
