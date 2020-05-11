@@ -1,5 +1,4 @@
 <?php
-
     function postaviHeader($lokacija)
     {
         if($_SERVER['REMOTE_ADDR']=='192.168.1.42')

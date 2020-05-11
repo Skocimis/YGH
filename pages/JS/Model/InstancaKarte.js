@@ -4,7 +4,6 @@ const CardTypes = {
     Trap: 2
 }
 
-
 class InstancaKarte {
     constructor(karta) {
         this.karta = karta;
@@ -194,7 +193,6 @@ class InstancaKarte {
             }
             return true;
         }
-
     }
     canBeAttacked(napadac) // Za sad prosledjujem teren zato sto on sadrzi i instancu karte
     {
@@ -284,8 +282,6 @@ class InstancaKarte {
                 render();
             });
         }
-
-
     }
     opcije() {
         var opcije = [];
@@ -385,7 +381,6 @@ class InstancaKarte {
                     stanjeIgre = StanjeIgre.SelekcijaTerena;
                 }
             }, this.uruci));
-
         }
         var indexOnTerrain;
         //Lose ali trebalo bi da uglavnom radi

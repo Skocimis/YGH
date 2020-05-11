@@ -1,12 +1,10 @@
 /*
-
 0 - Draw
 1 - Standby
 2 - Main 1
 3 - Battle
 4 - Main 2
 5 - End
-
 */
 function postaviFazu(brFaze) { //trenutno preskace faze sto radi, ali mozda bude zasmetalo u buducnosti
     /*while (faza < brFaze) {
@@ -32,9 +30,7 @@ function resetTurnVariables() {
     for (var j = 0; j < teren[CardZones.HandP].cards.length; j++) {
         teren[CardZones.HandP].cards[j].resetTurnVariables();
     }
-
 }
-
 
 function zavrsiFazu() {
     setTimeout(function () {
@@ -85,7 +81,6 @@ function zapocniFazu(faza, mojpotez) {
             GameVariables.ProsloPoteza++;
             render();
             zavrsiFazu();
-
         }
     } else { //OVDE za AI
         if (faza == Faza.DrawPhase) {
@@ -99,7 +94,6 @@ function zapocniFazu(faza, mojpotez) {
                 zavrsiFazu();
             }
         } else if (faza == Faza.StandByPhase) {
-
             render();
             //prikaziRed("Bot je zavrsio standby");
             zavrsiFazu();
@@ -154,7 +148,6 @@ function zapocniFazu(faza, mojpotez) {
 
             zavrsiFazu();
             //prikaziRed("Bot je zavrsio m1");
-
         } else if (faza == Faza.BattlePhase) {
             //pronalazi najjacu kartu u robotovoj ruci
             var najjacecudoviste = -1;
@@ -170,7 +163,6 @@ function zapocniFazu(faza, mojpotez) {
                 }
             }
             //ako korisnik nema cudovista napadni direktno
-
             if (najslabijaigracevakarta == -1) {
                 for (var i = CardZones.Monster1P; i <= CardZones.Monster5P; i++) {
                     if (teren[i].cards.length != 0) {
@@ -178,9 +170,7 @@ function zapocniFazu(faza, mojpotez) {
                     }
                 }
             } else { //dovde super radi posle 
-
                 for (var i = CardZones.Monster1P; i <= CardZones.Monster5P; i++) {
-
                     //prikaziRed(CardZones.Monster1P + " " + CardZones.Monster5P);
                     if (teren[i].cards.length != 0) {
                         najjacecudoviste = i; //uzima cuvoviste koje napada
@@ -229,19 +219,12 @@ function zapocniFazu(faza, mojpotez) {
                             }
                         }
 
-
                         /*   for (var j = CardZones.Monster5; j <= CardZones.Monster1; j++) {
-                              
-
-
-
-                        
 
                            }*/
                     }
                 }
                 /*Direktan napad*/
-
                 for (var i = CardZones.Monster1P; i <= CardZones.Monster5P; i++) {
                     if (teren[i].cards.length != 0) {
                         if (teren[i].cards[0].checkForAttacks(i).length == 0 && teren[i].cards[0].DumpVariables.CanDirectAttack) {
@@ -250,10 +233,8 @@ function zapocniFazu(faza, mojpotez) {
                         }
                     }
                 }
-
             }
             //prikaziRed("Bot je zavrsio b");             teren[CardZones.DeckP].cards.length
-
 
             render();
             zavrsiFazu();

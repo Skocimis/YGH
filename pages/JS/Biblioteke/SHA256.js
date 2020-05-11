@@ -1,5 +1,3 @@
-/*** JavaScript SHA-256 hash function. License and copyright free. ***/
-
 SHA256 = {};
 
 SHA256.K = [
@@ -47,9 +45,6 @@ SHA256.setArray = function (target, source) {
     }
 };
 
-// The digest function returns the hash value (digest)
-// as a 32 byte (typed) array.
-// message: the string or byte array to hash
 SHA256.digest = function (message) {
     var h0 = 0x6a09e667;
     var h1 = 0xbb67ae85;
@@ -155,8 +150,6 @@ SHA256.digest = function (message) {
     return hash;
 };
 
-// The hash function returns the hash value as a hex string.
-// message: the string or byte array to hash
 SHA256.hash = function (message) {
     var digest = SHA256.digest(message);
     var hex = '';

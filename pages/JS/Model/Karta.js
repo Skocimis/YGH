@@ -74,11 +74,6 @@ const Atributi = {
     Trap: 7
 }
 
-
-
-
-
-
 class Karta {
     constructor(id_karte, naziv, nivo, atribut, tip, napad, odbrana, opis) {
         this.id_karte = id_karte;

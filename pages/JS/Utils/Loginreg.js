@@ -82,5 +82,4 @@ $('#logforma').submit(function (e) {
             post("../control/login.php", { korisnicko_ime: korisnicko_ime, lozinka: hesovana }, "post");
             return false;
         });
-
 });

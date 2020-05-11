@@ -19,7 +19,6 @@ function gore() {
 
 }
 
-
 function gore1() {
     csvsdek.clearRect(0, 0, 500, 500);
     if (indekspomeranja1 >= 5)
@@ -30,7 +29,6 @@ function gore1() {
 }
 
 function dole1() {
-
     csvsdek.clearRect(0, 0, 500, 500);
     if (indekspomeranja1 < korisnickiDek.length - 15)
         indekspomeranja1 = indekspomeranja1 + 5;

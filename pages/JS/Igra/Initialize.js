@@ -48,7 +48,6 @@ function resetDebugLog() {
     konzola.innerHTML = "Debug komande:";
 }
 
-
 function initialize() {
     //OSNOVNI ELEMENTI
     c = document.getElementById("platno");
@@ -61,14 +60,12 @@ function initialize() {
     indexkarteuprotivnickojruci = 0;
     dijalozi = [];
 
-
     //DEFINISANJE DEKOVA
     deck = new Deck(vid_deka);
     //prikaziRed(dek.cards.length);
     protivnickideck = new Deck(-1);
     //RUKA
     stanjeIgre = StanjeIgre.Normalno;
-
 
     teren = [];
     var tx = 13,

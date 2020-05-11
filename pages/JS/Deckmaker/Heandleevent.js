@@ -2,10 +2,8 @@ function cMouseMove(e) {
     var x = e.offsetX;
     var y = e.offsetY;
 
-
     if (x > 0 && x < 500 && y > 0 && y < 500) {
         var indeksmisa = Math.floor(y / 145) * 5 + Math.floor(x / 100);
-
 
         if (indeksmisa + indekspomeranja < svekarte.length) {
             //prikaziRed(indeksmisa + " " + indekspomeranja);
@@ -28,8 +26,6 @@ function maxbrojkarata(broj) {
     if (brojacponavljanja >= 3) { prekoracenje = false; }
 }
 
-
-
 function cMouseUp(e) {
     var x = e.offsetX;
     var y = e.offsetY;
@@ -37,8 +33,6 @@ function cMouseUp(e) {
     if (x > 0 && x < 500 && y > 0 && y < 500) {
         var indeksmisa = Math.floor(y / 145) * 5 + Math.floor(x / 100);
         if (indeksmisa + indekspomeranja < svekarte.length && korisnickiDek.filter(x => x == indekspomeranja + indeksmisa).length < 3) korisnickiDek.push((indeksmisa + indekspomeranja));
-
-
     }
     render1();
 }
@@ -66,12 +60,8 @@ function cMouseUp2(e) {
         var indeksmisa = Math.floor(y / 145) * 5 + Math.floor(x / 100);
         korisnickiDek.splice(indeksmisa, 1);
         render1();
-
     }
 }
-
-
-
 
 function handleEvents() {
     csvekarte.addEventListener("mousemove", cMouseMove);
