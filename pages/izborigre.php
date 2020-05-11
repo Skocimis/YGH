@@ -30,9 +30,15 @@ $conn->close();
 </head>
 
 <body>
+    <script src="JS/Biblioteke/jquery-3.5.1.min.js"></script>
+    <script src="JS/Biblioteke/Cookies.js"></script>
     <div class="header">
         <div class="pomeridesno">
-            <p><?php echo "Korisnik: " . $_COOKIE['korisnicko_ime'] ?></p>
+            <p id = "korisnickoime">Niste prijavljeni</p>
+            <script>
+                var korisnickoimep = document.getElementById("korisnickoime");
+                korisnickoimep.innerHTML = "Korisnik: " + getCookie("korisnicko_ime");
+            </script>
         </div>
     </div>
 
@@ -55,7 +61,6 @@ $conn->close();
     
             </div>
     </div>
-    <script src="JS/Biblioteke/jquery-3.5.1.min.js"></script>
     <script>
         var vid_korisnika;
         var v_dekovi, postParams;

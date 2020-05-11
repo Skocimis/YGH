@@ -65,6 +65,16 @@ $conn->close();
 </head>
 
 <body>
+    <script src="JS/Biblioteke/Cookies.js"></script>
+    <div class="header">
+        <div class="pomeridesno">
+            <p id="korisnickoime">Niste prijavljeni</p>
+            <script>
+                var korisnickoimep = document.getElementById("korisnickoime");
+                korisnickoimep.innerHTML = "Korisnik: " + getCookie("korisnicko_ime");
+            </script>
+        </div>
+    </div>
     <div class="centrirajlogo">
         <img src="media/slike/yugilogo.png" alt="slika yugioh" width="424" height="171">
 

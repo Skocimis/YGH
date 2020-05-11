@@ -21,11 +21,11 @@ function resetDebugLog() {
 
 function loadUserDecks() {
     $.post('../control/getdecks.php', { id_korisnika: vid_korisnika },
-        function (returnedData) {
+        function(returnedData) {
             //alert(returnedData);
             var selekt = document.getElementById("izbor_deka");
             selekt.innerHTML = "<option value=\"-1\">Napravi novi dek</option>";
-            selekt.onchange = function (e) {
+            selekt.onchange = function(e) {
                 var x = document.getElementById("izbor_deka").value;
                 if (x > -1) {
                     korisnickiDek = v_dekovi[x].karte_u_deku.split(" ").map(a => parseInt(a));
@@ -53,7 +53,7 @@ function loadUserData() {
     var vkorisnicko_ime = getCookie("korisnicko_ime");
     var vlozinka = getCookie("lozinka");
     $.post('../control/getuserinfo.php', { korisnicko_ime: vkorisnicko_ime, lozinka: vlozinka },
-        function (returnedData) {
+        function(returnedData) {
             vid_korisnika = returnedData;
             loadUserDecks(vid_korisnika);
         });
@@ -84,7 +84,7 @@ function insertData() {
         data: JSON.stringify(dekk),
         contentType: "application/json; charset=utf-8",
         traditional: true,
-        success: function (data) {
+        success: function(data) {
             prikaziRed(data);
 
             loadUserData();
@@ -93,21 +93,7 @@ function insertData() {
 }
 
 
-function getCookie(cname) {
-    var name = cname + "=";
-    var decodedCookie = decodeURIComponent(document.cookie);
-    var ca = decodedCookie.split(';');
-    for (var i = 0; i < ca.length; i++) {
-        var c = ca[i];
-        while (c.charAt(0) == ' ') {
-            c = c.substring(1);
-        }
-        if (c.indexOf(name) == 0) {
-            return c.substring(name.length, c.length);
-        }
-    }
-    return "";
-}
+
 
 
 
