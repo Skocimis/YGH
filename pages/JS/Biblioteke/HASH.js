@@ -1,8 +1,4 @@
 /*** JavaScript SHA-256 hash function. License and copyright free. ***/
-
-
-
-
 SHA256 = {};
 
 SHA256.K = [
