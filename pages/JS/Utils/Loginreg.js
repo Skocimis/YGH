@@ -9,6 +9,7 @@ $('#regforma').submit(function(e) {
 
     const mailregex = new RegExp("\\b[\\w.!$%&*'+\\/=?^`{|}~-]+@[\\w-]+(?:\\.[w-]+)*\\b");
     const lozinkaregex = new RegExp("(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
+
     if (!mailregex.test(mejl)) {
         document.getElementById('poruka02').innerHTML = "Uneli ste nevazecu mejl";
         return false;
