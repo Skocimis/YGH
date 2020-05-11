@@ -19,6 +19,11 @@ $conn->close();
     <link rel="stylesheet" href="CSS/style.css">
     <title>YUGIOH</title>
     <style>
+        html {
+
+            width: 100%;
+            height: 100%;
+        }
         body {
             background-image: url("https://cdn.discordapp.com/attachments/707582164354727950/708021884603596901/ljubicastapozadina.jpg");
             background-size: 100% 100%;

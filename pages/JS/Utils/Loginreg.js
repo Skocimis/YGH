@@ -8,19 +8,47 @@ $('#regforma').submit(function(e) {
 
 
     const mailregex = new RegExp("\\b[\\w.!$%&*'+\\/=?^`{|}~-]+@[\\w-]+(?:\\.[w-]+)*\\b");
-    const lozinkaregex = new RegExp("(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
+
+    const velikoslovo = new RegExp("(?=.*[A-Z])");
+    const maloslovo = new RegExp("(?=.*[a-z])");
+    const broj = new RegExp("(?=.*[0-9])");
+    const duzinalozinke = new RegExp("(?=.{8,})");
+    const special = new RegExp("(?=.*[!@#$%^&*[\\]()<>.,?;:'\"\\\\`~])");
+
     if (!mailregex.test(mejl)) {
         document.getElementById('poruka02').innerHTML = "Uneli ste nevazecu mejl";
         return false;
     }
-    if (!lozinkaregex.test(lozinka)) {
-        document.getElementById("poruka02").innerHTML = "Lozinka treba da ima bar 8 karaktera u sebi. Treba da sadrzi 1 veliko slovo i 1 broj.";
+    //pocetak provere lozinke
+
+
+    if (!maloslovo.test(lozinka)) {
+        document.getElementById("poruka02").innerHTML = "Lozinka treba da sadrži bar jedno malo slovo.";
         return false;
     }
+
+    if (!velikoslovo.test(lozinka)) {
+        document.getElementById("poruka02").innerHTML = "Lozinka treba da sadrži bar jedno veliko slovo.";
+        return false;
+    }
+    if (!broj.test(lozinka)) {
+        document.getElementById("poruka02").innerHTML = "Lozinka treba da sadrži bar jedan broj.";
+        return false;
+    }
+    if (!duzinalozinke.test(lozinka)) {
+        document.getElementById("poruka02").innerHTML = "Lozinka je prekratka.";
+        return false;
+    }
+    if (!special.test(lozinka)) {
+        document.getElementById("poruka02").innerHTML = "Lozinka mora da sadrži jedan od karaktera(*, !, @, #, $, %, ^, &,...)";
+        return false;
+    }
+    //kraj
     if (lozinka != lozinka2) {
         document.getElementById('poruka02').innerHTML = "Lozinke se ne poklapaju. ";
         return false;
     }
+
     var salt = generisisalt(100);
     var hesovana = SHA256.hash(lozinka + salt);
     post("../control/register.php", { korisnicko_ime: korisnicko_ime, mejl: mejl, lozinka: hesovana, salt: salt }, "post");

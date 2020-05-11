@@ -18,6 +18,11 @@ $conn->close();
 <head>
     <link rel="stylesheet" href="CSS/style.css">
     <style>
+        html {
+
+            width: 100%;
+            height: 100%;
+        }
         body {
             background-image: url("media/slike/crnadevojka.jpg");
             background-size: 100% 100%;
