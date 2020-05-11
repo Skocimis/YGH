@@ -9,13 +9,12 @@ $('#regforma').submit(function(e) {
 
     const mailregex = new RegExp("\\b[\\w.!$%&*'+\\/=?^`{|}~-]+@[\\w-]+(?:\\.[w-]+)*\\b");
     const lozinkaregex = new RegExp("(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
-
     if (!mailregex.test(mejl)) {
         document.getElementById('poruka02').innerHTML = "Uneli ste nevazecu mejl";
         return false;
     }
     if (!lozinkaregex.test(lozinka)) {
-        document.getElementById("poruka02").innerHTML = "Niste uneli vazecu lozinku. Lozinka mora da...";
+        document.getElementById("poruka02").innerHTML = "Lozinka treba da ima bar 8 karaktera u sebi. Treba da sadrzi 1 veliko slovo i 1 broj.";
         return false;
     }
     if (lozinka != lozinka2) {
@@ -27,7 +26,7 @@ $('#regforma').submit(function(e) {
     post("../control/register.php", { korisnicko_ime: korisnicko_ime, mejl: mejl, lozinka: hesovana, salt: salt }, "post");
     return false;
 });
-/*Lozinka treba da ima bar 8 karaktera u sebi. Treba da sadrzi 1 veliko slovo i 1 broj. */
+
 $('#logforma').submit(function(e) {
     e.preventDefault();
     var podaci = $('#logforma').serialize();
