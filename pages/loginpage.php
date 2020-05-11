@@ -80,7 +80,6 @@ $conn->close();
     </div>
     <script src="JS/Utils/loginreg.js"></script>
     <script>
-        
         if (findGetParameter("option") == "login") {
             document.getElementById('id01').style.display = 'block';
             document.getElementById('poruka01').innerHTML = findGetParameter("poruka");

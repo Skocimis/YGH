@@ -1,5 +1,4 @@
 <?php
-    require_once "../models/card.php";
+require_once "../models/card.php";
 
-    echo json_encode(get_all_cards());
-?>
+echo json_encode(get_all_cards());

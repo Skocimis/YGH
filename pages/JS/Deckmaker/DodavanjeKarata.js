@@ -57,7 +57,6 @@ function loadUserData() {
         });
 }
 
-
 function insertData() {
     var selekt = parseInt(document.getElementById("izbor_deka").value);
     //dobro su nazvane promenljive
@@ -89,11 +88,6 @@ function insertData() {
         }
     });
 }
-
-
-
-
-
 
 kolona1 = 0;
 red1 = 0;

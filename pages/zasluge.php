@@ -24,6 +24,7 @@ $conn->close();
             width: 100%;
             height: 100%;
         }
+
         body {
             background-image: url("media/slike/crnadevojka.jpg");
             background-size: 100% 100%;
@@ -58,7 +59,6 @@ $conn->close();
             <a href="pocetna.php" class="button1" style="font-size:3em">&nbsp &nbsp &nbsp &nbsp Projekat radili: &nbsp &nbsp &nbsp &nbsp <br>
                 &nbsp &nbsp &nbsp &nbsp Bogdan Tomic &nbsp &nbsp &nbsp &nbsp<br>&nbsp &nbsp &nbsp &nbsp Aleksandar Spremo &nbsp &nbsp &nbsp &nbsp<br>
                 &nbsp &nbsp &nbsp &nbsp Aleksa Buncic &nbsp &nbsp &nbsp &nbsp<br>&nbsp &nbsp &nbsp &nbsp Andrija Colakovic &nbsp &nbsp &nbsp &nbsp </a>
-
         </div>
         </table>
     </div>

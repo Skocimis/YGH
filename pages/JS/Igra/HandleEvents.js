@@ -47,7 +47,6 @@ function dodajDijalogAkoMoze(dijalog) {
     dijalozi.push(dijalog);
 }
 
-
 function DialogClickable(x, y) {
     var indeksd = -1;
     if (dijalozi.map(d => [d.x, d.y, d.width, d.height]).some(ar => (izmedju(x, ar[0], ar[0] + ar[2]) && izmedju(y, ar[1], ar[1] + ar[3])))) {

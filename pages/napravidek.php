@@ -22,6 +22,7 @@ $conn->close();
             width: 100%;
             height: 100%;
         }
+
         body {
             background-image: url("media/slike/crnadevojka.jpg");
             background-size: 100% 100%;

@@ -1,4 +1,3 @@
-
 <?php
 require_once "../utils/db.php";
 require_once "../utils/cookie.php";
@@ -24,6 +23,7 @@ $conn->close();
             width: 100%;
             height: 100%;
         }
+
         body {
             background-image: url("https://cdn.discordapp.com/attachments/707582164354727950/708021884603596901/ljubicastapozadina.jpg");
             background-size: 100% 100%;
@@ -106,8 +106,7 @@ $conn->close();
     <script src="JS/Biblioteke/jquery-3.5.1.min.js"></script>
     <script>
         var postParams = findGetParameter("dek");
-        if(postParams==null||postParams=="")
-        {
+        if (postParams == null || postParams == "") {
             postParams = -1;
         }
         postParams = parseInt(postParams);

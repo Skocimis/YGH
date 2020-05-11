@@ -18,6 +18,7 @@ class Opcija {
 
     }
 }
+
 class HrpaOpcija {
     constructor(opcije, mandatory, x, y, wOpcije, hOpcije, razmak, stackType, stackDirection) {
         this.opcije = opcije;

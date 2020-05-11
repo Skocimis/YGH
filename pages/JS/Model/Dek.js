@@ -27,7 +27,6 @@ class Deck {
                 this.cards.push(1000017);
                 this.cards.push(1000017);
 
-
                 /* PRVI DEK U OVOJ IGRICI
                 this.cards.push(1000001);
                 this.cards.push(1000002);

@@ -1,14 +1,12 @@
 <?php
-    require_once "utils/db.php";
-    require_once "utils/cookie.php";
-    require_once "utils/iputils.php";
+require_once "utils/db.php";
+require_once "utils/cookie.php";
+require_once "utils/iputils.php";
 
-    $conn = PoveziSeSaBazom();
+$conn = PoveziSeSaBazom();
 
-    if(nadjeni($conn)) {
-        postaviHeader("pages/pocetna.php");
-    }
-    else {
-        postaviHeader("pages/loginpage.php");
-    }
-?>
+if (nadjeni($conn)) {
+    postaviHeader("pages/pocetna.php");
+} else {
+    postaviHeader("pages/loginpage.php");
+}

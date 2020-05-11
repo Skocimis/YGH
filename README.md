@@ -1,3 +1,3 @@
 # YGH
-Yugioh custom igra
+Yu-Gi-Oh custom igra
 Dev: SBB
