@@ -48,9 +48,7 @@ function cMouseMove2(e) {
             var slikaVelike = document.getElementById("velikakarta");
             slikaVelike.src = "JS/Slike/Karte/" + svekarte[korisnickiDek[indeksmisa2 + indekspomeranja1]].id_karte + ".png";
         }
-
     }
-
 }
 
 function cMouseUp2(e) {
