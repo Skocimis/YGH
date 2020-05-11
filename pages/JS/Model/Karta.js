@@ -98,7 +98,7 @@ function loadCards() {
     if (arguments.length == 0) {
         svekarte = Array(999999);
         $.post('../control/getallcards.php', {},
-            function(returnedData) {
+            function (returnedData) {
                 ldc = JSON.parse(returnedData);
                 ldc.forEach(a => {
                     svekarte[a.id_karte] = new Karta(a.id_karte, a.naziv, parseInt(a.nivo), parseInt(a.atribut), a.tip, parseInt(a.napad), parseInt(a.odbrana), a.opis);

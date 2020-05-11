@@ -37,7 +37,7 @@ function generisisalt(duzina) {
     return salt;
 }
 
-$('#regforma').submit(function(e) {
+$('#regforma').submit(function (e) {
     e.preventDefault();
     var podaci = $('#regforma').serialize();
     var korisnicko_ime = findParameter("korisnicko_ime", podaci);
@@ -67,15 +67,15 @@ $('#regforma').submit(function(e) {
     post("../control/register.php", { korisnicko_ime: korisnicko_ime, mejl: mejl, lozinka: hesovana, salt: salt }, "post");
     return false;
 });
-$('#logforma').submit(function(e) {
+$('#logforma').submit(function (e) {
     e.preventDefault();
     var podaci = $('#logforma').serialize();
     var korisnicko_ime = findParameter("korisnicko_ime", podaci);
     var lozinka = findParameter("lozinka", podaci);
     $.post('../control/getuserinfo.php', {
-            korisnicko_ime: korisnicko_ime
-        },
-        function(returnedData) {
+        korisnicko_ime: korisnicko_ime
+    },
+        function (returnedData) {
 
             var salt = returnedData; //uzimanje iz baze
             var hesovana = SHA256.hash(lozinka + salt);
